@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../app_theme.dart';
+
 class AppColorTheme {
-  static ThemeData getTheme(ColorTheme theme) => _colorThemes[theme] ?? _light;
+  static ThemeData getTheme(AppColorThemes theme) => (_colorThemes[theme] ?? _light);
 }
 
-enum ColorTheme {
-  light,
-  dark,
-}
+
 
 final _colorThemes = {
-  ColorTheme.light: _light,
-  ColorTheme.dark: _dark,
+  AppColorThemes.light: _light,
+  AppColorThemes.dark: _dark,
 };
 
 final _dark = ThemeData(

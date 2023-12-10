@@ -1,6 +1,7 @@
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:istu_map/app/ui/splash_screen.dart';
+
+import '../../config/routes/app_router.dart';
 
 class App extends StatefulWidget {
   const App({Key? key, required this.uncaughtException}) : super(key: key);
@@ -19,7 +20,7 @@ class _AppState extends State<App> {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: AppTheme.of(context_),
-          home: const SplashScreen(),
+          onGenerateRoute: AppRouter.onGenerateRoute,
         );
       }),
     );

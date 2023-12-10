@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import '../color_themes.dart';
 
 import 'dart:async';
-
+enum AppColorThemes {
+  light,
+  dark,
+}
 class AppTheme extends StatefulWidget {
   const AppTheme({
     super.key,
@@ -20,7 +23,7 @@ class AppTheme extends StatefulWidget {
 
   static Future<void> changeTheme(
     BuildContext context,
-    ColorTheme newTheme,
+    AppColorThemes newTheme,
   ) =>
       _AppThemeInheritedWidget.of(context, listen: true)
           .state
@@ -36,10 +39,10 @@ class _AppThemeState extends State<AppTheme> {
   @override
   void initState() {
     super.initState();
-    _appTheme = AppColorTheme.getTheme(ColorTheme.dark);
+    _appTheme = AppColorTheme.getTheme(AppColorThemes.dark);
   }
 
-  Future<void> _changeTheme(ColorTheme newTheme) async {
+  Future<void> _changeTheme(AppColorThemes newTheme) async {
     setState(() {
       _appTheme = AppColorTheme.getTheme(newTheme);
     });

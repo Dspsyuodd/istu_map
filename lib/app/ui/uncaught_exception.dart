@@ -1,6 +1,7 @@
-import 'package:common/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+import '../../core/constants/strings.dart';
 
 class UncaughtException extends StatefulWidget {
   const UncaughtException(
