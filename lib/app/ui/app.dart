@@ -1,5 +1,6 @@
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../config/routes/app_router.dart';
 
@@ -13,6 +14,14 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppTheme(
