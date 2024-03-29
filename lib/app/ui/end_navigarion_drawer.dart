@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:istu_map/core/ui/widgets/svg_clipper.dart';
 import 'package:path_drawing/path_drawing.dart';
 
 import '../../core/ui/widgets/clip_shadow_path.dart';
 
 class EndDrawer extends StatefulWidget {
-  const EndDrawer(
-      {Key? key, this.onEndDrawerChanged, this.child, this.width = 300})
+  const EndDrawer({Key? key, this.onStateChanged, this.child, this.width = 300})
       : super(key: key);
-  final void Function(bool isOpen)? onEndDrawerChanged;
+  final void Function(bool isOpen)? onStateChanged;
   final Widget? child;
   final double width;
 
   @override
-  _EndDrawerState createState() => _EndDrawerState();
+  EndDrawerState createState() => EndDrawerState();
 }
 
-class _EndDrawerState extends State<EndDrawer>
+class EndDrawerState extends State<EndDrawer>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> animation;
@@ -25,10 +25,11 @@ class _EndDrawerState extends State<EndDrawer>
       vsync: this,
       duration: const Duration(milliseconds: 150),
     )..addStatusListener((status) {
-      if (widget.onEndDrawerChanged != null) {
-        widget.onEndDrawerChanged!(status == AnimationStatus.completed || status == AnimationStatus.forward);
-      }
-    });
+        if (widget.onStateChanged != null) {
+          widget.onStateChanged!(status == AnimationStatus.completed ||
+              status == AnimationStatus.forward);
+        }
+      });
     animation = controller.drive<double>(CurveTween(curve: Curves.easeInOut));
     super.initState();
   }
@@ -94,6 +95,16 @@ class _EndDrawerState extends State<EndDrawer>
                     _close();
                   }
                 },
+                child: AnimatedOpacity(
+                  opacity: (controller.status == AnimationStatus.completed ||
+                          controller.status == AnimationStatus.forward)
+                      ? 0.5
+                      : 0,
+                  duration: const Duration(milliseconds: 150),
+                  child: Container(
+                    color: Colors.black,
+                  ),
+                ),
               ),
             ),
             Positioned(
@@ -103,7 +114,8 @@ class _EndDrawerState extends State<EndDrawer>
                 onHorizontalDragEnd: _onHorizontalDragEnd,
                 onHorizontalDragUpdate: _onHorizontalDragUpdate,
                 child: ClipShadowPath(
-                  clipper: _EndDrawerOpenButtonClipper(),
+                  clipper: SvgClipper(
+                      'M1 51.9184C1 91.9388 48 69.2245 48 106V0C48 34.1796 1 11.898 1 51.9184Z'),
                   shadow: Shadow(
                     color: Colors.black,
                     offset: Offset(controller.isCompleted ? -1 : 0, 0),
@@ -161,15 +173,4 @@ class _EndDrawerState extends State<EndDrawer>
       },
     );
   }
-}
-
-class _EndDrawerOpenButtonClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    return parseSvgPathData(
-        "M1 51.9184C1 91.9388 48 69.2245 48 106V0C48 34.1796 1 11.898 1 51.9184Z");
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => true;
 }

@@ -1,5 +1,6 @@
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:istu_map/app/ui/avatar.dart';
 import '../../core/ui/widgets/svg_picture.dart';
 
 class IstuNavigationDrawer extends StatelessWidget {
@@ -40,26 +41,7 @@ class IstuNavigationDrawer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      width: 80,
-                      height: 80,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.black,
-                      ),
-                      child: const Center(
-                        child: CircleAvatar(
-                          radius: 35,
-                          backgroundColor: Colors.white,
-                          child: Center(
-                            child: Text(
-                              'КВ',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    const Avatar(size: 80, borderColor: Colors.black),
                     InkWell(
                       onTap: () {
                         AppTheme.changeTheme(context, AppColorThemes.light);

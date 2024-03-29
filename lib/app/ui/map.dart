@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:istu_map/app/ui/bottom_search_drawer.dart';
+import 'package:istu_map/app/ui/bottom_search_drawer_content.dart';
 import 'package:istu_map/app/ui/end_navigarion_drawer.dart';
 import 'package:istu_map/app/ui/navigation_drawer.dart';
+import 'package:istu_map/app/ui/schedule_list.dart';
+import 'package:istu_map/app/ui/search_bar.dart';
 import '../../features/map/presentation/pages/map.dart';
 
 class IstuMap extends StatefulWidget {
@@ -11,71 +15,87 @@ class IstuMap extends StatefulWidget {
 }
 
 class _IstuMapState extends State<IstuMap> {
-  var mapScale = 1.0;
-  var endDrawerOpened = false;
+  var drawerOpened = false;
+  late FocusNode bottomDrawerSearchFocusNode;
+  late BottomSearchDrawerController bottomSearchDrawerController;
+
+  @override
+  void initState() {
+    super.initState();
+    bottomDrawerSearchFocusNode = FocusNode();
+    bottomSearchDrawerController = BottomSearchDrawerController();
+  }
+
+  @override
+  void dispose() {
+    bottomDrawerSearchFocusNode.dispose();
+    bottomSearchDrawerController.dispose();
+    super.dispose();
+  }
 
   void _onDrawerChanged(bool isOpened) {
     setState(() {
-      isOpened ? mapScale = 1.05 : mapScale = 1.0;
+      drawerOpened = isOpened;
+      print(drawerOpened);
     });
   }
 
-  void _onEndDrawerChanged(bool isOpened) {
+  void _onBottomAppDrawerChanged(bool isOpened) {
     _onDrawerChanged(isOpened);
-    setState(() {
-      endDrawerOpened = isOpened;
-    });
+    if (isOpened) {
+      bottomDrawerSearchFocusNode.requestFocus();
+    } else {
+      bottomDrawerSearchFocusNode.unfocus();
+    }
+  }
+
+  void _onPopInvoked(bool didPop) {
+    //TODO: implement _onPopInvoked
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       onDrawerChanged: _onDrawerChanged,
       drawer: const IstuNavigationDrawer(),
       body: Stack(
         children: [
-          IgnorePointer(
-            ignoring: endDrawerOpened,
-            child: AnimatedScale(
-              duration: const Duration(milliseconds: 150),
-              scale: mapScale,
-              child: const IstuMapWidget(),
-            ),
+          AnimatedScale(
+            duration: const Duration(milliseconds: 150),
+            scale: drawerOpened ? 1.05 : 1.0,
+            child: const IstuMapWidget(),
           ),
-
-
-          IgnorePointer(
-            ignoring: true,
-            child: AnimatedOpacity(
-              opacity: endDrawerOpened ? 0.5 : 0,
-              duration: const Duration(milliseconds: 150),
-              child: Container(
-                color: Colors.black,
-              ),
-            ),
-          ),
-
-          
-          IgnorePointer(
-            ignoring: endDrawerOpened,
-            child: Builder(builder: (drawerOpenerContext) {
-              return Padding(
-                padding: const EdgeInsets.all(40),
-                child: InkWell(
-                  onTap: () {
+          Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 52),
+              child: Builder(builder: (drawerOpenerContext) {
+                return SearchAppBar(
+                  onAvatarTap: () {
                     Scaffold.of(drawerOpenerContext).openDrawer();
                   },
-                  child: const CircleAvatar(
-                    radius: 15,
-                    backgroundColor: Colors.black,
-                  ),
-                ),
-              );
-            }),
+                  onSearchTap: () {
+                    bottomSearchDrawerController.open();
+                  },
+                );
+              }),
+            ),
           ),
           EndDrawer(
-            onEndDrawerChanged: _onEndDrawerChanged,
+            onStateChanged: _onDrawerChanged,
             width: MediaQuery.of(context).size.width * 0.61,
+            child: ScheduleList(
+              width: MediaQuery.of(context).size.width * 0.38,
+              spacing: 67,
+            ),
+          ),
+          BottomSearchDrawer(
+            controller: bottomSearchDrawerController,
+            onStateChanged: _onBottomAppDrawerChanged,
+            child: BottomSearchDrawerContent(
+              focusNode: bottomDrawerSearchFocusNode,
+            ),
           ),
         ],
       ),

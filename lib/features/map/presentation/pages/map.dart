@@ -55,7 +55,7 @@ class _IstuMapWidgetState extends State<IstuMapWidget> with SingleTickerProvider
         FlutterMap(
           mapController: mapController,
           options: const MapOptions(
-            initialCenter: LatLng(51.5, -0.09),
+            initialCenter: LatLng(56.84781353176152, 53.21021903088401), 
             initialZoom: 13.0,
           ),
           children: [

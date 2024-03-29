@@ -7,10 +7,10 @@ class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  SplashScreenState createState() => SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
+class SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late Animation<double> animation;
   late AnimationController animationController;
@@ -37,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen>
       });
       await Future.delayed(const Duration(seconds: 2));
       if (context.mounted) {
-        Navigator.of(context).pushReplacementNamed('/map');
+        Navigator.of(context).pushReplacementNamed('/authorization');
       }
     });
 
