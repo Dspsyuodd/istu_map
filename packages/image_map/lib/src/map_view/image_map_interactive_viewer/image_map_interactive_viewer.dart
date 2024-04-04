@@ -3,6 +3,8 @@ import 'package:image_map/image_map.dart';
 import 'package:image_map/src/core/offset_rotate_extension.dart';
 import 'package:image_map/src/map_view/image_map_interactive_viewer/internal_map_controller/internal_map_controller.dart';
 
+import 'image_map_inherited_widget.dart';
+
 class ImageMapInteractiveViewer extends StatefulWidget {
   const ImageMapInteractiveViewer({
     Key? key,
@@ -16,11 +18,11 @@ class ImageMapInteractiveViewer extends StatefulWidget {
   final ImageMapOptions options;
 
   @override
-  _ImageMapInteractiveViewerState createState() =>
-      _ImageMapInteractiveViewerState();
+  ImageMapInteractiveViewerState createState() =>
+      ImageMapInteractiveViewerState();
 }
 
-class _ImageMapInteractiveViewerState extends State<ImageMapInteractiveViewer> {
+class ImageMapInteractiveViewerState extends State<ImageMapInteractiveViewer> {
   var _offset = Offset.zero;
 
   var _zoom = 1.0;
@@ -32,6 +34,9 @@ class _ImageMapInteractiveViewerState extends State<ImageMapInteractiveViewer> {
   bool _rotationStarted = false;
 
   var _pivotPoint = Offset.zero;
+
+  double get rotation => _currentRotation + _rotationAngle;
+  double get scale => _currentZoom * _zoom;
 
   void _onScaleUpdate(ScaleUpdateDetails details) {
     setState(() {
@@ -87,7 +92,11 @@ class _ImageMapInteractiveViewerState extends State<ImageMapInteractiveViewer> {
           ),
           Transform(
             transform: _getTransformMatrix(),
-            child: widget.child,
+            child: ImageMapInheritedWidget(
+              options: widget.options,
+              state: this,
+              child: widget.child ?? Container(),
+            ),
           ),
         ],
       ),

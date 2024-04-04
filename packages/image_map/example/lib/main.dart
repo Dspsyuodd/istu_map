@@ -29,11 +29,26 @@ class _MainAppState extends State<MainApp> {
           markupElements: [
             PolylineMapLayer(
               polylines: [
-                MapPolyline(),
+                MapPolyline(
+                  color: Colors.blue,
+                  strokeWidth: 10,
+                  points: [
+                    const Offset(0.11, 0.2),
+                    const Offset(0.11, 0.6),
+                    const Offset(0.3, 0.6),
+                    const Offset(0.3, 0.47),
+                    const Offset(0.6, 0.47),
+                    const Offset(0.6, 0.65),
+                    const Offset(0.3, 0.65),
+                    const Offset(0.3, 0.8),
+                  ],
+                ),
               ],
             ),
           ],
-          options: ImageMapOptions(),
+          options: ImageMapOptions(
+            minScale: 0.8,
+          ),
         ),
       ),
     );

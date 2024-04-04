@@ -55,14 +55,11 @@ class _ImageMapState extends State<ImageMap> {
     return ImageMapInteractiveViewer(
       controller: _internalMapController,
       options: widget.options,
-      child: ImageMapInheritedWidget(
-        options: widget.options,
-        child: Stack(
-          children: [
-            widget.baseImage,
-            ...widget.markupElements,
-          ],
-        ),
+      child: Stack(
+        children: [
+          widget.baseImage,
+          ...widget.markupElements.map((e) => Positioned.fill(child: e)),
+        ],
       ),
     );
   }
@@ -80,28 +77,4 @@ class ImageMapOptions {
     this.maxScale = 3.0,
     this.minScale = 0.5,
   });
-}
-
-class ImageMapInheritedWidget extends InheritedWidget {
-  const ImageMapInheritedWidget({
-    Key? key,
-    required Widget child,
-    required this.options,
-  }) : super(key: key, child: child);
-
-  final ImageMapOptions options;
-
-  @override
-  bool updateShouldNotify(covariant ImageMapInheritedWidget oldWidget) {
-    return options != oldWidget.options;
-  }
-
-  static ImageMapInheritedWidget of(BuildContext context) {
-    return _maybeOf(context)!;
-  }
-
-  static ImageMapInheritedWidget? _maybeOf(BuildContext context) {
-    return context
-        .dependOnInheritedWidgetOfExactType<ImageMapInheritedWidget>();
-  }
 }
