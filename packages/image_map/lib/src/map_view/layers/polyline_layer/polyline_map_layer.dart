@@ -11,9 +11,11 @@ class PolylineMapLayer extends StatefulWidget {
   const PolylineMapLayer({
     Key? key,
     required this.polylines,
+    this.useAnimation = false,
   }) : super(key: key);
 
   final List<MapPolyline> polylines;
+  final bool useAnimation;
 
   @override
   State<PolylineMapLayer> createState() => _PolylineMapLayerState();
@@ -21,24 +23,28 @@ class PolylineMapLayer extends StatefulWidget {
 
 class _PolylineMapLayerState extends State<PolylineMapLayer>
     with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
+  AnimationController? _animationController;
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
-    )
-      ..addListener(() {
-        setState(() {});
-      })
-      ..repeat();
+    if (widget.useAnimation) {
+      _animationController = AnimationController(
+        vsync: this,
+        duration: const Duration(milliseconds: 500),
+      )
+        ..addListener(() {
+          setState(() {});
+        })
+        ..repeat();
+    }
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
+    if (widget.useAnimation) {
+      _animationController!.dispose();
+    }
     super.dispose();
   }
 
@@ -55,10 +61,12 @@ class _PolylineMapLayerState extends State<PolylineMapLayer>
                 (e) => CustomPaint(
                   size: size,
                   painter: MapPolylinePainter(
-                    animation: _animationController.value,
+                    animation:
+                        widget.useAnimation ? _animationController!.value : 0,
                     polyline: e,
                     options: mapInfo.options,
                     state: mapInfo.state,
+                    useAnimation: widget.useAnimation,
                   ),
                 ),
               )
@@ -74,6 +82,7 @@ class MapPolylinePainter extends CustomPainter {
   final ImageMapOptions options;
   final ImageMapInteractiveViewerState state;
   final double animation;
+  final bool useAnimation;
 
   MapPolylinePainter({
     super.repaint,
@@ -81,6 +90,7 @@ class MapPolylinePainter extends CustomPainter {
     required this.options,
     required this.state,
     this.animation = 0,
+    required this.useAnimation,
   });
   @override
   void paint(Canvas canvas, Size size) {
@@ -111,17 +121,25 @@ class MapPolylinePainter extends CustomPainter {
           //   tileMode: TileMode.mirror,
           // ).createShader(const Rect.fromLTWH(0, 0, 20, 20)),
           );
-      paint
-        ..color = polyline.arrowsColor
-        ..strokeWidth = (1 / state.scale) * 2;
-      final lenth = _distanse(firstPoint, secondPoint);
-      for (int i = 0; i < lenth / arrowOffset - 1; i++) {
-        var direction = _getDirection(firstPoint, secondPoint);
-        var point =
-            firstPoint + direction * ((i.toDouble() + animation) * arrowOffset);
+      if (useAnimation) {
+        paint
+          ..color = polyline.arrowsColor
+          ..strokeWidth = (1 / state.scale) * 2;
+        final lenth = _distanse(firstPoint, secondPoint);
+        for (int i = 0; i < lenth / arrowOffset - 1; i++) {
+          var direction = _getDirection(firstPoint, secondPoint);
+          var point = firstPoint +
+              direction * ((i.toDouble() + animation) * arrowOffset);
 
-        canvas.drawLine(point - direction.rotate(pi / 4) * (1 / state.scale) * 5, point, paint);
-        canvas.drawLine(point + direction.rotate(pi / 4 * 3) * (1 / state.scale) * 5, point, paint);
+          canvas.drawLine(
+              point - direction.rotate(pi / 4) * (1 / state.scale) * 5,
+              point,
+              paint);
+          canvas.drawLine(
+              point + direction.rotate(pi / 4 * 3) * (1 / state.scale) * 5,
+              point,
+              paint);
+        }
       }
     }
   }
