@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:istu_map/app/ui/bottom_search_drawer.dart';
-import 'package:istu_map/app/ui/bottom_search_drawer_content.dart';
-import 'package:istu_map/app/ui/end_navigarion_drawer.dart';
-import 'package:istu_map/app/ui/navigation_drawer.dart';
-import 'package:istu_map/app/ui/schedule_list.dart';
-import 'package:istu_map/app/ui/search_bar.dart';
-import '../../features/map/presentation/pages/map.dart';
+import 'bottom_search_drawer.dart';
+import 'bottom_search_drawer_content.dart';
+import 'end_navigarion_drawer.dart';
+import 'navigation_drawer.dart';
+import 'schedule_list.dart';
+import 'search_bar.dart';
+import '../../features/map/external_map/presentation/pages/map.dart';
 
 class IstuMap extends StatefulWidget {
   const IstuMap({Key? key}) : super(key: key);
@@ -36,7 +36,6 @@ class _IstuMapState extends State<IstuMap> {
   void _onDrawerChanged(bool isOpened) {
     setState(() {
       drawerOpened = isOpened;
-      print(drawerOpened);
     });
   }
 

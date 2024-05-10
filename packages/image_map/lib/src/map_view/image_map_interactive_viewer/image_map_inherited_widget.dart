@@ -12,11 +12,11 @@ class ImageMapInheritedWidget extends InheritedWidget {
   }) : super(key: key, child: child);
 
   final ImageMapOptions options;
-  final ImageMapInteractiveViewerState state;
+  final InteractiveViewerState state;
 
   @override
   bool updateShouldNotify(covariant ImageMapInheritedWidget oldWidget) {
-    return options != oldWidget.options;
+    return options != oldWidget.options || state != oldWidget.state;
   }
 
   static ImageMapInheritedWidget of(BuildContext context) {

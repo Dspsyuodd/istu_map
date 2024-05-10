@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:image_map/image_map.dart';
-import 'package:image_map/src/core/offset_rotate_extension.dart';
+import '../../../../image_map.dart';
+import '../../../core/offset_rotate_extension.dart';
 
 import '../../image_map_interactive_viewer/image_map_inherited_widget.dart';
 import '../../image_map_interactive_viewer/image_map_interactive_viewer.dart';
@@ -51,7 +51,6 @@ class _PolylineMapLayerState extends State<PolylineMapLayer>
   @override
   Widget build(BuildContext context) {
     final mapInfo = ImageMapInheritedWidget.of(context);
-
     return LayoutBuilder(
       builder: (context, constraints) {
         var size = Size(constraints.maxWidth, constraints.maxHeight);
@@ -80,7 +79,7 @@ class _PolylineMapLayerState extends State<PolylineMapLayer>
 class MapPolylinePainter extends CustomPainter {
   final MapPolyline polyline;
   final ImageMapOptions options;
-  final ImageMapInteractiveViewerState state;
+  final InteractiveViewerState state;
   final double animation;
   final bool useAnimation;
 
@@ -107,20 +106,13 @@ class MapPolylinePainter extends CustomPainter {
       final secondPoint = Offset(polyline.points[i + 1].dx * size.width,
           polyline.points[i + 1].dy * size.height);
       // var aliegment = _getLineGradiendAliegment(firstPoint, secondPoint);
+      
       canvas.drawLine(
           firstPoint,
           secondPoint,
           paint
             ..color = polyline.color
-            ..strokeWidth = (1 / state.scale) * polyline.strokeWidth
-          // ..shader = LinearGradient(
-          //   begin: aliegment.$1,
-          //   end: aliegment.$2,
-          //   colors: [polyline.color, Colors.white],
-          //   stops: [0.8, 1.0],
-          //   tileMode: TileMode.mirror,
-          // ).createShader(const Rect.fromLTWH(0, 0, 20, 20)),
-          );
+            ..strokeWidth = (1 / state.scale) * polyline.strokeWidth);
       if (useAnimation) {
         paint
           ..color = polyline.arrowsColor
@@ -146,7 +138,7 @@ class MapPolylinePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
+    return false;
   }
 
   Offset _getDirection(Offset start, Offset end) {

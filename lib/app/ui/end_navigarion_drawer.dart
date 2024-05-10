@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:istu_map/core/ui/widgets/svg_clipper.dart';
-import 'package:path_drawing/path_drawing.dart';
+import '../../core/ui/widgets/svg_clipper.dart';
 
 import '../../core/ui/widgets/clip_shadow_path.dart';
 

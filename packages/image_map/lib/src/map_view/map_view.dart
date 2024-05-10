@@ -1,8 +1,10 @@
 import 'dart:math';
 
+import 'package:equatable/equatable.dart';
+
 import 'package:flutter/material.dart';
-import 'package:image_map/src/map_view/image_map_interactive_viewer/image_map_interactive_viewer.dart';
-import 'package:image_map/src/map_view/image_map_controller/image_map_controller_impl.dart';
+import 'image_map_interactive_viewer/image_map_interactive_viewer.dart';
+import 'image_map_controller/image_map_controller_impl.dart';
 
 import 'image_map_interactive_viewer/internal_map_controller/internal_map_controller.dart';
 import 'image_map_controller/image_map_controller.dart';
@@ -65,16 +67,19 @@ class _ImageMapState extends State<ImageMap> {
   }
 }
 
-class ImageMapOptions {
+class ImageMapOptions extends Equatable {
   final Color? backgroundColor;
   final double rotationGap;
   final double maxScale;
   final double minScale;
 
-  ImageMapOptions({
+  const ImageMapOptions({
     this.backgroundColor,
     this.rotationGap = pi / 10,
     this.maxScale = 3.0,
     this.minScale = 0.5,
   });
+
+  @override
+  List<Object?> get props => [backgroundColor, rotationGap, maxScale, minScale];
 }

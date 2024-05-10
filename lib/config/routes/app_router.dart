@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:istu_map/app/ui/authorization/authorizaiton_screen.dart';
+import '../../app/ui/authorization/authorizaiton_screen.dart';
 
 import '../../app/ui/map.dart';
 import '../../app/ui/splash_screen.dart';

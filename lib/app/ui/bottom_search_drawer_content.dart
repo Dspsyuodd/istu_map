@@ -1,6 +1,6 @@
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:istu_map/app/ui/avatar.dart';
+import 'avatar.dart';
 
 class Category {
   final String name;

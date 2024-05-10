@@ -1,5 +1,6 @@
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
+
 import '../../../core/ui/widgets/svg_picture.dart';
 
 class SplashScreen extends StatefulWidget {

@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:image_map/image_map.dart';
-import 'package:image_map/src/core/offset_rotate_extension.dart';
-import 'package:image_map/src/map_view/image_map_interactive_viewer/internal_map_controller/internal_map_controller.dart';
+import '../../../image_map.dart';
+import '../../core/offset_rotate_extension.dart';
+import 'internal_map_controller/internal_map_controller.dart';
 
 import 'image_map_inherited_widget.dart';
 
@@ -35,8 +36,43 @@ class ImageMapInteractiveViewerState extends State<ImageMapInteractiveViewer> {
 
   var _pivotPoint = Offset.zero;
 
-  double get rotation => _currentRotation + _rotationAngle;
-  double get scale => _currentZoom * _zoom;
+  InteractiveViewerState get state => InteractiveViewerState(
+        offset: _offset,
+        rotation: _currentRotation + _rotationAngle,
+        scale: _currentZoom * _zoom,
+      );
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.controller != null) {
+      widget.controller!.mapState = this;
+    }
+  }
+
+  void move({double? zoom, Offset? offset}) {
+    setState(() {
+      if (offset != null) {
+        _offset = offset;
+      }
+
+      if (zoom != null) {
+        _currentZoom = zoom;
+        _zoom = 1.0;
+      }
+    });
+  }
+
+  void rotate({double? degree, Offset? origin}) {
+    setState(() {
+      if (degree != null) {
+        _offset = _offset.rotate(degree,
+            origin: origin ?? _pivotPoint);
+        _currentRotation = degree;
+        _rotationAngle = 0;
+      }
+    });
+  }
 
   void _onScaleUpdate(ScaleUpdateDetails details) {
     setState(() {
@@ -61,7 +97,7 @@ class ImageMapInteractiveViewerState extends State<ImageMapInteractiveViewer> {
   void _onScaleEnd(ScaleEndDetails details) {
     _offset =
         _offset.rotate(_rotationAngle, origin: _pivotPoint * _zoom + _offset);
-    _offset -= _pivotPoint * (_zoom - 1);
+    _offset += _pivotPoint * (1 - _zoom);
 
     _currentZoom *= _zoom;
     _zoom = 1.0;
@@ -69,6 +105,7 @@ class ImageMapInteractiveViewerState extends State<ImageMapInteractiveViewer> {
     _currentRotation += _rotationAngle;
     _rotationAngle = 0;
     _rotationStarted = false;
+    _pivotPoint = Offset.zero;
   }
 
   Matrix4 _getTransformMatrix() => Matrix4.identity()
@@ -94,7 +131,11 @@ class ImageMapInteractiveViewerState extends State<ImageMapInteractiveViewer> {
             transform: _getTransformMatrix(),
             child: ImageMapInheritedWidget(
               options: widget.options,
-              state: this,
+              state: InteractiveViewerState(
+                offset: _offset,
+                rotation: _currentRotation + _rotationAngle,
+                scale: _currentZoom * _zoom,
+              ),
               child: widget.child ?? Container(),
             ),
           ),
@@ -102,4 +143,16 @@ class ImageMapInteractiveViewerState extends State<ImageMapInteractiveViewer> {
       ),
     );
   }
+}
+
+class InteractiveViewerState extends Equatable {
+  final double rotation;
+  final double scale;
+  final Offset offset;
+
+  const InteractiveViewerState(
+      {required this.rotation, required this.scale, required this.offset});
+
+  @override
+  List<Object?> get props => [rotation, scale, offset];
 }

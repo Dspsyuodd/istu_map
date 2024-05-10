@@ -1,8 +1,9 @@
-import 'package:app_theme/app_theme.dart';
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-import 'package:istu_map/core/ui/widgets/svg_picture.dart';
+import 'package:app_theme/app_theme.dart';
+import 'package:flutter/material.dart';
+
+import '../../../core/ui/widgets/svg_picture.dart';
 
 class AuthorizaitonScreen extends StatelessWidget {
   const AuthorizaitonScreen({Key? key}) : super(key: key);
