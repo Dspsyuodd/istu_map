@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import '../app_theme.dart';
 
 class AppColorTheme {
-  static ThemeData getTheme(AppColorThemes theme) => (_colorThemes[theme] ?? _light);
+  static ThemeData getTheme(AppColorThemes theme) =>
+      (_colorThemes[theme] ?? _light);
 }
-
-
 
 final _colorThemes = {
   AppColorThemes.light: _light,
@@ -14,6 +13,12 @@ final _colorThemes = {
 };
 
 final _dark = ThemeData(
+  textTheme: const TextTheme(
+    displayLarge: TextStyle(
+      color: Color.fromARGB(255, 226, 228, 238),
+      fontSize: 20,
+    ),
+  ),
   colorScheme: const ColorScheme(
     brightness: Brightness.dark,
     primary: Color.fromRGBO(73, 83, 131, 1),
@@ -30,6 +35,12 @@ final _dark = ThemeData(
 );
 
 final _light = ThemeData(
+  textTheme: const TextTheme(
+    displayLarge: TextStyle(
+      color: Color.fromARGB(255, 17, 19, 29),
+      fontSize: 20,
+    ),
+  ),
   colorScheme: const ColorScheme(
     brightness: Brightness.light,
     primary: Color.fromRGBO(124, 134, 182, 1),

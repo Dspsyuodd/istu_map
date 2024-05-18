@@ -1,7 +1,7 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../domain/entities/exteral_route.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'external_route_model.g.dart';
 

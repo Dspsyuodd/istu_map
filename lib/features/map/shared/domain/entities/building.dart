@@ -6,15 +6,15 @@ class Building extends Equatable {
   final String title;
   final String address;
   final LatLng position;
-  final String desctiption;
+  final String description;
 
   const Building(
       {required this.id,
       required this.title,
       required this.address,
       required this.position,
-      required this.desctiption});
+      required this.description});
 
   @override
-  List<Object?> get props => [id, title, address, position, desctiption];
+  List<Object?> get props => [id, title, address, position, description];
 }
