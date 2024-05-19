@@ -71,7 +71,7 @@ class _IstuMapWidgetState extends State<IstuMapWidget>
             ),
             BlocBuilder<MapBloc, MapState>(
               builder: (context, state) {
-                if (state is MapLoadSuccess && state.route != null) {
+                if (state.status == MapStatus.success && state.route != null) {
                   return PolylineLayer(
                     polylines: [
                       Polyline(
@@ -89,7 +89,7 @@ class _IstuMapWidgetState extends State<IstuMapWidget>
             ),
             BlocBuilder<MapBloc, MapState>(
               builder: (context, state) {
-                if (state is MapLoadSuccess) {
+                if (state.status == MapStatus.success || state.status == MapStatus.loading) {
                   return MarkerLayer(
                     markers: state.buildings
                         .map(

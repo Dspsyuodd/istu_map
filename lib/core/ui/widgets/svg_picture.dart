@@ -14,15 +14,23 @@ class SvgIstuIconData {
 }
 
 class IstuSvgPicture extends StatelessWidget {
-  const IstuSvgPicture(this.iconData, {Key? key, this.width, this.height})
+  const IstuSvgPicture(this.iconData,
+      {Key? key, this.width, this.height, this.color})
       : super(key: key);
 
   final SvgIstuIconData iconData;
   final double? width;
   final double? height;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(iconData.assetPath, width: width, height: height);
+    return SvgPicture.asset(
+      iconData.assetPath,
+      width: width,
+      height: height,
+      colorFilter:
+          color != null ? ColorFilter.mode(color!, BlendMode.srcIn) : null,
+    );
   }
 }

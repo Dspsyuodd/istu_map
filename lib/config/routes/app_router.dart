@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:istu_map/app/ui/map.dart';
+import 'package:istu_map/features/authentication/presentation/pages/registration_screen.dart';
 import 'package:istu_map/features/map/external_map/presentation/bloc/map_bloc.dart';
 import 'package:istu_map/features/map/injection_container.dart';
-import '../../app/ui/authorization/authorizaiton_screen.dart';
+import '../../features/authentication/presentation/pages/authorizaiton_screen.dart';
 
 import '../../app/ui/splash_screen.dart';
 
@@ -26,4 +27,6 @@ final _routes = {
           create: (_) => sl(), child: const IstuMap())),
   '/authorization':
       MaterialPageRoute(builder: (_) => const AuthorizaitonScreen()),
+  '/registration':
+      MaterialPageRoute(builder: (_) => const RegistrationScreen()),
 };

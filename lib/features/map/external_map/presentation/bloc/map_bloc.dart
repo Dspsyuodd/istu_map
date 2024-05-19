@@ -21,24 +21,24 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   List<Building> _buildings = [];
   ExternalRoute? _route;
 
-  MapBloc(this.getRoute, this.loadMap) : super(MapInitial()) {
+  MapBloc(this.getRoute, this.loadMap) : super(const MapState.initial()) {
     on<MapEvent>((event, emit) async {
       log(event.runtimeType.toString());
       if (event is MapLoaded) {
-        emit(MapLoadInProgress());
+        emit(MapState(_buildings, _route, MapStatus.loading));
         var result = await loadMap(NoParams());
 
         result.fold(
           (l) => _emitError(l, emit),
           (r) {
             _buildings = r;
-            emit(MapLoadSuccess(_buildings, _route));
+            emit(MapState(_buildings, _route, MapStatus.success));
           },
         );
       }
 
       if (event is RouteCreated) {
-        emit(MapLoadInProgress());
+        emit(MapState(_buildings, _route, MapStatus.loading));
         var position = await Geolocator.getCurrentPosition();
         var result = await getRoute(GetExternalRouteParams(
             from: LatLng(position.latitude, position.longitude), to: event.to));
@@ -47,7 +47,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
           (l) => _emitError(l, emit),
           (r) {
             _route = r;
-            emit(MapLoadSuccess(_buildings, _route));
+            emit(MapState(_buildings, _route, MapStatus.success));
           },
         );
       }
@@ -62,6 +62,6 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     if (l  is ServerFailure) {
       log(l.message);
     }
-    emit(MapLoadFailure());
+    emit(MapState(_buildings, _route, MapStatus.failure));
   }
 }
