@@ -36,7 +36,7 @@ class SplashScreenState extends State<SplashScreen>
         blackLogoVisility = 1;
       });
       await Future.delayed(const Duration(seconds: 2));
-      if (context.mounted) {
+      if (mounted) {
         Navigator.of(context).pushReplacementNamed('/authorization');
       }
     });

@@ -1,7 +1,7 @@
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:istu_map/features/map/injection_container.dart';
+import 'package:istu_map/injection_container.dart';
 
 import '../../config/routes/app_router.dart';
 
@@ -21,7 +21,7 @@ class _AppState extends State<App> {
     super.initState();
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-    intiDependencies();
+    initDependencies();
   }
 
   @override

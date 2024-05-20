@@ -1,12 +1,17 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:istu_map/core/errors/failure.dart';
 import 'package:istu_map/core/usecases/usecase.dart';
+import 'package:istu_map/features/authentication/domain/entities/user_data.dart';
+import 'package:istu_map/features/authentication/domain/repositories/authentication_repositoru.dart';
 
 class Login extends Usecase<void, LoginParams> {
+  final AuthenticationRepository authenticationRepository;
+
+  Login(this.authenticationRepository);
   @override
   Future<Either<Failure, void>> call(LoginParams params) {
-    // TODO: implement call
-    throw UnimplementedError();
+    return authenticationRepository
+        .login(UserData(email: params.email, password: params.password));
   }
 }
 

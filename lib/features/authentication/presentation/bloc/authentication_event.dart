@@ -6,3 +6,21 @@ sealed class AuthenticationEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class RegisterEvent extends AuthenticationEvent {
+  final UserData data;
+
+  const RegisterEvent(this.data);
+
+  @override
+  List<Object> get props => [data];
+}
+
+class LoginEvent extends AuthenticationEvent {
+  final UserData data;
+
+  const LoginEvent(this.data);
+
+  @override
+  List<Object> get props => [data];
+}
