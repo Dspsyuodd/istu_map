@@ -6,10 +6,14 @@ class AuthenticationTextField extends StatelessWidget {
     required this.label,
     this.onChanged,
     this.errorText,
+    this.obscureText = false,
+    this.controller,
   }) : super(key: key);
   final String label;
   final void Function(String)? onChanged;
   final String? errorText;
+  final bool obscureText;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +29,8 @@ class AuthenticationTextField extends StatelessWidget {
         SizedBox(
           height: 65,
           child: TextField(
+            controller: controller,
+            obscureText: obscureText,
             onChanged: onChanged,
             autofillHints: const [AutofillHints.email],
             decoration: InputDecoration(

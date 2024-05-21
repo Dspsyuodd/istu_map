@@ -37,7 +37,7 @@ class SplashScreenState extends State<SplashScreen>
       });
       await Future.delayed(const Duration(seconds: 2));
       if (mounted) {
-        Navigator.of(context).pushReplacementNamed('/authorization');
+        Navigator.of(context).pushReplacementNamed('/authentication');
       }
     });
 

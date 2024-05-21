@@ -8,9 +8,10 @@ part of 'external_route_model.dart';
 
 ExternalRouteModel _$ExternalRouteModelFromJson(Map<String, dynamic> json) =>
     ExternalRouteModel(
-      totalTime: DateTime.parse(json['TotalTime'] as String),
+      totalTime: DateTime.parse("0000-00-00 ${json['TotalTime'] as String}"),
       points: (json['Points'] as List<dynamic>)
-          .map((e) => LatLng((e['Latitude'] as num).toDouble(), (e['Longitude'] as num).toDouble()))
+          .map((e) => LatLng((e['Latitude'] as num).toDouble(),
+              (e['Longitude'] as num).toDouble()))
           .toList(),
     );
 

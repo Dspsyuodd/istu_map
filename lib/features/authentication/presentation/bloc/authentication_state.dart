@@ -11,8 +11,16 @@ final class AuthenticationInitial extends AuthenticationState {}
 
 class AuthenticationLoading extends AuthenticationState {}
 
-class LoginSuccess extends AuthenticationState {}
+class LoginSuccess extends AuthenticationState {
+  final UserDto data;
 
-class RegistrationSuccess extends AuthenticationState {}
+  const LoginSuccess(this.data);
+}
+
+class RegistrationSuccess extends AuthenticationState {
+  final UserDto data;
+
+  const RegistrationSuccess(this.data);
+}
 
 class AuthenticationFailure extends AuthenticationState {}

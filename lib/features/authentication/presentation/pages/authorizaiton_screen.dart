@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:istu_map/features/authentication/domain/entities/user_data.dart';
 import 'package:istu_map/features/authentication/presentation/bloc/authentication_bloc.dart';
+import 'package:istu_map/features/authentication/presentation/pages/registration_screen.dart';
 import 'package:istu_map/features/authentication/presentation/widgets/auth_elevated_button.dart';
 import 'package:istu_map/features/authentication/presentation/widgets/auth_screen_template.dart';
 import 'package:istu_map/features/authentication/presentation/widgets/authentication_text_field.dart';
@@ -17,25 +18,31 @@ class AuthorizaitonScreen extends StatefulWidget {
 }
 
 class _AuthorizaitonScreenState extends State<AuthorizaitonScreen> {
-  var email = '';
-  String? emailErrorMessage;
+  var _email = '';
+  String? _emailErrorMessage;
 
-  var password = '';
-  String? passwordErrorMessage;
+  var _password = '';
+  String? _passwordErrorMessage;
+  late TextEditingController _emailController;
+  late TextEditingController _passwordController;
 
   @override
   void initState() {
     super.initState();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthenticationBloc, AuthenticationState>(
-      listener: (context, state) {
-        if (state is LoginSuccess) {
-          Navigator.of(context).pushReplacementNamed('/map');
-        }
-      },
+    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
       builder: (context, state) {
         return AuthScreenTemplate(
           content: [
@@ -59,29 +66,32 @@ class _AuthorizaitonScreenState extends State<AuthorizaitonScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AuthenticationTextField(
+                          controller: _emailController,
                           label: 'E-mail',
                           onChanged: (value) {
-                            if (emailErrorMessage != null) {
+                            if (_emailErrorMessage != null) {
                               setState(() {
-                                emailErrorMessage = null;
+                                _emailErrorMessage = null;
                               });
                             }
-                            email = value;
+                            _email = value;
                           },
-                          errorText: emailErrorMessage,
+                          errorText: _emailErrorMessage,
                         ),
                         const Gap(30),
                         AuthenticationTextField(
+                          controller: _passwordController,
+                          obscureText: true,
                           label: 'Пароль',
                           onChanged: (value) {
-                            if (passwordErrorMessage != null) {
+                            if (_passwordErrorMessage != null) {
                               setState(() {
-                                passwordErrorMessage = null;
+                                _passwordErrorMessage = null;
                               });
                             }
-                            password = value;
+                            _password = value;
                           },
-                          errorText: passwordErrorMessage,
+                          errorText: _passwordErrorMessage,
                         )
                       ],
                     ),
@@ -89,32 +99,48 @@ class _AuthorizaitonScreenState extends State<AuthorizaitonScreen> {
                     AuthElevatedButton(
                       text: 'Войти',
                       onPressed: () {
-                        if (EmailValidator.validate(email)) {
-                          if (password.length >= 6) {
-                            BlocProvider.of<AuthenticationBloc>(context).add(
-                              LoginEvent(
-                                UserData(
-                                  email: email,
-                                  password: password,
-                                ),
-                              ),
-                            );
-                          } else {
-                            setState(() {
-                              passwordErrorMessage = 'Неверный пароль';
-                            });
-                          }
-                        } else {
+                        var emailValidate = EmailValidator.validate(_email);
+                        var passwordValidate =
+                            _password.length >= 6 && !_password.contains(' ');
+                        if (!emailValidate) {
                           setState(() {
-                            emailErrorMessage =
+                            _emailErrorMessage =
                                 'Неверный адрес электронной почты';
                           });
+                        }
+                        if (!passwordValidate) {
+                          setState(() {
+                            _passwordErrorMessage = 'Неверный пароль';
+                          });
+                        }
+                        if (emailValidate && passwordValidate) {
+                          BlocProvider.of<AuthenticationBloc>(context).add(
+                            LoginEvent(UserData(
+                                userDto:
+                                    UserDto(email: _email, password: _password))),
+                          );
                         }
                       },
                     ),
                     InkWell(
-                      onTap: () {
-                        Navigator.of(context).pushNamed('/registration');
+                      onTap: () async {
+                        var result = await Navigator.of(context).push<(String, String)?>(
+                          MaterialPageRoute(
+                            builder: (_) => BlocProvider.value(
+                              value:
+                                  BlocProvider.of<AuthenticationBloc>(context),
+                              child: const RegistrationScreen(),
+                            ),
+                          ),
+                        );
+                        if (result != null) {
+                          setState(() {
+                            _email = result.$1;
+                            _emailController.text = _email;
+                            _password = result.$2;
+                            _passwordController.text = _password;
+                          });
+                        }
                       },
                       child: const Text(
                         'Создать аккаунт',
@@ -132,7 +158,12 @@ class _AuthorizaitonScreenState extends State<AuthorizaitonScreen> {
               ),
             ),
             if (state is AuthenticationLoading)
-              const Center(child: CircularProgressIndicator())
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.2),
+                ),
+                child: const Center(child: CircularProgressIndicator()),
+              )
           ],
         );
       },

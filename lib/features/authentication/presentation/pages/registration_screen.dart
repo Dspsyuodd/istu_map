@@ -33,7 +33,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) {
         if (state is RegistrationSuccess) {
-          Navigator.of(context).pop();
+          Navigator.of(context).pop((email, password));
         }
       },
       builder: (context, state) {
@@ -72,6 +72,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
                         const Gap(30),
                         AuthenticationTextField(
+                          obscureText: true,
                           label: 'Пароль',
                           onChanged: (value) {
                             if (passwordErrorMessage != null) {
@@ -124,12 +125,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       text: 'Создать аккаунт',
                       onPressed: () {
                         var emailValidate = EmailValidator.validate(email);
-                        var passwordValidate = password.length >= 6;
-                        var firstNameValidate = firstName.isNotEmpty;
-                        var lastNameValidate = lastName.isNotEmpty;
+                        var passwordValidate =
+                            password.length >= 6 && !password.contains(' ');
+                        var firstNameValidate =
+                            firstName.length >= 2 && !firstName.contains(' ');
+                        var lastNameValidate =
+                            lastName.length >= 2 && !lastName.contains(' ');
                         if (!emailValidate) {
                           setState(() {
-                            emailErrorMessage = 'Неверный адрес электронной почты';
+                            emailErrorMessage =
+                                'Неверный адрес электронной почты';
                           });
                         }
                         if (!passwordValidate) {
@@ -154,10 +159,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           BlocProvider.of<AuthenticationBloc>(context).add(
                             RegisterEvent(
                               UserData(
-                                email: email,
-                                password: password,
-                                firstName: firstName,
-                                lastName: lastName,
+                                userDto: UserDto(
+                                  email: email,
+                                  password: password,
+                                  firstName: firstName,
+                                  lastName: lastName,
+                                ),
                               ),
                             ),
                           );
@@ -168,6 +175,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
               ),
             ),
+            if (state is AuthenticationLoading)
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.2),
+                ),
+                child: const Center(child: CircularProgressIndicator()),
+              )
           ],
         );
       },

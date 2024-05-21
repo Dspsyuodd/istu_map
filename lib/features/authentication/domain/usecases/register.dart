@@ -2,21 +2,21 @@ import 'package:fpdart/fpdart.dart';
 import 'package:istu_map/core/errors/failure.dart';
 import 'package:istu_map/core/usecases/usecase.dart';
 import 'package:istu_map/features/authentication/domain/entities/user_data.dart';
-import 'package:istu_map/features/authentication/domain/repositories/authentication_repositoru.dart';
+import 'package:istu_map/features/authentication/domain/repositories/authentication_repository.dart';
 
-class Register extends Usecase<void, RegisterParams> {
+class Register extends Usecase<UserDto, RegisterParams> {
   final AuthenticationRepository authenticationRepository;
 
   Register(this.authenticationRepository);
   @override
-  Future<Either<Failure, void>> call(RegisterParams params) {
+  Future<Either<Failure, UserDto>> call(RegisterParams params) {
     return authenticationRepository.registration(
-      UserData(
-        email: params.email,
-        password: params.password,
-        firstName: params.firstName,
-        lastName: params.lastName,
-      ),
+      UserDto(
+      email: params.email,
+      password: params.password,
+      firstName: params.firstName,
+      lastName: params.lastName,
+    )
     );
   }
 }
