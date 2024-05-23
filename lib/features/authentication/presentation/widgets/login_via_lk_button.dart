@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:istu_map/core/ui/widgets/svg_picture.dart';
+import '../../../../core/presentation/ui/widgets/svg_picture.dart';
 
 class LoginViaLkButton extends StatelessWidget {
   const LoginViaLkButton({Key? key}) : super(key: key);

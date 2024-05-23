@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../core/ui/widgets/svg_clipper.dart';
+import '../../core/presentation/ui/widgets/svg_clipper.dart';
 
-import '../../core/ui/widgets/clip_shadow_path.dart';
+import '../../core/presentation/ui/widgets/clip_shadow_path.dart';
 
 class EndDrawer extends StatefulWidget {
   const EndDrawer({Key? key, this.onStateChanged, this.child, this.width = 300})

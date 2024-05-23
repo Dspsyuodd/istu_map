@@ -1,27 +1,18 @@
-import 'package:equatable/equatable.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'user_dto.dart';
 
-class UserData extends Equatable {
-  final String? accessToken;
-  final String? refreshToken;
-  @JsonKey(name: 'User')
-  final UserDto userDto;
+part 'user_data.freezed.dart';
+part 'user_data.g.dart';
 
-  const UserData({required this.userDto, this.accessToken, this.refreshToken});
+@Freezed()
+class UserData with _$UserData {
+  const factory UserData({
+    // ignore: invalid_annotation_target
+    @JsonKey(name: "User") required UserDto userDto,
+    String? accessToken,
+    String? refreshToken,
+  }) = _UserData;
 
-  @override
-  List<Object?> get props => [accessToken, refreshToken, userDto];
-}
-
-class UserDto extends Equatable {
-  final String email;
-  final String? password;
-  final String? firstName;
-  final String? lastName;
-
-  const UserDto(
-      {required this.email, this.password, this.firstName, this.lastName});
-
-  @override
-  List<Object?> get props => [email, password, firstName, lastName];
+  factory UserData.fromJson(Map<String, dynamic> json) =>
+      _$UserDataFromJson(json);
 }

@@ -2,12 +2,13 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:istu_map/core/errors/failure.dart';
-import 'package:istu_map/features/authentication/domain/entities/user_data.dart';
-import 'package:istu_map/features/authentication/domain/usecases/initialize.dart';
-import 'package:istu_map/features/authentication/domain/usecases/login.dart';
-import 'package:istu_map/features/authentication/domain/usecases/login_via_istu_acc.dart';
-import 'package:istu_map/features/authentication/domain/usecases/register.dart';
+import '../../../../core/errors/failure.dart';
+import '../../domain/entities/user_data.dart';
+import '../../domain/entities/user_dto.dart';
+import '../../domain/usecases/initialize.dart';
+import '../../domain/usecases/login.dart';
+import '../../domain/usecases/login_via_istu_acc.dart';
+import '../../domain/usecases/register.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';

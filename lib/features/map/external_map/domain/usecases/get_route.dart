@@ -1,11 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:latlong2/latlong.dart';
+
+import '../../../../../core/domain/usecases/usecase.dart';
 import '../../../../../core/errors/failure.dart';
-import '../../../../../core/usecases/usecase.dart';
+import '../../../shared/domain/entities/building.dart';
 import '../entities/exteral_route.dart';
 import '../repositories/external_route_repository.dart';
-import '../../../shared/domain/entities/building.dart';
-import 'package:latlong2/latlong.dart';
 
 class GetExternalRoute extends Usecase<ExternalRoute, GetExternalRouteParams> {
   final ExternalRouteRepository externalRouteRepository;

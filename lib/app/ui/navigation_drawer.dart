@@ -1,8 +1,8 @@
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:istu_map/features/authentication/presentation/widgets/logout.dart';
+import '../../features/authentication/presentation/widgets/logout.dart';
 import 'avatar.dart';
-import '../../core/ui/widgets/svg_picture.dart';
+import '../../core/presentation/ui/widgets/svg_picture.dart';
 
 class IstuNavigationDrawer extends StatelessWidget {
   const IstuNavigationDrawer({Key? key}) : super(key: key);

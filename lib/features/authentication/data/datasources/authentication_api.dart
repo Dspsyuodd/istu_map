@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:istu_map/core/constants/api_constants.dart';
-import 'package:istu_map/features/authentication/data/models/user_data_model.dart';
-import 'package:istu_map/features/authentication/data/models/user_dto_model.dart';
+import '../../../../core/constants/api_constants.dart';
+import '../../domain/entities/user_data.dart';
+import '../../domain/entities/user_dto.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -12,17 +12,17 @@ abstract class AuthenticationApi {
   factory AuthenticationApi(Dio dio) = _AuthenticationApi;
 
   @POST(ApiConstants.users + ApiConstants.login)
-  Future<UserDataModel> login(@Body() UserDtoModel data);
+  Future<UserData> login(@Body() UserDto data);
 
   @POST(ApiConstants.users + ApiConstants.register)
-  Future<UserDtoModel> registration(@Body() UserDtoModel data);
+  Future<UserDto> registration(@Body() UserDto data);
 
   @POST(ApiConstants.oauth + ApiConstants.authenticate)
   Future<void> loginViaIstuAcc(); 
 
-  @POST(ApiConstants.oauth + ApiConstants.refresh)
-  Future<String> refreshAccessToken(@Header('Refresh-Token') String refreshToken);
+  @POST(ApiConstants.users + ApiConstants.refresh)
+  Future<String> refreshAccessToken(@Header('RefreshToken') String refreshToken);
 
   @GET(ApiConstants.users + ApiConstants.info) 
-  Future<UserDtoModel> getUser();
+  Future<UserDto> getUser();
 }

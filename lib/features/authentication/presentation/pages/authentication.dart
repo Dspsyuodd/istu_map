@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:istu_map/features/authentication/presentation/bloc/authentication_bloc.dart';
-import 'package:istu_map/features/authentication/presentation/pages/authorizaiton_screen.dart';
+import '../bloc/authentication_bloc.dart';
+import 'authorizaiton_screen.dart';
 
 import '../../authentication_injection_container.dart';
 

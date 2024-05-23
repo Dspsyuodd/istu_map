@@ -1,17 +1,18 @@
+import 'dart:convert';
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:istu_map/core/errors/failure.dart';
-import 'package:istu_map/core/errors/server_errors_handler.dart';
-import 'package:istu_map/features/authentication/core/failures.dart';
-import 'package:istu_map/features/authentication/data/datasources/authentication_api.dart';
-import 'package:istu_map/features/authentication/domain/repositories/token_repository.dart';
+import '../../../../core/errors/failure.dart';
+import '../../../../core/errors/server_errors_handler.dart';
+import '../../core/failures.dart';
+import '../datasources/authentication_api.dart';
+import '../../domain/repositories/token_repository.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 class TokenRepositoryImpl extends ExceptionsHandler implements TokenRepository {
   final FlutterSecureStorage _storage;
   final AuthenticationApi authenticationApi;
-  String? _accessToken;
-  String? _refreshToken;
+  final _tokens = <String, String>{};
 
   TokenRepositoryImpl(this._storage, this.authenticationApi, super.networkInfo);
 
@@ -22,42 +23,64 @@ class TokenRepositoryImpl extends ExceptionsHandler implements TokenRepository {
 
   @override
   Future<Either<Failure, String>> getAuthToken() async {
-    if (_accessToken != null) return Right(_accessToken!);
-    var token = await _storage.read(key: 'AccessToken');
-    if (token == null) return Left(NoTokenFailure());
-    if (JwtDecoder.isExpired(token)) return Left(AccessTokenExpiredFailure());
-    _accessToken = token;
-    return Right(token);
+    return _getToken('AccessToken');
   }
 
   @override
   Future<Either<Failure, String>> getRefreshToken() async {
-    if (_refreshToken != null) return Right(_refreshToken!);
-    var refreshToken = await _storage.read(key: 'RefreshToken');
-    if (refreshToken == null) return Left(NoTokenFailure());
-    if (JwtDecoder.isExpired(refreshToken)) {
-      return Left(RefreshTokenExpiredFailure());
-    }
-    _refreshToken = refreshToken;
-    return Right(refreshToken);
+    return _getToken('RefreshToken');
   }
 
   @override
   Future<void> setAuthToken(String token) async {
-    _accessToken = token;
-    return await _storage.write(key: 'AccessToken', value: token);
+    await _setToken('AccessToken', token);
   }
 
   @override
   Future<void> setRefreshToken(String token) async {
-    _refreshToken = token;
-    return await _storage.write(key: 'RefreshToken', value: token);
+    await _setToken('RefreshToken', token);
+  }
+
+  Future<Either<Failure, String>> _getToken(String key) async {
+    if (_tokens[key] != null) return Right(_tokens[key]!);
+    var token = await _storage.read(key: key);
+    if (token == null) return Left(NoTokenFailure());
+    try {
+      if (JwtDecoder.isExpired(token)) {
+        return Left(TokenFailure.getFailure(key));
+      }
+    } on FormatException {
+      clearStorage();
+      return Left(NoTokenFailure());
+    }
+
+    _tokens[key] = token;
+    return Right(token);
+  }
+
+  Future<void> _setToken(String key, String token) {
+    _tokens[key] = token;
+    return _storage.write(key: key, value: token);
   }
 
   @override
   Future<Either<Failure, String>> refreshAccessToken() async {
     var token = await getRefreshToken();
-    return token.fold((l) => Left(l),
-        (r) => getEither(() => authenticationApi.refreshAccessToken(r)));
+    return await token.fold(
+      (l) async => Left(l),
+      (r) async => getEither(
+        () async => authenticationApi.refreshAccessToken(r).then(
+          (json) async {
+            var access = jsonDecode(json)['AccessToken'] as String;
+            var refresh = jsonDecode(json)['RefreshToken'] as String;
+            await setAuthToken(access);
+            await setRefreshToken(refresh);
+            return access;
+          },
+        ),
+      ),
+    );
   }
 }
+
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5NGIxY2NlLWNiMWItNDhjNi05OTcwLWYxZjUxYzEwMWM3MSIsImV4cCI6MTcxODk4MTY1OH0.pjCJbNiA7Esw0Y5uNh9R-fwnGssdiLNnSUCKbankYgk

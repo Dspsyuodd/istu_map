@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:istu_map/features/authentication/authentication_injection_container.dart';
-import 'package:istu_map/features/authentication/presentation/bloc/authentication_bloc.dart';
+import '../../authentication_injection_container.dart';
+import '../bloc/authentication_bloc.dart';
 
 class Logout extends StatelessWidget {
   const Logout({Key? key}) : super(key: key);

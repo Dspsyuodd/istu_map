@@ -1,9 +1,9 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:istu_map/core/errors/failure.dart';
-import 'package:istu_map/features/authentication/core/failures.dart';
-import 'package:istu_map/features/authentication/domain/entities/user_data.dart';
-import 'package:istu_map/features/authentication/domain/repositories/authentication_repository.dart';
-import 'package:istu_map/features/authentication/domain/repositories/token_repository.dart';
+import '../../../../core/errors/failure.dart';
+import '../../core/failures.dart';
+import '../entities/user_dto.dart';
+import '../repositories/authentication_repository.dart';
+import '../repositories/token_repository.dart';
 
 class Initialize {
   final TokenRepository tokenRepository;
@@ -19,7 +19,6 @@ class Initialize {
           return await refresh.fold(
             (l) async => Left(l),
             (r) async {
-              tokenRepository.setAuthToken(r);
               return await authenticationRepository.getUser();
             },
           );

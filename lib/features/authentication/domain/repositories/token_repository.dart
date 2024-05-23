@@ -1,5 +1,5 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:istu_map/core/errors/failure.dart';
+import '../../../../core/errors/failure.dart';
 
 abstract interface class TokenRepository {
   Future<Either<Failure, String>> getAuthToken();

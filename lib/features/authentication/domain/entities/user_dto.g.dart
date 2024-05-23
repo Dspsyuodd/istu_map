@@ -1,19 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_dto_model.dart';
+part of 'user_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserDtoModel _$UserDtoModelFromJson(Map<String, dynamic> json) => UserDtoModel(
+_$UserDtoImpl _$$UserDtoImplFromJson(Map<String, dynamic> json) =>
+    _$UserDtoImpl(
       email: json['Email'] as String,
       password: json['Password'] as String?,
       firstName: json['FirstName'] as String?,
       lastName: json['LastName'] as String?,
     );
 
-Map<String, dynamic> _$UserDtoModelToJson(UserDtoModel instance) =>
+Map<String, dynamic> _$$UserDtoImplToJson(_$UserDtoImpl instance) =>
     <String, dynamic>{
       'Email': instance.email,
       'Password': instance.password,

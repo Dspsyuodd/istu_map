@@ -1,7 +1,7 @@
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:istu_map/core/ui/widgets/svg_picture.dart';
+import '../../../../core/presentation/ui/widgets/svg_picture.dart';
 import 'dart:math' as math;
 
 class AuthorizationLogoClipper extends CustomClipper<Path> {

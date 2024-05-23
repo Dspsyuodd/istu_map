@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
-import 'package:istu_map/features/authentication/core/failures.dart';
-import 'package:istu_map/features/authentication/domain/repositories/token_repository.dart';
+import '../../../core/constants/api_constants.dart';
+import 'failures.dart';
+import '../domain/repositories/token_repository.dart';
 
 class AuthenticationInterceptor extends Interceptor {
   final TokenRepository tokenRepository;
@@ -14,9 +13,9 @@ class AuthenticationInterceptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) async {
     var accessTokenEither = await tokenRepository.getAuthToken();
-    log('GET AUTH TOKEN: $accessTokenEither');
     String? accessToken = await accessTokenEither.fold(
       (l) async {
+        if (options.path.contains(ApiConstants.refresh)) return null;
         if (l is AccessTokenExpiredFailure) {
           var refreshEither = await tokenRepository.refreshAccessToken();
           return refreshEither.fold(

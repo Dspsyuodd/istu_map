@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:istu_map/core/constants/api_constants.dart';
-import 'package:istu_map/features/map/external_map/data/models/external_route_model.dart';
+import '../../../../../core/constants/api_constants.dart';
+import '../../domain/entities/exteral_route.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -11,10 +11,7 @@ abstract class ExternalRouteApi {
   factory ExternalRouteApi(Dio dio, {String baseUrl}) = _ExternalRouteApi;
 
   @POST(ApiConstants.externalRoutes)
-  Future<ExternalRouteModel> getRoute(
+  Future<ExternalRoute> getRoute(
     @Body() Map<String, dynamic> body,
   );
 }
-// @Field('Type') int type,
-// @Field('BuildingId') String buildingId,
-// @Field('StartPointDto') Map<String, dynamic> startPointDto,

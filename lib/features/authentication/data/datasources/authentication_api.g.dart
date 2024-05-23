@@ -21,14 +21,13 @@ class _AuthenticationApi implements AuthenticationApi {
   String? baseUrl;
 
   @override
-  Future<UserDataModel> login(UserDtoModel data) async {
+  Future<UserData> login(UserDto data) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(data.toJson());
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<UserDataModel>(Options(
+    final _data = data;
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<UserData>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -44,19 +43,18 @@ class _AuthenticationApi implements AuthenticationApi {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = UserDataModel.fromJson(_result.data!);
+    final value = UserData.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<UserDtoModel> registration(UserDtoModel data) async {
+  Future<UserDto> registration(UserDto data) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(data.toJson());
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<UserDtoModel>(Options(
+    final _data = data;
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<UserDto>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -72,7 +70,7 @@ class _AuthenticationApi implements AuthenticationApi {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = UserDtoModel.fromJson(_result.data!);
+    final value = UserDto.fromJson(_result.data!);
     return value;
   }
 
@@ -104,7 +102,7 @@ class _AuthenticationApi implements AuthenticationApi {
   Future<String> refreshAccessToken(String refreshToken) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Refresh-Token': refreshToken};
+    final _headers = <String, dynamic>{r'RefreshToken': refreshToken};
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
@@ -114,7 +112,7 @@ class _AuthenticationApi implements AuthenticationApi {
     )
         .compose(
           _dio.options,
-          'oauth/refresh/',
+          'users/refresh/',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -128,13 +126,13 @@ class _AuthenticationApi implements AuthenticationApi {
   }
 
   @override
-  Future<UserDtoModel> getUser() async {
+  Future<UserDto> getUser() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<UserDtoModel>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<UserDto>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -150,7 +148,7 @@ class _AuthenticationApi implements AuthenticationApi {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = UserDtoModel.fromJson(_result.data!);
+    final value = UserDto.fromJson(_result.data!);
     return value;
   }
 

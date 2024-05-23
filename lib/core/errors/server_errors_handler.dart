@@ -1,7 +1,7 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:istu_map/core/errors/exceptions.dart';
-import 'package:istu_map/core/errors/failure.dart';
 
+import 'exceptions.dart';
+import 'failure.dart';
 import 'network_info.dart';
 
 abstract class ExceptionsHandler {

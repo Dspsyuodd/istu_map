@@ -21,14 +21,14 @@ class _ExternalRouteApi implements ExternalRouteApi {
   String? baseUrl;
 
   @override
-  Future<ExternalRouteModel> getRoute(Map<String, dynamic> body) async {
+  Future<ExternalRoute> getRoute(Map<String, dynamic> body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<ExternalRouteModel>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<ExternalRoute>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -44,7 +44,7 @@ class _ExternalRouteApi implements ExternalRouteApi {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ExternalRouteModel.fromJson(_result.data!);
+    final value = ExternalRoute.fromJson(_result.data!);
     return value;
   }
 

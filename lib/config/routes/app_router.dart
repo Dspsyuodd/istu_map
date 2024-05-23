@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:istu_map/app/ui/map.dart';
-import 'package:istu_map/features/authentication/presentation/pages/authentication.dart';
-import 'package:istu_map/features/map/external_map/presentation/bloc/map_bloc.dart';
-import 'package:istu_map/features/map/map_injection_container.dart';
+import '../../app/ui/map.dart';
+import '../../features/authentication/presentation/pages/authentication.dart';
+import '../../features/map/external_map/presentation/bloc/map_bloc.dart';
+import '../../features/map/internal_map/presintation/pages/building_map.dart';
+import '../../features/map/map_injection_container.dart';
 
 import '../../app/ui/splash_screen.dart';
 
@@ -24,5 +25,6 @@ final _routes = {
   '/map': MaterialPageRoute(
       builder: (_) =>
           BlocProvider<MapBloc>(create: (_) => sl(), child: const IstuMap())),
+  '/building_map': MaterialPageRoute(builder: (_) => const BuildingMap()),
   '/authentication': MaterialPageRoute(builder: (_) => const Authentication()),
 };

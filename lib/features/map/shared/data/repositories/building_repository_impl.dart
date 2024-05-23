@@ -1,9 +1,9 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:istu_map/core/errors/failure.dart';
-import 'package:istu_map/core/errors/server_errors_handler.dart';
-import 'package:istu_map/features/map/shared/data/datasources/building_data_source.dart';
-import 'package:istu_map/features/map/shared/domain/entities/building.dart';
-import 'package:istu_map/features/map/shared/domain/repositories/building_repository.dart';
+import '../../../../../core/errors/failure.dart';
+import '../../../../../core/errors/server_errors_handler.dart';
+import '../datasources/building_data_source.dart';
+import '../../domain/entities/building.dart';
+import '../../domain/repositories/building_repository.dart';
 
 class BuildingRepositoryImpl extends ExceptionsHandler
     implements BuildingRepository {

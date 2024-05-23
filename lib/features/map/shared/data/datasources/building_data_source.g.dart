@@ -21,13 +21,13 @@ class _BuildingApi implements BuildingApi {
   String? baseUrl;
 
   @override
-  Future<List<BuildingModel>> getAll() async {
+  Future<List<Building>> getAll() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<BuildingModel>>(Options(
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Building>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -44,7 +44,7 @@ class _BuildingApi implements BuildingApi {
               baseUrl,
             ))));
     var value = _result.data!
-        .map((dynamic i) => BuildingModel.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => Building.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }

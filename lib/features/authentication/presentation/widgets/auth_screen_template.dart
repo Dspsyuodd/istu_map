@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:istu_map/features/authentication/presentation/widgets/top_logo.dart';
+import 'top_logo.dart';
 
 class AuthScreenTemplate extends StatefulWidget {
   const AuthScreenTemplate({Key? key, required this.content}) : super(key: key);

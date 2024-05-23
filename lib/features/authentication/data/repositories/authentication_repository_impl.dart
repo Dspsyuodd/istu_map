@@ -1,10 +1,10 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:istu_map/core/errors/failure.dart';
-import 'package:istu_map/core/errors/server_errors_handler.dart';
-import 'package:istu_map/features/authentication/data/datasources/authentication_api.dart';
-import 'package:istu_map/features/authentication/data/models/user_dto_model.dart';
-import 'package:istu_map/features/authentication/domain/entities/user_data.dart';
-import 'package:istu_map/features/authentication/domain/repositories/authentication_repository.dart';
+import '../../../../core/errors/failure.dart';
+import '../../../../core/errors/server_errors_handler.dart';
+import '../datasources/authentication_api.dart';
+import '../../domain/entities/user_data.dart';
+import '../../domain/entities/user_dto.dart';
+import '../../domain/repositories/authentication_repository.dart';
 
 class AuthenticationRepositoryImpl extends ExceptionsHandler
     implements AuthenticationRepository {
@@ -13,7 +13,7 @@ class AuthenticationRepositoryImpl extends ExceptionsHandler
   AuthenticationRepositoryImpl(this.authenticationApi, super.networkInfo);
   @override
   Future<Either<Failure, UserData>> login(UserDto data) async {
-    return getEither(() => authenticationApi.login(UserDtoModel(
+    return getEither(() => authenticationApi.login(UserDto(
         email: data.email, password: data.password)));
   }
 
@@ -26,7 +26,7 @@ class AuthenticationRepositoryImpl extends ExceptionsHandler
   @override
   Future<Either<Failure, UserDto>> registration(UserDto data) {
     assert(data.firstName != null && data.lastName != null);
-    return getEither(() => authenticationApi.registration(UserDtoModel(
+    return getEither(() => authenticationApi.registration(UserDto(
           email: data.email,
           password: data.password,
           firstName: data.firstName,

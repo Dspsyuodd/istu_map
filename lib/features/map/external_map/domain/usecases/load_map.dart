@@ -1,6 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import '../../../../../core/errors/failure.dart';
-import '../../../../../core/usecases/usecase.dart';
+import '../../../../../core/domain/usecases/usecase.dart';
 import '../../../shared/domain/entities/building.dart';
 import '../../../shared/domain/repositories/building_repository.dart';
 

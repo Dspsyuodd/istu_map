@@ -2,13 +2,14 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:istu_map/features/authentication/domain/entities/user_data.dart';
-import 'package:istu_map/features/authentication/presentation/bloc/authentication_bloc.dart';
-import 'package:istu_map/features/authentication/presentation/pages/registration_screen.dart';
-import 'package:istu_map/features/authentication/presentation/widgets/auth_elevated_button.dart';
-import 'package:istu_map/features/authentication/presentation/widgets/auth_screen_template.dart';
-import 'package:istu_map/features/authentication/presentation/widgets/authentication_text_field.dart';
-import 'package:istu_map/features/authentication/presentation/widgets/login_via_lk_button.dart';
+import '../../domain/entities/user_data.dart';
+import '../../domain/entities/user_dto.dart';
+import '../bloc/authentication_bloc.dart';
+import 'registration_screen.dart';
+import '../widgets/auth_elevated_button.dart';
+import '../widgets/auth_screen_template.dart';
+import '../widgets/authentication_text_field.dart';
+import '../widgets/login_via_lk_button.dart';
 
 class AuthorizaitonScreen extends StatefulWidget {
   const AuthorizaitonScreen({Key? key}) : super(key: key);
