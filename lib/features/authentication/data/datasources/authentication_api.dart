@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import '../../../../core/constants/api_constants.dart';
+import '../../../../config/constants/api_constants.dart';
 import '../../domain/entities/user_data.dart';
 import '../../domain/entities/user_dto.dart';
 import 'package:retrofit/http.dart';

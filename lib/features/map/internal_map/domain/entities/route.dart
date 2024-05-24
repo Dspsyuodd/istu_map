@@ -1,12 +1,17 @@
-import 'dart:ui';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:istu_map/features/map/internal_map/domain/entities/waypoint.dart';
 
-import 'package:equatable/equatable.dart';
+part 'route.freezed.dart';
+part 'route.g.dart';
 
-class Route extends Equatable {
-  final List<Offset> points;
+@Freezed()
+class Route with _$Route {
+  const factory Route({
+    required String buildingId,
+    required String floorId,
+    required int floorNumber,
+    required List<Waypoint> objects,
+  }) = _Route;
 
-  const Route({required this.points});
-  
-  @override
-  List<Object?> get props => [points];
+  factory Route.fromJson(Map<String, dynamic> json) => _$RouteFromJson(json);
 }

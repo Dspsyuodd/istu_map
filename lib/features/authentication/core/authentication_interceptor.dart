@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import '../../../core/constants/api_constants.dart';
+import '../../../config/constants/api_constants.dart';
 import 'failures.dart';
 import '../domain/repositories/token_repository.dart';
 
