@@ -25,9 +25,9 @@ mixin _$Waypoint {
   int get floor => throw _privateConstructorUsedError;
   int get type => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
-  int get x => throw _privateConstructorUsedError;
-  int get y => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  double get x => throw _privateConstructorUsedError;
+  double get y => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,9 +46,9 @@ abstract class $WaypointCopyWith<$Res> {
       int floor,
       int type,
       String title,
-      String description,
-      int x,
-      int y});
+      String? description,
+      double x,
+      double y});
 }
 
 /// @nodoc
@@ -69,7 +69,7 @@ class _$WaypointCopyWithImpl<$Res, $Val extends Waypoint>
     Object? floor = null,
     Object? type = null,
     Object? title = null,
-    Object? description = null,
+    Object? description = freezed,
     Object? x = null,
     Object? y = null,
   }) {
@@ -94,18 +94,18 @@ class _$WaypointCopyWithImpl<$Res, $Val extends Waypoint>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       x: null == x
           ? _value.x
           : x // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       y: null == y
           ? _value.y
           : y // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
     ) as $Val);
   }
 }
@@ -124,9 +124,9 @@ abstract class _$$WaypointImplCopyWith<$Res>
       int floor,
       int type,
       String title,
-      String description,
-      int x,
-      int y});
+      String? description,
+      double x,
+      double y});
 }
 
 /// @nodoc
@@ -145,7 +145,7 @@ class __$$WaypointImplCopyWithImpl<$Res>
     Object? floor = null,
     Object? type = null,
     Object? title = null,
-    Object? description = null,
+    Object? description = freezed,
     Object? x = null,
     Object? y = null,
   }) {
@@ -170,18 +170,18 @@ class __$$WaypointImplCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       x: null == x
           ? _value.x
           : x // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       y: null == y
           ? _value.y
           : y // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
     ));
   }
 }
@@ -213,11 +213,11 @@ class _$WaypointImpl implements _Waypoint {
   @override
   final String title;
   @override
-  final String description;
+  final String? description;
   @override
-  final int x;
+  final double x;
   @override
-  final int y;
+  final double y;
 
   @override
   String toString() {
@@ -267,9 +267,9 @@ abstract class _Waypoint implements Waypoint {
       required final int floor,
       required final int type,
       required final String title,
-      required final String description,
-      required final int x,
-      required final int y}) = _$WaypointImpl;
+      required final String? description,
+      required final double x,
+      required final double y}) = _$WaypointImpl;
 
   factory _Waypoint.fromJson(Map<String, dynamic> json) =
       _$WaypointImpl.fromJson;
@@ -285,11 +285,11 @@ abstract class _Waypoint implements Waypoint {
   @override
   String get title;
   @override
-  String get description;
+  String? get description;
   @override
-  int get x;
+  double get x;
   @override
-  int get y;
+  double get y;
   @override
   @JsonKey(ignore: true)
   _$$WaypointImplCopyWith<_$WaypointImpl> get copyWith =>

@@ -13,9 +13,9 @@ _$WaypointImpl _$$WaypointImplFromJson(Map<String, dynamic> json) =>
       floor: (json['Floor'] as num).toInt(),
       type: (json['Type'] as num).toInt(),
       title: json['Title'] as String,
-      description: json['Description'] as String,
-      x: (json['X'] as num).toInt(),
-      y: (json['Y'] as num).toInt(),
+      description: json['Description'] as String?,
+      x: (json['X'] as num).toDouble(),
+      y: (json['Y'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$WaypointImplToJson(_$WaypointImpl instance) =>

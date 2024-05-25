@@ -11,9 +11,9 @@ class Waypoint with _$Waypoint {
     required int floor,
     required int type,
     required String title,
-    required String description,
-    required int x,
-    required int y,
+    required String? description,
+    required double x,
+    required double y,
   }) = _Waypoint;
 
   factory Waypoint.fromJson(Map<String, dynamic> json) =>

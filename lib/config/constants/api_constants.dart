@@ -5,7 +5,7 @@ abstract class ApiConstants {
   static const String edges = "edges/";
   static const String images = "images/";
   static const String upload = "upload/";
-  static const String dowload = "dowload/";
+  static const String download = "download/";
   static const String users = "users/";
   static const String info = "info/";
   static const String register = "register/";

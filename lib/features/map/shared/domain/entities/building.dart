@@ -12,6 +12,7 @@ class Building with _$Building {
     required String title,
     required String address,
     @LatLngJsonConverter() required LatLng position,
+    
     required String description,
     required List<FloorInfo> floors,
   }) = _Building;

@@ -1,10 +1,16 @@
 part of 'building_map_bloc.dart';
 
-sealed class BuildingMapState extends Equatable {
-  const BuildingMapState();
-  
+final class BuildingMapState extends Equatable {
+  const BuildingMapState(this.status, this.floor, this.floorImage);
+  final BuildingMapStatus status;
+  final Floor? floor;
+  final Uint8List? floorImage;
+
+  const BuildingMapState.initial()
+      : this(BuildingMapStatus.initial, null, null);
+
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [status, floor, floorImage];
 }
 
-final class BuildingMapInitial extends BuildingMapState {}
+enum BuildingMapStatus { initial, success, route, failure }

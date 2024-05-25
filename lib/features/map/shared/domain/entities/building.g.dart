@@ -11,8 +11,8 @@ _$BuildingImpl _$$BuildingImplFromJson(Map<String, dynamic> json) =>
       id: json['Id'] as String,
       title: json['Title'] as String,
       address: json['Address'] as String,
-      position: const LatLngJsonConverter().fromJson(
-          {'Latitude': json['Latitude'], 'Longitude': json['Longitude']}),
+      position: const LatLngJsonConverter()
+          .fromJson(json['Position'] as Map<String, dynamic>),
       description: json['Description'] as String,
       floors: (json['Floors'] as List<dynamic>)
           .map((e) => FloorInfo.fromJson(e as Map<String, dynamic>))
