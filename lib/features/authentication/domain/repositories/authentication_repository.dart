@@ -6,6 +6,5 @@ import '../entities/user_dto.dart';
 abstract interface class AuthenticationRepository {
   Future<Either<Failure, UserData>> login(UserDto data);
   Future<Either<Failure, UserDto>> registration(UserDto data);
-  Future<Either<Failure, void>> loginViaIstuAcc();
-  Future<Either<Failure, UserDto>> getUser();
+  Future<Either<Failure, UserData>> loginViaIstuAcc(String code);
 }

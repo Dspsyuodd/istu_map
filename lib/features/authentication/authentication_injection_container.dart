@@ -20,7 +20,7 @@ void initAuthenticationDependencies() {
   sl.registerLazySingleton(() => Initialize(sl(), sl()));
   sl.registerLazySingleton(() => Login(sl(), sl()));
   sl.registerLazySingleton(() => Register(sl()));
-  sl.registerLazySingleton(() => LoginViaIstuAcc(sl()));
+  sl.registerLazySingleton(() => LoginViaIstuAcc(sl(), sl()));
 
   sl.registerLazySingleton(() => AuthenticationInterceptor(sl()));
 

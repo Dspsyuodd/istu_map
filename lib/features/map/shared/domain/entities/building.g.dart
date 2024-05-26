@@ -11,8 +11,8 @@ _$BuildingImpl _$$BuildingImplFromJson(Map<String, dynamic> json) =>
       id: json['Id'] as String,
       title: json['Title'] as String,
       address: json['Address'] as String,
-      position: const LatLngJsonConverter()
-          .fromJson(json['Position'] as Map<String, dynamic>),
+      externalPosition: const LatLngJsonConverter()
+          .fromJson(json['ExternalPosition'] as Map<String, dynamic>),
       description: json['Description'] as String,
       floors: (json['Floors'] as List<dynamic>)
           .map((e) => FloorInfo.fromJson(e as Map<String, dynamic>))
@@ -24,7 +24,8 @@ Map<String, dynamic> _$$BuildingImplToJson(_$BuildingImpl instance) =>
       'Id': instance.id,
       'Title': instance.title,
       'Address': instance.address,
-      'Position': const LatLngJsonConverter().toJson(instance.position),
+      'ExternalPosition':
+          const LatLngJsonConverter().toJson(instance.externalPosition),
       'Description': instance.description,
       'Floors': instance.floors.map((e) => e.toJson()).toList(),
     };

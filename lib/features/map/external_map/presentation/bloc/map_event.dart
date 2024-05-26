@@ -25,13 +25,11 @@ class RouteCreated extends MapEvent {
   List<Object> get props => [to];
 }
 
-class PositionChanged  extends MapEvent {
-  final LatLng position;
-
-  const PositionChanged(this.position);
+class PositionChanged extends MapEvent {
+  const PositionChanged();
 
   @override
-  List<Object> get props => [position];
+  List<Object> get props => [];
 }
 
 class CloseToBuilding extends MapEvent {

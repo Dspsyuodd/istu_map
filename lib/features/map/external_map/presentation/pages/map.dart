@@ -94,7 +94,7 @@ class _IstuMapWidgetState extends State<IstuMapWidget>
               ),
               BlocBuilder<MapBloc, MapState>(
                 builder: (context, state) {
-                  if (state.status == MapStatus.success &&
+                  if (state.status != MapStatus.failure &&
                       state.route != null) {
                     return PolylineLayer(
                       polylines: [
@@ -113,14 +113,13 @@ class _IstuMapWidgetState extends State<IstuMapWidget>
               ),
               BlocBuilder<MapBloc, MapState>(
                 builder: (context, state) {
-                  if (state.status == MapStatus.success ||
-                      state.status == MapStatus.loading) {
+                  if (state.status != MapStatus.failure) {
                     return MarkerLayer(
                       markers: state.buildings
                           .map(
                             (e) => Marker(
                               rotate: true,
-                              point: e.position,
+                              point: e.externalPosition,
                               child: InkWell(
                                 child: const Icon(
                                   Icons.location_on,
@@ -187,8 +186,8 @@ class _IstuMapWidgetState extends State<IstuMapWidget>
         ),
         MapFocusButton(
           onTap: () {
-            mapController.move(
-                mapController.camera.center, mapController.camera.zoom);
+            var pos = BlocProvider.of<MapBloc>(context).state.currentPosition;
+            mapController.move(pos, mapController.camera.zoom);
           },
         ),
       ],

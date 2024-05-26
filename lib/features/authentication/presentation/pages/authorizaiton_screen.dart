@@ -1,7 +1,9 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:gap/gap.dart';
+import 'package:istu_map/features/authentication/presentation/pages/istu_oauth.dart';
 import '../../domain/entities/user_data.dart';
 import '../../domain/entities/user_dto.dart';
 import '../bloc/authentication_bloc.dart';
@@ -117,15 +119,16 @@ class _AuthorizaitonScreenState extends State<AuthorizaitonScreen> {
                         if (emailValidate && passwordValidate) {
                           BlocProvider.of<AuthenticationBloc>(context).add(
                             LoginEvent(UserData(
-                                userDto:
-                                    UserDto(email: _email, password: _password))),
+                                userDto: UserDto(
+                                    email: _email, password: _password))),
                           );
                         }
                       },
                     ),
                     InkWell(
                       onTap: () async {
-                        var result = await Navigator.of(context).push<(String, String)?>(
+                        var result =
+                            await Navigator.of(context).push<(String, String)?>(
                           MaterialPageRoute(
                             builder: (_) => BlocProvider.value(
                               value:
@@ -153,7 +156,19 @@ class _AuthorizaitonScreenState extends State<AuthorizaitonScreen> {
                       ),
                     ),
                     const Gap(10),
-                    const LoginViaLkButton(),
+                    LoginViaLkButton(
+                      onPressed: () async {
+                        WebUri? callbackUrl = await Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => const IstuOauth(),
+                          ),
+                        );
+                        if (callbackUrl != null && context.mounted) {
+                          BlocProvider.of<AuthenticationBloc>(context)
+                              .add(OauthEvent(callbackUrl));
+                        }
+                      },
+                    ),
                   ],
                 ),
               ),

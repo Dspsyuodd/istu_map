@@ -24,7 +24,7 @@ mixin _$Building {
   String get title => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
   @LatLngJsonConverter()
-  LatLng get position => throw _privateConstructorUsedError;
+  LatLng get externalPosition => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   List<FloorInfo> get floors => throw _privateConstructorUsedError;
 
@@ -43,7 +43,7 @@ abstract class $BuildingCopyWith<$Res> {
       {String id,
       String title,
       String address,
-      @LatLngJsonConverter() LatLng position,
+      @LatLngJsonConverter() LatLng externalPosition,
       String description,
       List<FloorInfo> floors});
 }
@@ -64,7 +64,7 @@ class _$BuildingCopyWithImpl<$Res, $Val extends Building>
     Object? id = null,
     Object? title = null,
     Object? address = null,
-    Object? position = null,
+    Object? externalPosition = null,
     Object? description = null,
     Object? floors = null,
   }) {
@@ -81,9 +81,9 @@ class _$BuildingCopyWithImpl<$Res, $Val extends Building>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      position: null == position
-          ? _value.position
-          : position // ignore: cast_nullable_to_non_nullable
+      externalPosition: null == externalPosition
+          ? _value.externalPosition
+          : externalPosition // ignore: cast_nullable_to_non_nullable
               as LatLng,
       description: null == description
           ? _value.description
@@ -109,7 +109,7 @@ abstract class _$$BuildingImplCopyWith<$Res>
       {String id,
       String title,
       String address,
-      @LatLngJsonConverter() LatLng position,
+      @LatLngJsonConverter() LatLng externalPosition,
       String description,
       List<FloorInfo> floors});
 }
@@ -128,7 +128,7 @@ class __$$BuildingImplCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? address = null,
-    Object? position = null,
+    Object? externalPosition = null,
     Object? description = null,
     Object? floors = null,
   }) {
@@ -145,9 +145,9 @@ class __$$BuildingImplCopyWithImpl<$Res>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      position: null == position
-          ? _value.position
-          : position // ignore: cast_nullable_to_non_nullable
+      externalPosition: null == externalPosition
+          ? _value.externalPosition
+          : externalPosition // ignore: cast_nullable_to_non_nullable
               as LatLng,
       description: null == description
           ? _value.description
@@ -168,7 +168,7 @@ class _$BuildingImpl implements _Building {
       {required this.id,
       required this.title,
       required this.address,
-      @LatLngJsonConverter() required this.position,
+      @LatLngJsonConverter() required this.externalPosition,
       required this.description,
       required final List<FloorInfo> floors})
       : _floors = floors;
@@ -184,7 +184,7 @@ class _$BuildingImpl implements _Building {
   final String address;
   @override
   @LatLngJsonConverter()
-  final LatLng position;
+  final LatLng externalPosition;
   @override
   final String description;
   final List<FloorInfo> _floors;
@@ -197,7 +197,7 @@ class _$BuildingImpl implements _Building {
 
   @override
   String toString() {
-    return 'Building(id: $id, title: $title, address: $address, position: $position, description: $description, floors: $floors)';
+    return 'Building(id: $id, title: $title, address: $address, externalPosition: $externalPosition, description: $description, floors: $floors)';
   }
 
   @override
@@ -208,8 +208,8 @@ class _$BuildingImpl implements _Building {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.address, address) || other.address == address) &&
-            (identical(other.position, position) ||
-                other.position == position) &&
+            (identical(other.externalPosition, externalPosition) ||
+                other.externalPosition == externalPosition) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             const DeepCollectionEquality().equals(other._floors, _floors));
@@ -217,8 +217,14 @@ class _$BuildingImpl implements _Building {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, address, position,
-      description, const DeepCollectionEquality().hash(_floors));
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      title,
+      address,
+      externalPosition,
+      description,
+      const DeepCollectionEquality().hash(_floors));
 
   @JsonKey(ignore: true)
   @override
@@ -239,7 +245,7 @@ abstract class _Building implements Building {
       {required final String id,
       required final String title,
       required final String address,
-      @LatLngJsonConverter() required final LatLng position,
+      @LatLngJsonConverter() required final LatLng externalPosition,
       required final String description,
       required final List<FloorInfo> floors}) = _$BuildingImpl;
 
@@ -254,7 +260,7 @@ abstract class _Building implements Building {
   String get address;
   @override
   @LatLngJsonConverter()
-  LatLng get position;
+  LatLng get externalPosition;
   @override
   String get description;
   @override

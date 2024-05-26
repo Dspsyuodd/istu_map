@@ -57,11 +57,16 @@ class _ImageMapState extends State<ImageMap> {
     return ImageMapInteractiveViewer(
       controller: _internalMapController,
       options: widget.options,
-      child: Stack(
-        children: [
-          widget.baseImage,
-          ...widget.markupElements.map((e) => Positioned.fill(child: e)),
-        ],
+      child: Container(
+        decoration: BoxDecoration(
+          boxShadow: widget.options.boxShadow,
+        ),
+        child: Stack(
+          children: [
+            widget.baseImage,
+            ...widget.markupElements.map((e) => Positioned.fill(child: e)),
+          ],
+        ),
       ),
     );
   }
@@ -72,12 +77,14 @@ class ImageMapOptions extends Equatable {
   final double rotationGap;
   final double maxScale;
   final double minScale;
+  final List<BoxShadow>? boxShadow;
 
   const ImageMapOptions({
     this.backgroundColor,
     this.rotationGap = pi / 10,
     this.maxScale = 3.0,
     this.minScale = 0.5,
+    this.boxShadow,
   });
 
   @override

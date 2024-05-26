@@ -22,6 +22,13 @@ class BuildingMapBloc extends Bloc<BuildingMapEvent, BuildingMapState> {
       : super(const BuildingMapState.initial()) {
     on<BuildingMapEvent>((event, emit) async {
       if (event is FloorOpened) {
+        emit(
+          BuildingMapState(
+            BuildingMapStatus.loading,
+            _currentFloor,
+            _currentFloorImage,
+          ),
+        );
         var newFloor = await loadFloor(
           FloorLoadParams(
             buildingId: event.buildingId,
@@ -34,8 +41,13 @@ class BuildingMapBloc extends Bloc<BuildingMapEvent, BuildingMapState> {
           (r) {
             _currentFloor = r.$1;
             _currentFloorImage = r.$2;
-            emit(BuildingMapState(
-                BuildingMapStatus.success, _currentFloor, _currentFloorImage));
+            emit(
+              BuildingMapState(
+                BuildingMapStatus.success,
+                _currentFloor,
+                _currentFloorImage,
+              ),
+            );
           },
         );
       }

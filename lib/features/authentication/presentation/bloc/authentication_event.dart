@@ -28,3 +28,11 @@ class LoginEvent extends AuthenticationEvent {
   @override
   List<Object> get props => [data];
 }
+
+class OauthEvent extends AuthenticationEvent {
+  const OauthEvent(this.callbackUri);
+  final WebUri callbackUri;
+
+  @override
+  List<Object> get props => [callbackUri];
+}

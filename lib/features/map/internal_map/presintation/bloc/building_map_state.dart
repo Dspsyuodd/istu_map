@@ -13,4 +13,4 @@ final class BuildingMapState extends Equatable {
   List<Object?> get props => [status, floor, floorImage];
 }
 
-enum BuildingMapStatus { initial, success, route, failure }
+enum BuildingMapStatus { initial, loading, success, route, failure }

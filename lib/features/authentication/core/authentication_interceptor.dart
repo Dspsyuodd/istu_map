@@ -12,6 +12,7 @@ class AuthenticationInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
+    if (options.path == ApiConstants.canselUriPath) return;
     var accessTokenEither = await tokenRepository.getAuthToken();
     String? accessToken = await accessTokenEither.fold(
       (l) async {

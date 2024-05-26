@@ -13,14 +13,13 @@ class AuthenticationRepositoryImpl extends ExceptionsHandler
   AuthenticationRepositoryImpl(this.authenticationApi, super.networkInfo);
   @override
   Future<Either<Failure, UserData>> login(UserDto data) async {
-    return getEither(() => authenticationApi.login(UserDto(
-        email: data.email, password: data.password)));
+    return getEither(() => authenticationApi
+        .login(UserDto(email: data.email, password: data.password)));
   }
 
   @override
-  Future<Either<Failure, void>> loginViaIstuAcc() {
-    // TODO: implement loginViaIstuAcc
-    throw UnimplementedError();
+  Future<Either<Failure, UserData>> loginViaIstuAcc(String code) {
+    return getEither(() => authenticationApi.loginViaIstuAcc(code));
   }
 
   @override
@@ -32,10 +31,5 @@ class AuthenticationRepositoryImpl extends ExceptionsHandler
           firstName: data.firstName,
           lastName: data.lastName,
         )));
-  }
-
-  @override
-  Future<Either<Failure, UserDto>> getUser() {
-    return getEither(() => authenticationApi.getUser());
   }
 }

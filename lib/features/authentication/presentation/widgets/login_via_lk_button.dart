@@ -3,7 +3,8 @@ import 'package:gap/gap.dart';
 import '../../../../core/presentation/ui/widgets/svg_picture.dart';
 
 class LoginViaLkButton extends StatelessWidget {
-  const LoginViaLkButton({Key? key}) : super(key: key);
+  const LoginViaLkButton({Key? key, this.onPressed}) : super(key: key);
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class LoginViaLkButton extends StatelessWidget {
         ]),
       ),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,

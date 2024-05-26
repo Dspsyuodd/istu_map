@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import '../../../../core/errors/failure.dart';
 import '../../domain/entities/user_data.dart';
 import '../../domain/entities/user_dto.dart';
@@ -20,15 +21,25 @@ class AuthenticationBloc
   final LoginViaIstuAcc loginViaIstuAcc;
   final Initialize initialize;
 
-  AuthenticationBloc(this.login, this.register, this.loginViaIstuAcc, this.initialize)
+  AuthenticationBloc(
+      this.login, this.register, this.loginViaIstuAcc, this.initialize)
       : super(AuthenticationInitial()) {
     on<AuthenticationEvent>((event, emit) async {
+      if (event is OauthEvent) {
+        emit(AuthenticationLoading());
+        var result = await loginViaIstuAcc(
+            LoginViaIstuAccParams(event.callbackUri.uriValue));
+        result.fold(
+          (l) => _emitError(l, emit),
+          (r) => emit(const LoginSuccess()),
+        );
+      }
       if (event is InitEvent) {
         emit(AuthenticationInitial());
         var userData = await initialize();
         userData.fold(
           (l) => _emitError(l, emit),
-          (r) => emit(LoginSuccess(r)),
+          (r) => emit(const LoginSuccess()),
         );
       }
 
@@ -63,7 +74,7 @@ class AuthenticationBloc
         result.fold(
           (l) => _emitError(l, emit),
           (r) {
-            emit(LoginSuccess(r.userDto));
+            emit(const LoginSuccess());
           },
         );
       }

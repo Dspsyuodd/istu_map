@@ -12,9 +12,7 @@ final class AuthenticationInitial extends AuthenticationState {}
 class AuthenticationLoading extends AuthenticationState {}
 
 class LoginSuccess extends AuthenticationState {
-  final UserDto data;
-
-  const LoginSuccess(this.data);
+  const LoginSuccess();
 }
 
 class RegistrationSuccess extends AuthenticationState {

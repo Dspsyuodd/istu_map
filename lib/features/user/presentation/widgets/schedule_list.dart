@@ -1,43 +1,28 @@
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
-final shedule = [
-  SheduleListElement(
-    name: 'Сети и телекоммуникации',
-    teacher: 'Ардашев Б.С.',
-    auditory: '3-714',
-  ),
-  SheduleListElement(
-    name: 'Теория цифровой обработки сигналов',
-    teacher: 'Архипов И.О.',
-    auditory: '3-714',
-  ),
-  SheduleListElement(
-    name: 'Математические основы искусственного интеллекта',
-    teacher: 'Брычкина М.С.',
-    auditory: '3-204а',
-  ),
-  SheduleListElement(
-    name: 'Математические основы искусственного интеллекта',
-    teacher: 'Брычкина М.С.',
-    auditory: '3-204а',
-  ),
-];
-
 class SheduleListElement {
   final String name;
   final String teacher;
   final String auditory;
 
-  SheduleListElement(
-      {required this.name, required this.teacher, required this.auditory});
+  SheduleListElement({
+    required this.name,
+    required this.teacher,
+    required this.auditory,
+  });
 }
 
 class ScheduleList extends StatefulWidget {
-  const ScheduleList({Key? key, required this.width, required this.spacing})
+  const ScheduleList(
+      {Key? key,
+      required this.width,
+      required this.spacing,
+      required this.shedule})
       : super(key: key);
   final double width;
   final double spacing;
+  final List<SheduleListElement> shedule;
 
   @override
   State<ScheduleList> createState() => _ScheduleListState();
@@ -45,8 +30,7 @@ class ScheduleList extends StatefulWidget {
 
 class _ScheduleListState extends State<ScheduleList>
     with SingleTickerProviderStateMixin {
-  final scheduleKeys =
-      List.generate(shedule.length, (int _) => GlobalKey<_ScheduleListState>());
+  late List<GlobalKey<_ScheduleListState>> scheduleKeys;
   late AnimationController controller;
   Widget? circles;
   var positionOffset = 0.0;
@@ -56,11 +40,24 @@ class _ScheduleListState extends State<ScheduleList>
 
   @override
   void initState() {
+    _createKeys();
     controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
     );
     controller.value = 1;
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(ScheduleList oldWidget) {
+    _createKeys();
+    super.didUpdateWidget(oldWidget);
+  }
+
+  void _createKeys() {
+    scheduleKeys = List.generate(
+        widget.shedule.length, (int _) => GlobalKey<_ScheduleListState>());
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
         _buildCircles();
@@ -86,12 +83,12 @@ class _ScheduleListState extends State<ScheduleList>
         }
       });
     });
-    super.initState();
   }
 
   void _moveTo(int index) {
     controller
-        .animateTo(1 - sirclesPositions[index] / maxOffset, curve: Curves.easeOut)
+        .animateTo(1 - sirclesPositions[index] / maxOffset,
+            curve: Curves.easeOut)
         .whenComplete(() => setState(() {
               currentPosition = index;
               _buildCircles();
@@ -165,7 +162,7 @@ class _ScheduleListState extends State<ScheduleList>
   }
 
   List<Widget> _buildScheduleList() {
-    return shedule.asMap().entries.map((e) {
+    return widget.shedule.asMap().entries.map((e) {
       var color = AppTheme.of(context).colorScheme.secondary.withOpacity(0.5);
       if (e.key > currentPosition) {
         color = Colors.white.withOpacity(0.1);
@@ -210,18 +207,17 @@ class _ScheduleListState extends State<ScheduleList>
   }
 
   void _buildCircles() {
+    if (scheduleKeys.isEmpty) return;
     final theme = AppTheme.of(context);
     var circlesList = <Widget>[];
     var circleSize = 47.0;
-    if (scheduleKeys.isNotEmpty) {
-      var height =
-          (scheduleKeys.first.currentContext?.findRenderObject() as RenderBox)
-              .size
-              .height;
-      circlesList.add(SizedBox(
-        height: (height - circleSize) / 2 + widget.spacing / 2,
-      ));
-    }
+    var height =
+        (scheduleKeys.first.currentContext?.findRenderObject() as RenderBox)
+            .size
+            .height;
+    circlesList.add(SizedBox(
+      height: (height - circleSize) / 2 + widget.spacing / 2,
+    ));
     for (var i = 0; i < scheduleKeys.length; i++) {
       circlesList.add(ScheduleListCircle(
         color: i == currentPosition
@@ -243,10 +239,9 @@ class _ScheduleListState extends State<ScheduleList>
         ));
       }
     }
-    var height =
-        (scheduleKeys.last.currentContext?.findRenderObject() as RenderBox)
-            .size
-            .height;
+    height = (scheduleKeys.last.currentContext?.findRenderObject() as RenderBox)
+        .size
+        .height;
     circlesList.add(SizedBox(
       height: (height - circleSize) / 2 + widget.spacing / 2,
     ));
