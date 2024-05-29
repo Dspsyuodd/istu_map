@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../app/ui/map.dart';
+import '../../features/map/external_map/presentation/pages/map.dart';
 import '../../features/authentication/presentation/pages/authentication.dart';
 import '../../features/map/external_map/presentation/bloc/map_bloc.dart';
 import '../../features/map/map_injection_container.dart';

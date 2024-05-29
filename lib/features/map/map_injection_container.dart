@@ -1,11 +1,12 @@
 import 'package:get_it/get_it.dart';
+import 'package:istu_map/features/map/external_map/domain/usecases/get_route_to_lesson.dart';
 import 'package:istu_map/features/map/internal_map/data/datasources/floor_api.dart';
-import 'package:istu_map/features/map/internal_map/data/datasources/image_api.dart';
+import 'package:istu_map/features/shared/data/datasources/image_api.dart';
 import 'package:istu_map/features/map/internal_map/data/datasources/image_local_data_source.dart';
 import 'package:istu_map/features/map/internal_map/data/repositories/floor_repository_impl.dart';
-import 'package:istu_map/features/map/internal_map/data/repositories/image_repository_impl.dart';
+import 'package:istu_map/features/shared/data/repositories/image_repository_impl.dart';
 import 'package:istu_map/features/map/internal_map/domain/repositories/floor_repository.dart';
-import 'package:istu_map/features/map/internal_map/domain/repositories/image_repository.dart';
+import 'package:istu_map/features/shared/domain/repositories/image_repository.dart';
 import 'package:istu_map/features/map/internal_map/domain/usecases/create_route.dart';
 import 'package:istu_map/features/map/internal_map/domain/usecases/load_floor.dart';
 import 'package:istu_map/features/map/internal_map/presintation/bloc/building_map_bloc.dart';
@@ -24,13 +25,14 @@ import 'shared/domain/repositories/building_repository.dart';
 final sl = GetIt.instance;
 
 void initMapDependencies() {
-  sl.registerFactory(() => MapBloc(sl(), sl(), sl()));
+  sl.registerFactory(() => MapBloc(sl(), sl(), sl(), sl()));
   sl.registerFactory(() => BuildingMapBloc(sl(), sl()));
 
+  sl.registerLazySingleton(() => GetRouteToLesson(sl(), sl()));
   sl.registerLazySingleton(() => GetExternalRoute(sl()));
   sl.registerLazySingleton(() => LoadMap(sl()));
   sl.registerLazySingleton(() => LoadFloor(sl(), sl()));
-  sl.registerLazySingleton(() => CreateRoute());
+  sl.registerLazySingleton(() => CreateRoute(sl()));
 
   sl.registerLazySingleton<ExternalRouteRepository>(
       () => ExternalRouteRepositoryImpl(sl(), sl()));

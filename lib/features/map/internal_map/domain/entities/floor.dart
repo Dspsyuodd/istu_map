@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:istu_map/features/map/internal_map/domain/entities/edge.dart';
-import 'package:istu_map/features/map/internal_map/domain/entities/waypoint.dart';
+import 'package:istu_map/features/map/shared/domain/entities/waypoint.dart';
 
 part 'floor.freezed.dart';
 part 'floor.g.dart';

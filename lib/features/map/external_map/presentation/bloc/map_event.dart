@@ -39,3 +39,19 @@ class CloseToBuilding extends MapEvent {
   @override
   List<Object?> get props => [building];
 }
+
+class ExternalLessonSelected extends MapEvent {
+  const ExternalLessonSelected(this.lesson);
+  final Lesson lesson;
+
+  @override
+  List<Object> get props => [lesson];
+}
+
+class ExternalRouteCreatedToLesson extends MapEvent {
+  const ExternalRouteCreatedToLesson(this.lesson);
+  final Lesson lesson;
+
+  @override
+  List<Object> get props => [lesson];
+}

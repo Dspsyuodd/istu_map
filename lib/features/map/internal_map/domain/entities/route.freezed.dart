@@ -14,38 +14,33 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-Route _$RouteFromJson(Map<String, dynamic> json) {
-  return _Route.fromJson(json);
+RouteFloor _$RouteFloorFromJson(Map<String, dynamic> json) {
+  return _RouteFloor.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Route {
-  String get buildingId => throw _privateConstructorUsedError;
-  String get floorId => throw _privateConstructorUsedError;
-  int get floorNumber => throw _privateConstructorUsedError;
-  List<Waypoint> get objects => throw _privateConstructorUsedError;
+mixin _$RouteFloor {
+  List<Waypoint> get route => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $RouteCopyWith<Route> get copyWith => throw _privateConstructorUsedError;
+  $RouteFloorCopyWith<RouteFloor> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $RouteCopyWith<$Res> {
-  factory $RouteCopyWith(Route value, $Res Function(Route) then) =
-      _$RouteCopyWithImpl<$Res, Route>;
+abstract class $RouteFloorCopyWith<$Res> {
+  factory $RouteFloorCopyWith(
+          RouteFloor value, $Res Function(RouteFloor) then) =
+      _$RouteFloorCopyWithImpl<$Res, RouteFloor>;
   @useResult
-  $Res call(
-      {String buildingId,
-      String floorId,
-      int floorNumber,
-      List<Waypoint> objects});
+  $Res call({List<Waypoint> route});
 }
 
 /// @nodoc
-class _$RouteCopyWithImpl<$Res, $Val extends Route>
-    implements $RouteCopyWith<$Res> {
-  _$RouteCopyWithImpl(this._value, this._then);
+class _$RouteFloorCopyWithImpl<$Res, $Val extends RouteFloor>
+    implements $RouteFloorCopyWith<$Res> {
+  _$RouteFloorCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -55,78 +50,45 @@ class _$RouteCopyWithImpl<$Res, $Val extends Route>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? buildingId = null,
-    Object? floorId = null,
-    Object? floorNumber = null,
-    Object? objects = null,
+    Object? route = null,
   }) {
     return _then(_value.copyWith(
-      buildingId: null == buildingId
-          ? _value.buildingId
-          : buildingId // ignore: cast_nullable_to_non_nullable
-              as String,
-      floorId: null == floorId
-          ? _value.floorId
-          : floorId // ignore: cast_nullable_to_non_nullable
-              as String,
-      floorNumber: null == floorNumber
-          ? _value.floorNumber
-          : floorNumber // ignore: cast_nullable_to_non_nullable
-              as int,
-      objects: null == objects
-          ? _value.objects
-          : objects // ignore: cast_nullable_to_non_nullable
+      route: null == route
+          ? _value.route
+          : route // ignore: cast_nullable_to_non_nullable
               as List<Waypoint>,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$RouteImplCopyWith<$Res> implements $RouteCopyWith<$Res> {
-  factory _$$RouteImplCopyWith(
-          _$RouteImpl value, $Res Function(_$RouteImpl) then) =
-      __$$RouteImplCopyWithImpl<$Res>;
+abstract class _$$RouteFloorImplCopyWith<$Res>
+    implements $RouteFloorCopyWith<$Res> {
+  factory _$$RouteFloorImplCopyWith(
+          _$RouteFloorImpl value, $Res Function(_$RouteFloorImpl) then) =
+      __$$RouteFloorImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String buildingId,
-      String floorId,
-      int floorNumber,
-      List<Waypoint> objects});
+  $Res call({List<Waypoint> route});
 }
 
 /// @nodoc
-class __$$RouteImplCopyWithImpl<$Res>
-    extends _$RouteCopyWithImpl<$Res, _$RouteImpl>
-    implements _$$RouteImplCopyWith<$Res> {
-  __$$RouteImplCopyWithImpl(
-      _$RouteImpl _value, $Res Function(_$RouteImpl) _then)
+class __$$RouteFloorImplCopyWithImpl<$Res>
+    extends _$RouteFloorCopyWithImpl<$Res, _$RouteFloorImpl>
+    implements _$$RouteFloorImplCopyWith<$Res> {
+  __$$RouteFloorImplCopyWithImpl(
+      _$RouteFloorImpl _value, $Res Function(_$RouteFloorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? buildingId = null,
-    Object? floorId = null,
-    Object? floorNumber = null,
-    Object? objects = null,
+    Object? route = null,
   }) {
-    return _then(_$RouteImpl(
-      buildingId: null == buildingId
-          ? _value.buildingId
-          : buildingId // ignore: cast_nullable_to_non_nullable
-              as String,
-      floorId: null == floorId
-          ? _value.floorId
-          : floorId // ignore: cast_nullable_to_non_nullable
-              as String,
-      floorNumber: null == floorNumber
-          ? _value.floorNumber
-          : floorNumber // ignore: cast_nullable_to_non_nullable
-              as int,
-      objects: null == objects
-          ? _value._objects
-          : objects // ignore: cast_nullable_to_non_nullable
+    return _then(_$RouteFloorImpl(
+      route: null == route
+          ? _value._route
+          : route // ignore: cast_nullable_to_non_nullable
               as List<Waypoint>,
     ));
   }
@@ -134,87 +96,64 @@ class __$$RouteImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$RouteImpl implements _Route {
-  const _$RouteImpl(
-      {required this.buildingId,
-      required this.floorId,
-      required this.floorNumber,
-      required final List<Waypoint> objects})
-      : _objects = objects;
+class _$RouteFloorImpl implements _RouteFloor {
+  const _$RouteFloorImpl({required final List<Waypoint> route})
+      : _route = route;
 
-  factory _$RouteImpl.fromJson(Map<String, dynamic> json) =>
-      _$$RouteImplFromJson(json);
+  factory _$RouteFloorImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RouteFloorImplFromJson(json);
 
+  final List<Waypoint> _route;
   @override
-  final String buildingId;
-  @override
-  final String floorId;
-  @override
-  final int floorNumber;
-  final List<Waypoint> _objects;
-  @override
-  List<Waypoint> get objects {
-    if (_objects is EqualUnmodifiableListView) return _objects;
+  List<Waypoint> get route {
+    if (_route is EqualUnmodifiableListView) return _route;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_objects);
+    return EqualUnmodifiableListView(_route);
   }
 
   @override
   String toString() {
-    return 'Route(buildingId: $buildingId, floorId: $floorId, floorNumber: $floorNumber, objects: $objects)';
+    return 'RouteFloor(route: $route)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RouteImpl &&
-            (identical(other.buildingId, buildingId) ||
-                other.buildingId == buildingId) &&
-            (identical(other.floorId, floorId) || other.floorId == floorId) &&
-            (identical(other.floorNumber, floorNumber) ||
-                other.floorNumber == floorNumber) &&
-            const DeepCollectionEquality().equals(other._objects, _objects));
+            other is _$RouteFloorImpl &&
+            const DeepCollectionEquality().equals(other._route, _route));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, buildingId, floorId, floorNumber,
-      const DeepCollectionEquality().hash(_objects));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_route));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$RouteImplCopyWith<_$RouteImpl> get copyWith =>
-      __$$RouteImplCopyWithImpl<_$RouteImpl>(this, _$identity);
+  _$$RouteFloorImplCopyWith<_$RouteFloorImpl> get copyWith =>
+      __$$RouteFloorImplCopyWithImpl<_$RouteFloorImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$RouteImplToJson(
+    return _$$RouteFloorImplToJson(
       this,
     );
   }
 }
 
-abstract class _Route implements Route {
-  const factory _Route(
-      {required final String buildingId,
-      required final String floorId,
-      required final int floorNumber,
-      required final List<Waypoint> objects}) = _$RouteImpl;
+abstract class _RouteFloor implements RouteFloor {
+  const factory _RouteFloor({required final List<Waypoint> route}) =
+      _$RouteFloorImpl;
 
-  factory _Route.fromJson(Map<String, dynamic> json) = _$RouteImpl.fromJson;
+  factory _RouteFloor.fromJson(Map<String, dynamic> json) =
+      _$RouteFloorImpl.fromJson;
 
   @override
-  String get buildingId;
-  @override
-  String get floorId;
-  @override
-  int get floorNumber;
-  @override
-  List<Waypoint> get objects;
+  List<Waypoint> get route;
   @override
   @JsonKey(ignore: true)
-  _$$RouteImplCopyWith<_$RouteImpl> get copyWith =>
+  _$$RouteFloorImplCopyWith<_$RouteFloorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

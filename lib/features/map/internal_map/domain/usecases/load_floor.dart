@@ -5,7 +5,7 @@ import 'package:istu_map/core/domain/usecases/usecase.dart';
 import 'package:istu_map/core/errors/failure.dart';
 import 'package:istu_map/features/map/internal_map/domain/entities/floor.dart';
 import 'package:istu_map/features/map/internal_map/domain/repositories/floor_repository.dart';
-import 'package:istu_map/features/map/internal_map/domain/repositories/image_repository.dart';
+import 'package:istu_map/features/shared/domain/repositories/image_repository.dart';
 
 class LoadFloor extends Usecase<(Floor, Uint8List), FloorLoadParams> {
   final FloorRepository _floorRepository;

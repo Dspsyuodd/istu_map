@@ -1,6 +1,8 @@
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:istu_map/features/map/internal_map/presintation/pages/building_map.dart';
+import 'package:istu_map/features/user/presentation/bloc/user_bloc.dart';
 
 import '../../../shared/domain/entities/building.dart';
 import 'map_bottom_sheet.dart';
@@ -27,7 +29,10 @@ class CloseToBuildingBottomSheet extends StatelessWidget {
                 Navigator.of(context).pop();
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                      builder: (_) => BuildingMap(building: building)),
+                      builder: (_) => BlocProvider.value(
+                            value: BlocProvider.of<UserBloc>(context),
+                            child: BuildingMap(building: building),
+                          )),
                 );
               },
             ),

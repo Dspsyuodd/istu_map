@@ -20,18 +20,21 @@ mixin _$UserEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getUserData,
+    required TResult Function(Lesson lesson) selectLesson,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getUserData,
+    TResult? Function(Lesson lesson)? selectLesson,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getUserData,
+    TResult Function(Lesson lesson)? selectLesson,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$UserEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetUser value) getUserData,
+    required TResult Function(_SelectLesson value) selectLesson,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetUser value)? getUserData,
+    TResult? Function(_SelectLesson value)? selectLesson,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetUser value)? getUserData,
+    TResult Function(_SelectLesson value)? selectLesson,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -91,12 +97,18 @@ class __$$StartedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$StartedImpl implements _Started {
+class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   const _$StartedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserEvent.started()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'UserEvent.started'));
   }
 
   @override
@@ -113,6 +125,7 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getUserData,
+    required TResult Function(Lesson lesson) selectLesson,
   }) {
     return started();
   }
@@ -122,6 +135,7 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getUserData,
+    TResult? Function(Lesson lesson)? selectLesson,
   }) {
     return started?.call();
   }
@@ -131,6 +145,7 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getUserData,
+    TResult Function(Lesson lesson)? selectLesson,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -144,6 +159,7 @@ class _$StartedImpl implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetUser value) getUserData,
+    required TResult Function(_SelectLesson value) selectLesson,
   }) {
     return started(this);
   }
@@ -153,6 +169,7 @@ class _$StartedImpl implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetUser value)? getUserData,
+    TResult? Function(_SelectLesson value)? selectLesson,
   }) {
     return started?.call(this);
   }
@@ -162,6 +179,7 @@ class _$StartedImpl implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetUser value)? getUserData,
+    TResult Function(_SelectLesson value)? selectLesson,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -193,12 +211,18 @@ class __$$GetUserImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GetUserImpl implements _GetUser {
+class _$GetUserImpl with DiagnosticableTreeMixin implements _GetUser {
   const _$GetUserImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserEvent.getUserData()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'UserEvent.getUserData'));
   }
 
   @override
@@ -215,6 +239,7 @@ class _$GetUserImpl implements _GetUser {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getUserData,
+    required TResult Function(Lesson lesson) selectLesson,
   }) {
     return getUserData();
   }
@@ -224,6 +249,7 @@ class _$GetUserImpl implements _GetUser {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getUserData,
+    TResult? Function(Lesson lesson)? selectLesson,
   }) {
     return getUserData?.call();
   }
@@ -233,6 +259,7 @@ class _$GetUserImpl implements _GetUser {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getUserData,
+    TResult Function(Lesson lesson)? selectLesson,
     required TResult orElse(),
   }) {
     if (getUserData != null) {
@@ -246,6 +273,7 @@ class _$GetUserImpl implements _GetUser {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetUser value) getUserData,
+    required TResult Function(_SelectLesson value) selectLesson,
   }) {
     return getUserData(this);
   }
@@ -255,6 +283,7 @@ class _$GetUserImpl implements _GetUser {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetUser value)? getUserData,
+    TResult? Function(_SelectLesson value)? selectLesson,
   }) {
     return getUserData?.call(this);
   }
@@ -264,6 +293,7 @@ class _$GetUserImpl implements _GetUser {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetUser value)? getUserData,
+    TResult Function(_SelectLesson value)? selectLesson,
     required TResult orElse(),
   }) {
     if (getUserData != null) {
@@ -278,11 +308,170 @@ abstract class _GetUser implements UserEvent {
 }
 
 /// @nodoc
+abstract class _$$SelectLessonImplCopyWith<$Res> {
+  factory _$$SelectLessonImplCopyWith(
+          _$SelectLessonImpl value, $Res Function(_$SelectLessonImpl) then) =
+      __$$SelectLessonImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Lesson lesson});
+
+  $LessonCopyWith<$Res> get lesson;
+}
+
+/// @nodoc
+class __$$SelectLessonImplCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$SelectLessonImpl>
+    implements _$$SelectLessonImplCopyWith<$Res> {
+  __$$SelectLessonImplCopyWithImpl(
+      _$SelectLessonImpl _value, $Res Function(_$SelectLessonImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? lesson = null,
+  }) {
+    return _then(_$SelectLessonImpl(
+      null == lesson
+          ? _value.lesson
+          : lesson // ignore: cast_nullable_to_non_nullable
+              as Lesson,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LessonCopyWith<$Res> get lesson {
+    return $LessonCopyWith<$Res>(_value.lesson, (value) {
+      return _then(_value.copyWith(lesson: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$SelectLessonImpl with DiagnosticableTreeMixin implements _SelectLesson {
+  const _$SelectLessonImpl(this.lesson);
+
+  @override
+  final Lesson lesson;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'UserEvent.selectLesson(lesson: $lesson)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UserEvent.selectLesson'))
+      ..add(DiagnosticsProperty('lesson', lesson));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SelectLessonImpl &&
+            (identical(other.lesson, lesson) || other.lesson == lesson));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, lesson);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SelectLessonImplCopyWith<_$SelectLessonImpl> get copyWith =>
+      __$$SelectLessonImplCopyWithImpl<_$SelectLessonImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() getUserData,
+    required TResult Function(Lesson lesson) selectLesson,
+  }) {
+    return selectLesson(lesson);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? getUserData,
+    TResult? Function(Lesson lesson)? selectLesson,
+  }) {
+    return selectLesson?.call(lesson);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? getUserData,
+    TResult Function(Lesson lesson)? selectLesson,
+    required TResult orElse(),
+  }) {
+    if (selectLesson != null) {
+      return selectLesson(lesson);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetUser value) getUserData,
+    required TResult Function(_SelectLesson value) selectLesson,
+  }) {
+    return selectLesson(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetUser value)? getUserData,
+    TResult? Function(_SelectLesson value)? selectLesson,
+  }) {
+    return selectLesson?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetUser value)? getUserData,
+    TResult Function(_SelectLesson value)? selectLesson,
+    required TResult orElse(),
+  }) {
+    if (selectLesson != null) {
+      return selectLesson(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SelectLesson implements UserEvent {
+  const factory _SelectLesson(final Lesson lesson) = _$SelectLessonImpl;
+
+  Lesson get lesson;
+  @JsonKey(ignore: true)
+  _$$SelectLessonImplCopyWith<_$SelectLessonImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$UserState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(User user, List<Lesson> shedule) success,
+    required TResult Function(
+            User user, List<Lesson> shedule, Lesson? selectedLesson)
+        success,
     required TResult Function() loading,
     required TResult Function() failure,
   }) =>
@@ -290,7 +479,8 @@ mixin _$UserState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(User user, List<Lesson> shedule)? success,
+    TResult? Function(User user, List<Lesson> shedule, Lesson? selectedLesson)?
+        success,
     TResult? Function()? loading,
     TResult? Function()? failure,
   }) =>
@@ -298,7 +488,8 @@ mixin _$UserState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(User user, List<Lesson> shedule)? success,
+    TResult Function(User user, List<Lesson> shedule, Lesson? selectedLesson)?
+        success,
     TResult Function()? loading,
     TResult Function()? failure,
     required TResult orElse(),
@@ -366,12 +557,18 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialImpl implements _Initial {
+class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   const _$InitialImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'UserState.initial'));
   }
 
   @override
@@ -387,7 +584,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(User user, List<Lesson> shedule) success,
+    required TResult Function(
+            User user, List<Lesson> shedule, Lesson? selectedLesson)
+        success,
     required TResult Function() loading,
     required TResult Function() failure,
   }) {
@@ -398,7 +597,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(User user, List<Lesson> shedule)? success,
+    TResult? Function(User user, List<Lesson> shedule, Lesson? selectedLesson)?
+        success,
     TResult? Function()? loading,
     TResult? Function()? failure,
   }) {
@@ -409,7 +609,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(User user, List<Lesson> shedule)? success,
+    TResult Function(User user, List<Lesson> shedule, Lesson? selectedLesson)?
+        success,
     TResult Function()? loading,
     TResult Function()? failure,
     required TResult orElse(),
@@ -468,9 +669,10 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({User user, List<Lesson> shedule});
+  $Res call({User user, List<Lesson> shedule, Lesson? selectedLesson});
 
   $UserCopyWith<$Res> get user;
+  $LessonCopyWith<$Res>? get selectedLesson;
 }
 
 /// @nodoc
@@ -486,6 +688,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
   $Res call({
     Object? user = null,
     Object? shedule = null,
+    Object? selectedLesson = freezed,
   }) {
     return _then(_$SuccessImpl(
       null == user
@@ -496,6 +699,10 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value._shedule
           : shedule // ignore: cast_nullable_to_non_nullable
               as List<Lesson>,
+      freezed == selectedLesson
+          ? _value.selectedLesson
+          : selectedLesson // ignore: cast_nullable_to_non_nullable
+              as Lesson?,
     ));
   }
 
@@ -506,12 +713,25 @@ class __$$SuccessImplCopyWithImpl<$Res>
       return _then(_value.copyWith(user: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LessonCopyWith<$Res>? get selectedLesson {
+    if (_value.selectedLesson == null) {
+      return null;
+    }
+
+    return $LessonCopyWith<$Res>(_value.selectedLesson!, (value) {
+      return _then(_value.copyWith(selectedLesson: value));
+    });
+  }
 }
 
 /// @nodoc
 
-class _$SuccessImpl implements _Success {
-  const _$SuccessImpl(this.user, final List<Lesson> shedule)
+class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
+  const _$SuccessImpl(
+      this.user, final List<Lesson> shedule, this.selectedLesson)
       : _shedule = shedule;
 
   @override
@@ -525,8 +745,21 @@ class _$SuccessImpl implements _Success {
   }
 
   @override
-  String toString() {
-    return 'UserState.success(user: $user, shedule: $shedule)';
+  final Lesson? selectedLesson;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'UserState.success(user: $user, shedule: $shedule, selectedLesson: $selectedLesson)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UserState.success'))
+      ..add(DiagnosticsProperty('user', user))
+      ..add(DiagnosticsProperty('shedule', shedule))
+      ..add(DiagnosticsProperty('selectedLesson', selectedLesson));
   }
 
   @override
@@ -535,12 +768,14 @@ class _$SuccessImpl implements _Success {
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
             (identical(other.user, user) || other.user == user) &&
-            const DeepCollectionEquality().equals(other._shedule, _shedule));
+            const DeepCollectionEquality().equals(other._shedule, _shedule) &&
+            (identical(other.selectedLesson, selectedLesson) ||
+                other.selectedLesson == selectedLesson));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, user, const DeepCollectionEquality().hash(_shedule));
+  int get hashCode => Object.hash(runtimeType, user,
+      const DeepCollectionEquality().hash(_shedule), selectedLesson);
 
   @JsonKey(ignore: true)
   @override
@@ -552,35 +787,39 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(User user, List<Lesson> shedule) success,
+    required TResult Function(
+            User user, List<Lesson> shedule, Lesson? selectedLesson)
+        success,
     required TResult Function() loading,
     required TResult Function() failure,
   }) {
-    return success(user, shedule);
+    return success(user, shedule, selectedLesson);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(User user, List<Lesson> shedule)? success,
+    TResult? Function(User user, List<Lesson> shedule, Lesson? selectedLesson)?
+        success,
     TResult? Function()? loading,
     TResult? Function()? failure,
   }) {
-    return success?.call(user, shedule);
+    return success?.call(user, shedule, selectedLesson);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(User user, List<Lesson> shedule)? success,
+    TResult Function(User user, List<Lesson> shedule, Lesson? selectedLesson)?
+        success,
     TResult Function()? loading,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(user, shedule);
+      return success(user, shedule, selectedLesson);
     }
     return orElse();
   }
@@ -624,11 +863,12 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements UserState {
-  const factory _Success(final User user, final List<Lesson> shedule) =
-      _$SuccessImpl;
+  const factory _Success(final User user, final List<Lesson> shedule,
+      final Lesson? selectedLesson) = _$SuccessImpl;
 
   User get user;
   List<Lesson> get shedule;
+  Lesson? get selectedLesson;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -652,12 +892,18 @@ class __$$LoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadingImpl implements _Loading {
+class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   const _$LoadingImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserState.loading()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'UserState.loading'));
   }
 
   @override
@@ -673,7 +919,9 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(User user, List<Lesson> shedule) success,
+    required TResult Function(
+            User user, List<Lesson> shedule, Lesson? selectedLesson)
+        success,
     required TResult Function() loading,
     required TResult Function() failure,
   }) {
@@ -684,7 +932,8 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(User user, List<Lesson> shedule)? success,
+    TResult? Function(User user, List<Lesson> shedule, Lesson? selectedLesson)?
+        success,
     TResult? Function()? loading,
     TResult? Function()? failure,
   }) {
@@ -695,7 +944,8 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(User user, List<Lesson> shedule)? success,
+    TResult Function(User user, List<Lesson> shedule, Lesson? selectedLesson)?
+        success,
     TResult Function()? loading,
     TResult Function()? failure,
     required TResult orElse(),
@@ -766,12 +1016,18 @@ class __$$FailureImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FailureImpl implements _Failure {
+class _$FailureImpl with DiagnosticableTreeMixin implements _Failure {
   const _$FailureImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserState.failure()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'UserState.failure'));
   }
 
   @override
@@ -787,7 +1043,9 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(User user, List<Lesson> shedule) success,
+    required TResult Function(
+            User user, List<Lesson> shedule, Lesson? selectedLesson)
+        success,
     required TResult Function() loading,
     required TResult Function() failure,
   }) {
@@ -798,7 +1056,8 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(User user, List<Lesson> shedule)? success,
+    TResult? Function(User user, List<Lesson> shedule, Lesson? selectedLesson)?
+        success,
     TResult? Function()? loading,
     TResult? Function()? failure,
   }) {
@@ -809,7 +1068,8 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(User user, List<Lesson> shedule)? success,
+    TResult Function(User user, List<Lesson> shedule, Lesson? selectedLesson)?
+        success,
     TResult Function()? loading,
     TResult Function()? failure,
     required TResult orElse(),

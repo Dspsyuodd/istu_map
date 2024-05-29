@@ -22,4 +22,8 @@ abstract class ApiConstants {
   static const String objects = "objects/";
   static const String istuLogin = 'https://navi-istu.ru/oauth/authenticate';
   static const String canselUriPath = '/oauth/callback';
+  static const String cards = 'cards/';
+  static const String search = 'search/';
+  static const String comment = 'comment/';
+  static const String comments = 'comments/';
 }

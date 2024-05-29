@@ -18,6 +18,14 @@ final _dark = ThemeData(
       color: Color.fromARGB(255, 226, 228, 238),
       fontSize: 20,
     ),
+    titleLarge: TextStyle(
+      color: Color.fromARGB(255, 226, 228, 238),
+      fontSize: 20,
+    ),
+    titleSmall: TextStyle(
+      color: Colors.grey,
+      fontSize: 14,
+    ),
   ),
   colorScheme: const ColorScheme(
     brightness: Brightness.dark,

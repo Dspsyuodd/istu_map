@@ -4,7 +4,7 @@ sealed class BuildingMapEvent extends Equatable {
   const BuildingMapEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 final class FloorOpened extends BuildingMapEvent {
@@ -16,4 +16,14 @@ final class FloorOpened extends BuildingMapEvent {
 
   @override
   List<Object> get props => [buildingId, floorNumber];
+}
+
+final class RouteCreated extends BuildingMapEvent {
+  final String? fromId;
+  final String toId;
+
+  const RouteCreated({this.fromId, required this.toId});
+
+  @override
+  List<Object?> get props => [fromId, toId];
 }

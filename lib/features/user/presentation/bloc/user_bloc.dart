@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:istu_map/core/domain/usecases/usecase.dart';
 import 'package:istu_map/core/errors/failure.dart';
@@ -16,6 +17,9 @@ part 'user_bloc.freezed.dart';
 class UserBloc extends Bloc<UserEvent, UserState> {
   final InitUser getUser;
   final GetShedule getShedule;
+  Lesson? _selectedLesson;
+  User? _user;
+  List<Lesson>? _shedule;
 
   UserBloc(this.getUser, this.getShedule) : super(const _Initial()) {
     on<UserEvent>((event, emit) async {
@@ -23,6 +27,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         started: () async {},
         getUserData: () async {
           await _getUserData(emit);
+        },
+        selectLesson: (lesson) {
+          _selectedLesson = lesson;
+          emit(UserState.success(_user!, _shedule!, _selectedLesson));
         },
       );
     });
@@ -32,17 +40,19 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     emit(const UserState.loading());
     var userEither = await getUser(NoParams());
     var scheduleEither = await getShedule(NoParams());
-    userEither.fold(
-      (l) => _emitError(l, emit),
-      (r) {
-        emit(UserState.success(r, []));
-      },
-    );
-    userEither.flatMap(
+    var resultEither = userEither.flatMap(
       (user) {
         return scheduleEither.map((shedule) {
-          emit(UserState.success(user, shedule));
+          return (user, shedule);
         });
+      },
+    );
+    resultEither.fold(
+      (l) => _emitError(l, emit),
+      (r) {
+        _user = r.$1;
+        _shedule = r.$2;
+        emit(UserState.success(r.$1, r.$2, _selectedLesson));
       },
     );
   }

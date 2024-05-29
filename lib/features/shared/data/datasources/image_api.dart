@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:istu_map/config/constants/api_constants.dart';
 import 'package:istu_map/features/map/internal_map/domain/entities/image_dto.dart';
@@ -16,4 +18,9 @@ abstract class ImageApi {
   @GET("${ApiConstants.images}${ApiConstants.download}{imageId}")
   @DioResponseType(ResponseType.bytes)
   Future<List<int>> getImageBytes(@Path("imageId") String imageId);
+
+  @POST("${ApiConstants.images}${ApiConstants.upload}{objectId}")
+  @MultiPart()
+  Future<String> uploadImage(
+      @Path("objectId") String objectId, @Part() File image);
 }

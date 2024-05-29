@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:istu_map/features/map/external_map/domain/usecases/get_route_to_lesson.dart';
+import 'package:istu_map/features/user/domain/entities/lesson.dart';
 import '../../../../../core/errors/failure.dart';
 import '../../../../../core/domain/usecases/usecase.dart';
 import '../../domain/entities/exteral_route.dart';
@@ -19,6 +21,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   final GetExternalRoute getRoute;
   final LoadMap loadMap;
   final GeopositionRepository geopositionRepository;
+  final GetRouteToLesson getRouteToLesson;
 
   List<Building> _buildings = [];
   ExternalRoute? _route;
@@ -26,10 +29,21 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   var _currentPosition = const LatLng(0.0, 0.0);
   Building? _nearestBuillding;
 
-  MapBloc(this.getRoute, this.loadMap, this.geopositionRepository)
+  MapBloc(this.getRoute, this.loadMap, this.geopositionRepository,
+      this.getRouteToLesson)
       : super(const MapState.initial()) {
     on<MapEvent>((event, emit) async {
       log(event.runtimeType.toString());
+
+      if (event is ExternalLessonSelected) {
+        if (_route != null) {
+          await _createRouteToLesson(event.lesson, emit);
+        }
+      }
+
+      if (event is ExternalRouteCreatedToLesson) {
+        await _createRouteToLesson(event.lesson, emit);
+      }
 
       if (event is PositionChanged && _route != null) {
         await _createRoute(_routeEndpoint!, emit);
@@ -53,7 +67,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
         geopositionRepository.addListener((position) {
           position.fold(
-            (l) => null,
+            (l) => _emitError(l, emit),
             (r) {
               if (_currentPosition != r) {
                 _currentPosition = r;
@@ -65,7 +79,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
                     _currentPosition.longitude,
                     _nearestBuillding!.externalPosition.latitude,
                     _nearestBuillding!.externalPosition.longitude);
-                if (distanse > 30) {
+                if (distanse > 80) {
                   add(const CloseToBuilding(null));
                 }
               }
@@ -75,7 +89,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
                     _currentPosition.longitude,
                     element.externalPosition.latitude,
                     element.externalPosition.longitude);
-                if (distanse < 30) {
+                if (distanse < 80) {
                   add(CloseToBuilding(element));
                 }
               }
@@ -102,6 +116,22 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         await _createRoute(event.to, emit);
       }
     });
+  }
+
+  Future<void> _createRouteToLesson(Lesson to, Emitter<MapState> emit) async {
+    emit(MapState(_buildings, _route, MapStatus.loading, _currentPosition,
+        _nearestBuillding));
+    var route =
+        await getRouteToLesson(GetRouteToLessonParams(to, _currentPosition));
+    route.fold(
+      (l) => _emitError(l, emit),
+      (r) {
+        _route = r.$1;
+        _routeEndpoint = r.$2;
+        emit(MapState(_buildings, _route, MapStatus.success, _currentPosition,
+            _nearestBuillding));
+      },
+    );
   }
 
   Future<void> _createRoute(Building to, Emitter<MapState> emit) async {

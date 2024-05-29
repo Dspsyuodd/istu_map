@@ -1,13 +1,14 @@
 part of 'building_map_bloc.dart';
 
 final class BuildingMapState extends Equatable {
-  const BuildingMapState(this.status, this.floor, this.floorImage);
+  const BuildingMapState(this.status, this.floor, this.floorImage, this.route);
   final BuildingMapStatus status;
   final Floor? floor;
   final Uint8List? floorImage;
+  final InternalRoute? route;
 
   const BuildingMapState.initial()
-      : this(BuildingMapStatus.initial, null, null);
+      : this(BuildingMapStatus.initial, null, null, null);
 
   @override
   List<Object?> get props => [status, floor, floorImage];

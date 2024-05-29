@@ -1,13 +1,16 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:istu_map/core/domain/usecases/usecase.dart';
 import 'package:istu_map/core/errors/failure.dart';
-import 'package:istu_map/features/map/internal_map/domain/entities/route.dart';
+import 'package:istu_map/features/map/internal_map/domain/entities/route_floor.dart';
+import 'package:istu_map/features/map/internal_map/domain/repositories/floor_repository.dart';
 
-class CreateRoute extends Usecase<Route, CreateRouteParams> {
+class CreateRoute extends Usecase<InternalRoute, CreateRouteParams> {
+  final FloorRepository _floorRepository;
+
+  CreateRoute(this._floorRepository);
   @override
-  Future<Either<Failure, Route>> call(CreateRouteParams params) {
-    // TODO: implement call
-    throw UnimplementedError();
+  Future<Either<Failure, InternalRoute>> call(CreateRouteParams params) async {
+    return await _floorRepository.createRoute(params.fromId, params.toId);
   }
 }
 

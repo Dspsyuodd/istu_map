@@ -18,11 +18,17 @@ class ScheduleList extends StatefulWidget {
       {Key? key,
       required this.width,
       required this.spacing,
-      required this.shedule})
+      required this.shedule,
+      this.onTap,
+      this.onLessonSelected,
+      this.initialIndex})
       : super(key: key);
   final double width;
   final double spacing;
   final List<SheduleListElement> shedule;
+  final void Function(int index, int selectedIndex)? onTap;
+  final void Function(int index)? onLessonSelected;
+  final int? initialIndex;
 
   @override
   State<ScheduleList> createState() => _ScheduleListState();
@@ -40,22 +46,30 @@ class _ScheduleListState extends State<ScheduleList>
 
   @override
   void initState() {
-    _createKeys();
+    // currentPosition = widget.initialIndex ?? 0;
+    _rebuild();
     controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
     );
     controller.value = 1;
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.initialIndex != null) {
+        _moveTo(widget.initialIndex!);
+      }
+    });
   }
 
   @override
   void didUpdateWidget(ScheduleList oldWidget) {
-    _createKeys();
+    if (oldWidget.shedule != widget.shedule) {
+      _rebuild();
+    }
     super.didUpdateWidget(oldWidget);
   }
 
-  void _createKeys() {
+  void _rebuild() {
     scheduleKeys = List.generate(
         widget.shedule.length, (int _) => GlobalKey<_ScheduleListState>());
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -72,7 +86,7 @@ class _ScheduleListState extends State<ScheduleList>
           maxOffset += widget.spacing * (scheduleKeys.length - 1);
           maxOffset -= containerHeights.first / 2;
           maxOffset -= containerHeights.last / 2;
-
+          sirclesPositions = [];
           sirclesPositions.add(0.0);
           for (var i = 1; i < scheduleKeys.length; i++) {
             sirclesPositions.add(sirclesPositions[i - 1] +
@@ -134,6 +148,7 @@ class _ScheduleListState extends State<ScheduleList>
                 details.velocity.pixelsPerSecond.dy /
                     MediaQuery.of(context).size.width *
                     20);
+            widget.onLessonSelected?.call(currentPosition);
           },
           child: Stack(
             fit: StackFit.expand,
@@ -174,6 +189,7 @@ class _ScheduleListState extends State<ScheduleList>
         padding: EdgeInsets.symmetric(vertical: widget.spacing / 2),
         child: GestureDetector(
           onTap: () {
+            widget.onTap?.call(e.key, currentPosition);
             _moveTo(e.key);
           },
           child: AnimatedContainer(
