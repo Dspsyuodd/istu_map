@@ -22,6 +22,7 @@ mixin _$ObjectCardEvent {
     required TResult Function(String objectId) cardOpened,
     required TResult Function(String text) commentCreated,
     required TResult Function(String text) commentDeleted,
+    required TResult Function(File image) imageAdded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$ObjectCardEvent {
     TResult? Function(String objectId)? cardOpened,
     TResult? Function(String text)? commentCreated,
     TResult? Function(String text)? commentDeleted,
+    TResult? Function(File image)? imageAdded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$ObjectCardEvent {
     TResult Function(String objectId)? cardOpened,
     TResult Function(String text)? commentCreated,
     TResult Function(String text)? commentDeleted,
+    TResult Function(File image)? imageAdded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +50,7 @@ mixin _$ObjectCardEvent {
     required TResult Function(_CardOpened value) cardOpened,
     required TResult Function(_CommentCreated value) commentCreated,
     required TResult Function(_CommentDeleted value) commentDeleted,
+    required TResult Function(_ImageAdded value) imageAdded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +59,7 @@ mixin _$ObjectCardEvent {
     TResult? Function(_CardOpened value)? cardOpened,
     TResult? Function(_CommentCreated value)? commentCreated,
     TResult? Function(_CommentDeleted value)? commentDeleted,
+    TResult? Function(_ImageAdded value)? imageAdded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +68,7 @@ mixin _$ObjectCardEvent {
     TResult Function(_CardOpened value)? cardOpened,
     TResult Function(_CommentCreated value)? commentCreated,
     TResult Function(_CommentDeleted value)? commentDeleted,
+    TResult Function(_ImageAdded value)? imageAdded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -128,6 +134,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(String objectId) cardOpened,
     required TResult Function(String text) commentCreated,
     required TResult Function(String text) commentDeleted,
+    required TResult Function(File image) imageAdded,
   }) {
     return started();
   }
@@ -139,6 +146,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(String objectId)? cardOpened,
     TResult? Function(String text)? commentCreated,
     TResult? Function(String text)? commentDeleted,
+    TResult? Function(File image)? imageAdded,
   }) {
     return started?.call();
   }
@@ -150,6 +158,7 @@ class _$StartedImpl implements _Started {
     TResult Function(String objectId)? cardOpened,
     TResult Function(String text)? commentCreated,
     TResult Function(String text)? commentDeleted,
+    TResult Function(File image)? imageAdded,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -165,6 +174,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_CardOpened value) cardOpened,
     required TResult Function(_CommentCreated value) commentCreated,
     required TResult Function(_CommentDeleted value) commentDeleted,
+    required TResult Function(_ImageAdded value) imageAdded,
   }) {
     return started(this);
   }
@@ -176,6 +186,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_CardOpened value)? cardOpened,
     TResult? Function(_CommentCreated value)? commentCreated,
     TResult? Function(_CommentDeleted value)? commentDeleted,
+    TResult? Function(_ImageAdded value)? imageAdded,
   }) {
     return started?.call(this);
   }
@@ -187,6 +198,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_CardOpened value)? cardOpened,
     TResult Function(_CommentCreated value)? commentCreated,
     TResult Function(_CommentDeleted value)? commentDeleted,
+    TResult Function(_ImageAdded value)? imageAdded,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -269,6 +281,7 @@ class _$CardOpenedImpl implements _CardOpened {
     required TResult Function(String objectId) cardOpened,
     required TResult Function(String text) commentCreated,
     required TResult Function(String text) commentDeleted,
+    required TResult Function(File image) imageAdded,
   }) {
     return cardOpened(objectId);
   }
@@ -280,6 +293,7 @@ class _$CardOpenedImpl implements _CardOpened {
     TResult? Function(String objectId)? cardOpened,
     TResult? Function(String text)? commentCreated,
     TResult? Function(String text)? commentDeleted,
+    TResult? Function(File image)? imageAdded,
   }) {
     return cardOpened?.call(objectId);
   }
@@ -291,6 +305,7 @@ class _$CardOpenedImpl implements _CardOpened {
     TResult Function(String objectId)? cardOpened,
     TResult Function(String text)? commentCreated,
     TResult Function(String text)? commentDeleted,
+    TResult Function(File image)? imageAdded,
     required TResult orElse(),
   }) {
     if (cardOpened != null) {
@@ -306,6 +321,7 @@ class _$CardOpenedImpl implements _CardOpened {
     required TResult Function(_CardOpened value) cardOpened,
     required TResult Function(_CommentCreated value) commentCreated,
     required TResult Function(_CommentDeleted value) commentDeleted,
+    required TResult Function(_ImageAdded value) imageAdded,
   }) {
     return cardOpened(this);
   }
@@ -317,6 +333,7 @@ class _$CardOpenedImpl implements _CardOpened {
     TResult? Function(_CardOpened value)? cardOpened,
     TResult? Function(_CommentCreated value)? commentCreated,
     TResult? Function(_CommentDeleted value)? commentDeleted,
+    TResult? Function(_ImageAdded value)? imageAdded,
   }) {
     return cardOpened?.call(this);
   }
@@ -328,6 +345,7 @@ class _$CardOpenedImpl implements _CardOpened {
     TResult Function(_CardOpened value)? cardOpened,
     TResult Function(_CommentCreated value)? commentCreated,
     TResult Function(_CommentDeleted value)? commentDeleted,
+    TResult Function(_ImageAdded value)? imageAdded,
     required TResult orElse(),
   }) {
     if (cardOpened != null) {
@@ -415,6 +433,7 @@ class _$CommentCreatedImpl implements _CommentCreated {
     required TResult Function(String objectId) cardOpened,
     required TResult Function(String text) commentCreated,
     required TResult Function(String text) commentDeleted,
+    required TResult Function(File image) imageAdded,
   }) {
     return commentCreated(text);
   }
@@ -426,6 +445,7 @@ class _$CommentCreatedImpl implements _CommentCreated {
     TResult? Function(String objectId)? cardOpened,
     TResult? Function(String text)? commentCreated,
     TResult? Function(String text)? commentDeleted,
+    TResult? Function(File image)? imageAdded,
   }) {
     return commentCreated?.call(text);
   }
@@ -437,6 +457,7 @@ class _$CommentCreatedImpl implements _CommentCreated {
     TResult Function(String objectId)? cardOpened,
     TResult Function(String text)? commentCreated,
     TResult Function(String text)? commentDeleted,
+    TResult Function(File image)? imageAdded,
     required TResult orElse(),
   }) {
     if (commentCreated != null) {
@@ -452,6 +473,7 @@ class _$CommentCreatedImpl implements _CommentCreated {
     required TResult Function(_CardOpened value) cardOpened,
     required TResult Function(_CommentCreated value) commentCreated,
     required TResult Function(_CommentDeleted value) commentDeleted,
+    required TResult Function(_ImageAdded value) imageAdded,
   }) {
     return commentCreated(this);
   }
@@ -463,6 +485,7 @@ class _$CommentCreatedImpl implements _CommentCreated {
     TResult? Function(_CardOpened value)? cardOpened,
     TResult? Function(_CommentCreated value)? commentCreated,
     TResult? Function(_CommentDeleted value)? commentDeleted,
+    TResult? Function(_ImageAdded value)? imageAdded,
   }) {
     return commentCreated?.call(this);
   }
@@ -474,6 +497,7 @@ class _$CommentCreatedImpl implements _CommentCreated {
     TResult Function(_CardOpened value)? cardOpened,
     TResult Function(_CommentCreated value)? commentCreated,
     TResult Function(_CommentDeleted value)? commentDeleted,
+    TResult Function(_ImageAdded value)? imageAdded,
     required TResult orElse(),
   }) {
     if (commentCreated != null) {
@@ -561,6 +585,7 @@ class _$CommentDeletedImpl implements _CommentDeleted {
     required TResult Function(String objectId) cardOpened,
     required TResult Function(String text) commentCreated,
     required TResult Function(String text) commentDeleted,
+    required TResult Function(File image) imageAdded,
   }) {
     return commentDeleted(text);
   }
@@ -572,6 +597,7 @@ class _$CommentDeletedImpl implements _CommentDeleted {
     TResult? Function(String objectId)? cardOpened,
     TResult? Function(String text)? commentCreated,
     TResult? Function(String text)? commentDeleted,
+    TResult? Function(File image)? imageAdded,
   }) {
     return commentDeleted?.call(text);
   }
@@ -583,6 +609,7 @@ class _$CommentDeletedImpl implements _CommentDeleted {
     TResult Function(String objectId)? cardOpened,
     TResult Function(String text)? commentCreated,
     TResult Function(String text)? commentDeleted,
+    TResult Function(File image)? imageAdded,
     required TResult orElse(),
   }) {
     if (commentDeleted != null) {
@@ -598,6 +625,7 @@ class _$CommentDeletedImpl implements _CommentDeleted {
     required TResult Function(_CardOpened value) cardOpened,
     required TResult Function(_CommentCreated value) commentCreated,
     required TResult Function(_CommentDeleted value) commentDeleted,
+    required TResult Function(_ImageAdded value) imageAdded,
   }) {
     return commentDeleted(this);
   }
@@ -609,6 +637,7 @@ class _$CommentDeletedImpl implements _CommentDeleted {
     TResult? Function(_CardOpened value)? cardOpened,
     TResult? Function(_CommentCreated value)? commentCreated,
     TResult? Function(_CommentDeleted value)? commentDeleted,
+    TResult? Function(_ImageAdded value)? imageAdded,
   }) {
     return commentDeleted?.call(this);
   }
@@ -620,6 +649,7 @@ class _$CommentDeletedImpl implements _CommentDeleted {
     TResult Function(_CardOpened value)? cardOpened,
     TResult Function(_CommentCreated value)? commentCreated,
     TResult Function(_CommentDeleted value)? commentDeleted,
+    TResult Function(_ImageAdded value)? imageAdded,
     required TResult orElse(),
   }) {
     if (commentDeleted != null) {
@@ -639,12 +669,163 @@ abstract class _CommentDeleted implements ObjectCardEvent {
 }
 
 /// @nodoc
+abstract class _$$ImageAddedImplCopyWith<$Res> {
+  factory _$$ImageAddedImplCopyWith(
+          _$ImageAddedImpl value, $Res Function(_$ImageAddedImpl) then) =
+      __$$ImageAddedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({File image});
+}
+
+/// @nodoc
+class __$$ImageAddedImplCopyWithImpl<$Res>
+    extends _$ObjectCardEventCopyWithImpl<$Res, _$ImageAddedImpl>
+    implements _$$ImageAddedImplCopyWith<$Res> {
+  __$$ImageAddedImplCopyWithImpl(
+      _$ImageAddedImpl _value, $Res Function(_$ImageAddedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? image = null,
+  }) {
+    return _then(_$ImageAddedImpl(
+      null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as File,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ImageAddedImpl implements _ImageAdded {
+  const _$ImageAddedImpl(this.image);
+
+  @override
+  final File image;
+
+  @override
+  String toString() {
+    return 'ObjectCardEvent.imageAdded(image: $image)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ImageAddedImpl &&
+            (identical(other.image, image) || other.image == image));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, image);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ImageAddedImplCopyWith<_$ImageAddedImpl> get copyWith =>
+      __$$ImageAddedImplCopyWithImpl<_$ImageAddedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(String objectId) cardOpened,
+    required TResult Function(String text) commentCreated,
+    required TResult Function(String text) commentDeleted,
+    required TResult Function(File image) imageAdded,
+  }) {
+    return imageAdded(image);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(String objectId)? cardOpened,
+    TResult? Function(String text)? commentCreated,
+    TResult? Function(String text)? commentDeleted,
+    TResult? Function(File image)? imageAdded,
+  }) {
+    return imageAdded?.call(image);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String objectId)? cardOpened,
+    TResult Function(String text)? commentCreated,
+    TResult Function(String text)? commentDeleted,
+    TResult Function(File image)? imageAdded,
+    required TResult orElse(),
+  }) {
+    if (imageAdded != null) {
+      return imageAdded(image);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_CardOpened value) cardOpened,
+    required TResult Function(_CommentCreated value) commentCreated,
+    required TResult Function(_CommentDeleted value) commentDeleted,
+    required TResult Function(_ImageAdded value) imageAdded,
+  }) {
+    return imageAdded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_CardOpened value)? cardOpened,
+    TResult? Function(_CommentCreated value)? commentCreated,
+    TResult? Function(_CommentDeleted value)? commentDeleted,
+    TResult? Function(_ImageAdded value)? imageAdded,
+  }) {
+    return imageAdded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CardOpened value)? cardOpened,
+    TResult Function(_CommentCreated value)? commentCreated,
+    TResult Function(_CommentDeleted value)? commentDeleted,
+    TResult Function(_ImageAdded value)? imageAdded,
+    required TResult orElse(),
+  }) {
+    if (imageAdded != null) {
+      return imageAdded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ImageAdded implements ObjectCardEvent {
+  const factory _ImageAdded(final File image) = _$ImageAddedImpl;
+
+  File get image;
+  @JsonKey(ignore: true)
+  _$$ImageAddedImplCopyWith<_$ImageAddedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$ObjectCardState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CardContent cardContent) success,
+    required TResult Function(CardContent cardContent) loadingSuccess,
     required TResult Function() failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -652,7 +833,7 @@ mixin _$ObjectCardState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CardContent cardContent)? success,
+    TResult? Function(CardContent cardContent)? loadingSuccess,
     TResult? Function()? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -660,7 +841,7 @@ mixin _$ObjectCardState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CardContent cardContent)? success,
+    TResult Function(CardContent cardContent)? loadingSuccess,
     TResult Function()? failure,
     required TResult orElse(),
   }) =>
@@ -669,7 +850,7 @@ mixin _$ObjectCardState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
+    required TResult Function(_LoadingSuccess value) loadingSuccess,
     required TResult Function(_Failure value) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -677,7 +858,7 @@ mixin _$ObjectCardState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
+    TResult? Function(_LoadingSuccess value)? loadingSuccess,
     TResult? Function(_Failure value)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -685,7 +866,7 @@ mixin _$ObjectCardState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
+    TResult Function(_LoadingSuccess value)? loadingSuccess,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) =>
@@ -750,7 +931,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CardContent cardContent) success,
+    required TResult Function(CardContent cardContent) loadingSuccess,
     required TResult Function() failure,
   }) {
     return initial();
@@ -761,7 +942,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CardContent cardContent)? success,
+    TResult? Function(CardContent cardContent)? loadingSuccess,
     TResult? Function()? failure,
   }) {
     return initial?.call();
@@ -772,7 +953,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CardContent cardContent)? success,
+    TResult Function(CardContent cardContent)? loadingSuccess,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
@@ -787,7 +968,7 @@ class _$InitialImpl implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
+    required TResult Function(_LoadingSuccess value) loadingSuccess,
     required TResult Function(_Failure value) failure,
   }) {
     return initial(this);
@@ -798,7 +979,7 @@ class _$InitialImpl implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
+    TResult? Function(_LoadingSuccess value)? loadingSuccess,
     TResult? Function(_Failure value)? failure,
   }) {
     return initial?.call(this);
@@ -809,7 +990,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
+    TResult Function(_LoadingSuccess value)? loadingSuccess,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
@@ -864,7 +1045,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CardContent cardContent) success,
+    required TResult Function(CardContent cardContent) loadingSuccess,
     required TResult Function() failure,
   }) {
     return loading();
@@ -875,7 +1056,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CardContent cardContent)? success,
+    TResult? Function(CardContent cardContent)? loadingSuccess,
     TResult? Function()? failure,
   }) {
     return loading?.call();
@@ -886,7 +1067,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CardContent cardContent)? success,
+    TResult Function(CardContent cardContent)? loadingSuccess,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
@@ -901,7 +1082,7 @@ class _$LoadingImpl implements _Loading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
+    required TResult Function(_LoadingSuccess value) loadingSuccess,
     required TResult Function(_Failure value) failure,
   }) {
     return loading(this);
@@ -912,7 +1093,7 @@ class _$LoadingImpl implements _Loading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
+    TResult? Function(_LoadingSuccess value)? loadingSuccess,
     TResult? Function(_Failure value)? failure,
   }) {
     return loading?.call(this);
@@ -923,7 +1104,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
+    TResult Function(_LoadingSuccess value)? loadingSuccess,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
@@ -939,20 +1120,22 @@ abstract class _Loading implements ObjectCardState {
 }
 
 /// @nodoc
-abstract class _$$SuccessImplCopyWith<$Res> {
-  factory _$$SuccessImplCopyWith(
-          _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
-      __$$SuccessImplCopyWithImpl<$Res>;
+abstract class _$$LoadingSuccessImplCopyWith<$Res> {
+  factory _$$LoadingSuccessImplCopyWith(_$LoadingSuccessImpl value,
+          $Res Function(_$LoadingSuccessImpl) then) =
+      __$$LoadingSuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call({CardContent cardContent});
+
+  $CardContentCopyWith<$Res> get cardContent;
 }
 
 /// @nodoc
-class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$ObjectCardStateCopyWithImpl<$Res, _$SuccessImpl>
-    implements _$$SuccessImplCopyWith<$Res> {
-  __$$SuccessImplCopyWithImpl(
-      _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
+class __$$LoadingSuccessImplCopyWithImpl<$Res>
+    extends _$ObjectCardStateCopyWithImpl<$Res, _$LoadingSuccessImpl>
+    implements _$$LoadingSuccessImplCopyWith<$Res> {
+  __$$LoadingSuccessImplCopyWithImpl(
+      _$LoadingSuccessImpl _value, $Res Function(_$LoadingSuccessImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -960,33 +1143,41 @@ class __$$SuccessImplCopyWithImpl<$Res>
   $Res call({
     Object? cardContent = null,
   }) {
-    return _then(_$SuccessImpl(
+    return _then(_$LoadingSuccessImpl(
       null == cardContent
           ? _value.cardContent
           : cardContent // ignore: cast_nullable_to_non_nullable
               as CardContent,
     ));
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CardContentCopyWith<$Res> get cardContent {
+    return $CardContentCopyWith<$Res>(_value.cardContent, (value) {
+      return _then(_value.copyWith(cardContent: value));
+    });
+  }
 }
 
 /// @nodoc
 
-class _$SuccessImpl implements _Success {
-  const _$SuccessImpl(this.cardContent);
+class _$LoadingSuccessImpl implements _LoadingSuccess {
+  const _$LoadingSuccessImpl(this.cardContent);
 
   @override
   final CardContent cardContent;
 
   @override
   String toString() {
-    return 'ObjectCardState.success(cardContent: $cardContent)';
+    return 'ObjectCardState.loadingSuccess(cardContent: $cardContent)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SuccessImpl &&
+            other is _$LoadingSuccessImpl &&
             (identical(other.cardContent, cardContent) ||
                 other.cardContent == cardContent));
   }
@@ -997,18 +1188,19 @@ class _$SuccessImpl implements _Success {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
-      __$$SuccessImplCopyWithImpl<_$SuccessImpl>(this, _$identity);
+  _$$LoadingSuccessImplCopyWith<_$LoadingSuccessImpl> get copyWith =>
+      __$$LoadingSuccessImplCopyWithImpl<_$LoadingSuccessImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CardContent cardContent) success,
+    required TResult Function(CardContent cardContent) loadingSuccess,
     required TResult Function() failure,
   }) {
-    return success(cardContent);
+    return loadingSuccess(cardContent);
   }
 
   @override
@@ -1016,10 +1208,10 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CardContent cardContent)? success,
+    TResult? Function(CardContent cardContent)? loadingSuccess,
     TResult? Function()? failure,
   }) {
-    return success?.call(cardContent);
+    return loadingSuccess?.call(cardContent);
   }
 
   @override
@@ -1027,12 +1219,12 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CardContent cardContent)? success,
+    TResult Function(CardContent cardContent)? loadingSuccess,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success(cardContent);
+    if (loadingSuccess != null) {
+      return loadingSuccess(cardContent);
     }
     return orElse();
   }
@@ -1042,10 +1234,10 @@ class _$SuccessImpl implements _Success {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
+    required TResult Function(_LoadingSuccess value) loadingSuccess,
     required TResult Function(_Failure value) failure,
   }) {
-    return success(this);
+    return loadingSuccess(this);
   }
 
   @override
@@ -1053,10 +1245,10 @@ class _$SuccessImpl implements _Success {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
+    TResult? Function(_LoadingSuccess value)? loadingSuccess,
     TResult? Function(_Failure value)? failure,
   }) {
-    return success?.call(this);
+    return loadingSuccess?.call(this);
   }
 
   @override
@@ -1064,23 +1256,24 @@ class _$SuccessImpl implements _Success {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
+    TResult Function(_LoadingSuccess value)? loadingSuccess,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success(this);
+    if (loadingSuccess != null) {
+      return loadingSuccess(this);
     }
     return orElse();
   }
 }
 
-abstract class _Success implements ObjectCardState {
-  const factory _Success(final CardContent cardContent) = _$SuccessImpl;
+abstract class _LoadingSuccess implements ObjectCardState {
+  const factory _LoadingSuccess(final CardContent cardContent) =
+      _$LoadingSuccessImpl;
 
   CardContent get cardContent;
   @JsonKey(ignore: true)
-  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+  _$$LoadingSuccessImplCopyWith<_$LoadingSuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1124,7 +1317,7 @@ class _$FailureImpl implements _Failure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CardContent cardContent) success,
+    required TResult Function(CardContent cardContent) loadingSuccess,
     required TResult Function() failure,
   }) {
     return failure();
@@ -1135,7 +1328,7 @@ class _$FailureImpl implements _Failure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CardContent cardContent)? success,
+    TResult? Function(CardContent cardContent)? loadingSuccess,
     TResult? Function()? failure,
   }) {
     return failure?.call();
@@ -1146,7 +1339,7 @@ class _$FailureImpl implements _Failure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CardContent cardContent)? success,
+    TResult Function(CardContent cardContent)? loadingSuccess,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
@@ -1161,7 +1354,7 @@ class _$FailureImpl implements _Failure {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
+    required TResult Function(_LoadingSuccess value) loadingSuccess,
     required TResult Function(_Failure value) failure,
   }) {
     return failure(this);
@@ -1172,7 +1365,7 @@ class _$FailureImpl implements _Failure {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
+    TResult? Function(_LoadingSuccess value)? loadingSuccess,
     TResult? Function(_Failure value)? failure,
   }) {
     return failure?.call(this);
@@ -1183,7 +1376,7 @@ class _$FailureImpl implements _Failure {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
+    TResult Function(_LoadingSuccess value)? loadingSuccess,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {

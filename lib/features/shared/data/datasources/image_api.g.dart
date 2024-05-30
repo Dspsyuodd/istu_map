@@ -78,19 +78,13 @@ class _ImageApi implements ImageApi {
   @override
   Future<String> uploadImage(
     String objectId,
-    File image,
+    List<MultipartFile> file,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = FormData();
-    _data.files.add(MapEntry(
-      'image',
-      MultipartFile.fromFileSync(
-        image.path,
-        filename: image.path.split(Platform.pathSeparator).last,
-      ),
-    ));
+    _data.files.addAll(file.map((i) => MapEntry('file', i)));
     final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
       method: 'POST',
       headers: _headers,

@@ -13,7 +13,9 @@ class ObjectCardRepositoryImpl extends ExceptionsHandler
 
   @override
   Future<Either<Failure, String>> createComment(String objectId, String text) {
-    return getEither(() => objectCardsApi.createComment(objectId, text));
+    return getEither(() => objectCardsApi
+        .createComment(objectId, text)
+        .then((value) => value.substring(1, value.length - 1)));
   }
 
   @override

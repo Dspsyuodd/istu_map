@@ -20,6 +20,7 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserData {
+// ignore: invalid_annotation_target
   @JsonKey(name: "User")
   UserDto get userDto => throw _privateConstructorUsedError;
   String? get accessToken => throw _privateConstructorUsedError;
@@ -146,6 +147,7 @@ class _$UserDataImpl implements _UserData {
   factory _$UserDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserDataImplFromJson(json);
 
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: "User")
   final UserDto userDto;
@@ -199,6 +201,7 @@ abstract class _UserData implements UserData {
   factory _UserData.fromJson(Map<String, dynamic> json) =
       _$UserDataImpl.fromJson;
 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: "User")
   UserDto get userDto;
   @override

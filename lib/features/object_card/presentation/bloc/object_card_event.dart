@@ -6,4 +6,5 @@ class ObjectCardEvent with _$ObjectCardEvent {
   const factory ObjectCardEvent.cardOpened(String objectId) = _CardOpened;
   const factory ObjectCardEvent.commentCreated(String text) = _CommentCreated;
   const factory ObjectCardEvent.commentDeleted(String text) = _CommentDeleted;
+  const factory ObjectCardEvent.imageAdded(File image) = _ImageAdded;
 }

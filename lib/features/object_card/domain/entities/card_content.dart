@@ -1,17 +1,27 @@
 import 'dart:typed_data';
 
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:istu_map/features/object_card/domain/entities/comment.dart';
 import 'package:istu_map/features/object_card/domain/entities/object_card.dart';
 
-class CardContent extends Equatable {
-  final ObjectCard card;
-  final List<Comment> comments;
-  final List<Uint8List> images;
+part 'card_content.freezed.dart';
 
-  const CardContent(
-      {required this.card, required this.comments, required this.images});
+@freezed
+class CardContent with _$CardContent {
+  const factory CardContent({
+    required final ObjectCard card,
+    required final List<Comment> comments,
+    final List<Uint8List>? images,
+  }) = _CardContent;
 
-  @override
-  List<Object?> get props => [card, comments, images];
+  factory CardContent.empty() => const CardContent(
+        card: ObjectCard(
+            objectId: '',
+            title: '',
+            description: '',
+            address: '',
+            contentType: 0,
+            imageIds: []),
+        comments: [],
+      );
 }

@@ -26,6 +26,6 @@ void initDependencies() {
   sl.registerLazySingleton(() => InternetConnection());
   dio.interceptors.addAll([
     sl<AuthenticationInterceptor>(),
-    PrettyDioLogger(requestBody: true),
+    // PrettyDioLogger(requestBody: true),
   ]);
 }

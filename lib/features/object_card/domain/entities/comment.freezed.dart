@@ -23,7 +23,7 @@ mixin _$Comment {
   String get id => throw _privateConstructorUsedError;
   String get creatorId => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
-  DateTime get creationData => throw _privateConstructorUsedError;
+  DateTime get creationDate => throw _privateConstructorUsedError;
   String get creatorName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $CommentCopyWith<$Res> {
       {String id,
       String creatorId,
       String text,
-      DateTime creationData,
+      DateTime creationDate,
       String creatorName});
 }
 
@@ -60,7 +60,7 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
     Object? id = null,
     Object? creatorId = null,
     Object? text = null,
-    Object? creationData = null,
+    Object? creationDate = null,
     Object? creatorName = null,
   }) {
     return _then(_value.copyWith(
@@ -76,9 +76,9 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-      creationData: null == creationData
-          ? _value.creationData
-          : creationData // ignore: cast_nullable_to_non_nullable
+      creationDate: null == creationDate
+          ? _value.creationDate
+          : creationDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
       creatorName: null == creatorName
           ? _value.creatorName
@@ -99,7 +99,7 @@ abstract class _$$CommentImplCopyWith<$Res> implements $CommentCopyWith<$Res> {
       {String id,
       String creatorId,
       String text,
-      DateTime creationData,
+      DateTime creationDate,
       String creatorName});
 }
 
@@ -117,7 +117,7 @@ class __$$CommentImplCopyWithImpl<$Res>
     Object? id = null,
     Object? creatorId = null,
     Object? text = null,
-    Object? creationData = null,
+    Object? creationDate = null,
     Object? creatorName = null,
   }) {
     return _then(_$CommentImpl(
@@ -133,9 +133,9 @@ class __$$CommentImplCopyWithImpl<$Res>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-      creationData: null == creationData
-          ? _value.creationData
-          : creationData // ignore: cast_nullable_to_non_nullable
+      creationDate: null == creationDate
+          ? _value.creationDate
+          : creationDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
       creatorName: null == creatorName
           ? _value.creatorName
@@ -152,7 +152,7 @@ class _$CommentImpl implements _Comment {
       {required this.id,
       required this.creatorId,
       required this.text,
-      required this.creationData,
+      required this.creationDate,
       required this.creatorName});
 
   factory _$CommentImpl.fromJson(Map<String, dynamic> json) =>
@@ -165,13 +165,13 @@ class _$CommentImpl implements _Comment {
   @override
   final String text;
   @override
-  final DateTime creationData;
+  final DateTime creationDate;
   @override
   final String creatorName;
 
   @override
   String toString() {
-    return 'Comment(id: $id, creatorId: $creatorId, text: $text, creationData: $creationData, creatorName: $creatorName)';
+    return 'Comment(id: $id, creatorId: $creatorId, text: $text, creationDate: $creationDate, creatorName: $creatorName)';
   }
 
   @override
@@ -183,8 +183,8 @@ class _$CommentImpl implements _Comment {
             (identical(other.creatorId, creatorId) ||
                 other.creatorId == creatorId) &&
             (identical(other.text, text) || other.text == text) &&
-            (identical(other.creationData, creationData) ||
-                other.creationData == creationData) &&
+            (identical(other.creationDate, creationDate) ||
+                other.creationDate == creationDate) &&
             (identical(other.creatorName, creatorName) ||
                 other.creatorName == creatorName));
   }
@@ -192,7 +192,7 @@ class _$CommentImpl implements _Comment {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, creatorId, text, creationData, creatorName);
+      Object.hash(runtimeType, id, creatorId, text, creationDate, creatorName);
 
   @JsonKey(ignore: true)
   @override
@@ -213,7 +213,7 @@ abstract class _Comment implements Comment {
       {required final String id,
       required final String creatorId,
       required final String text,
-      required final DateTime creationData,
+      required final DateTime creationDate,
       required final String creatorName}) = _$CommentImpl;
 
   factory _Comment.fromJson(Map<String, dynamic> json) = _$CommentImpl.fromJson;
@@ -225,7 +225,7 @@ abstract class _Comment implements Comment {
   @override
   String get text;
   @override
-  DateTime get creationData;
+  DateTime get creationDate;
   @override
   String get creatorName;
   @override

@@ -9,7 +9,7 @@ class Comment with _$Comment {
     required String id,
     required String creatorId,
     required String text,
-    required DateTime creationData,
+    required DateTime creationDate,
     required String creatorName,
   }) = _Comment;
 

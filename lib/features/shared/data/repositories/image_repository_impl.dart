@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:istu_map/core/errors/failure.dart';
 import 'package:istu_map/core/errors/server_errors_handler.dart';
 import 'package:istu_map/features/map/internal_map/data/datasources/image_local_data_source.dart';
@@ -33,6 +35,16 @@ class ImageRepositoryImpl extends ExceptionsHandler implements ImageRepository {
   @override
   Future<Either<Failure, String>> uploadImage(
       String objectId, File image) async {
-    return await getEither(() => imageApi.uploadImage(objectId, image));
+    return await getEither(
+      () => imageApi.uploadImage(
+        objectId,
+        [
+          MultipartFile.fromFileSync(
+            image.path,
+            contentType: MediaType('image', image.path.split('.').last),
+          )
+        ],
+      ),
+    );
   }
 }

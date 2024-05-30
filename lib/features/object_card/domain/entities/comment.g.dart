@@ -11,7 +11,7 @@ _$CommentImpl _$$CommentImplFromJson(Map<String, dynamic> json) =>
       id: json['Id'] as String,
       creatorId: json['CreatorId'] as String,
       text: json['Text'] as String,
-      creationData: DateTime.parse(json['CreationData'] as String),
+      creationDate: DateTime.parse(json['CreationDate'] as String),
       creatorName: json['CreatorName'] as String,
     );
 
@@ -20,6 +20,6 @@ Map<String, dynamic> _$$CommentImplToJson(_$CommentImpl instance) =>
       'Id': instance.id,
       'CreatorId': instance.creatorId,
       'Text': instance.text,
-      'CreationData': instance.creationData.toIso8601String(),
+      'CreationDate': instance.creationDate.toIso8601String(),
       'CreatorName': instance.creatorName,
     };
