@@ -1,7 +1,7 @@
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
-import 'avatar.dart';
+import '../../../user/presentation/widgets/avatar.dart';
 
 class SearchAppBar extends StatelessWidget {
   const SearchAppBar({Key? key, this.onSearchTap, this.onAvatarTap})

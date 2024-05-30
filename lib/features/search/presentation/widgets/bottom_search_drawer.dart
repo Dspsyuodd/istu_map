@@ -1,5 +1,8 @@
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:istu_map/features/authentication/authentication_injection_container.dart';
+import 'package:istu_map/features/search/presentation/cubit/search_cubit.dart';
 
 class BottomSearchDrawer extends StatefulWidget {
   const BottomSearchDrawer(
@@ -134,7 +137,10 @@ class _BottomSearchDrawerState extends State<BottomSearchDrawer>
                           topLeft: Radius.circular(36),
                           topRight: Radius.circular(36)),
                     ),
-                    child: widget.child,
+                    child: BlocProvider(
+                      create: (context) => sl<SearchCubit>(),
+                      child: widget.child,
+                    ),
                   ),
                 ),
               ),

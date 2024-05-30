@@ -82,5 +82,3 @@ class TokenRepositoryImpl extends ExceptionsHandler implements TokenRepository {
     );
   }
 }
-
-//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5NGIxY2NlLWNiMWItNDhjNi05OTcwLWYxZjUxYzEwMWM3MSIsImV4cCI6MTcxODk4MTY1OH0.pjCJbNiA7Esw0Y5uNh9R-fwnGssdiLNnSUCKbankYgk

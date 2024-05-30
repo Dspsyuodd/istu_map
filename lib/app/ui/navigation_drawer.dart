@@ -1,7 +1,7 @@
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import '../../features/authentication/presentation/widgets/logout.dart';
-import 'avatar.dart';
+import '../../features/user/presentation/widgets/avatar.dart';
 import '../../core/presentation/ui/widgets/svg_picture.dart';
 
 class IstuNavigationDrawer extends StatelessWidget {

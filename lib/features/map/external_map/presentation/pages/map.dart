@@ -4,11 +4,11 @@ import 'package:istu_map/features/authentication/authentication_injection_contai
 import 'package:istu_map/features/map/external_map/presentation/bloc/map_bloc.dart';
 import 'package:istu_map/features/user/presentation/bloc/user_bloc.dart';
 import 'package:istu_map/features/user/presentation/widgets/shedule_drawer.dart';
-import '../../../../../app/ui/bottom_search_drawer.dart';
-import '../../../../../app/ui/bottom_search_drawer_content.dart';
+import '../../../../search/presentation/widgets/bottom_search_drawer.dart';
+import '../../../../search/presentation/widgets/bottom_search_drawer_content.dart';
 import '../../../../../app/ui/end_navigarion_drawer.dart';
 import '../../../../../app/ui/navigation_drawer.dart';
-import '../../../../../app/ui/search_bar.dart';
+import '../../../../search/presentation/widgets/search_bar.dart';
 import '../widgets/map_widget.dart';
 
 class IstuMap extends StatefulWidget {

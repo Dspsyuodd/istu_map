@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -18,11 +17,12 @@ class GetExternalRoute extends Usecase<ExternalRoute, GetExternalRouteParams> {
   }
 }
 
-class GetExternalRouteParams extends Equatable {
+class GetExternalRouteParams extends NoParams {
   final LatLng from;
   final Building to;
 
-  const GetExternalRouteParams({required this.from, required this.to});
+  GetExternalRouteParams({required this.from, required this.to});
+
   @override
   List<Object?> get props => [from, to];
 }
