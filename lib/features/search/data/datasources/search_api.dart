@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:istu_map/config/constants/api_constants.dart';
+import 'package:istu_map/features/search/domain/entities/search_object.dart';
 import 'package:istu_map/features/search/domain/entities/search_result.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
@@ -15,4 +16,7 @@ abstract class SearchApi {
     @Query('text') required String text,
     @Query('limit') int? limit,
   });
+
+  @GET(ApiConstants.buildings + ApiConstants.objects)
+  Future<List<SearchObject>> searchByObjectType(@Query('Type') int type);
 }

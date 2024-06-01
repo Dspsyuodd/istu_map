@@ -1,5 +1,7 @@
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:istu_map/features/user/presentation/bloc/user_bloc.dart';
 
 import '../../../user/presentation/widgets/avatar.dart';
 
@@ -17,9 +19,25 @@ class SearchAppBar extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: onAvatarTap,
-            child: Avatar(
-              size: 44,
-              borderColor: AppTheme.of(context).colorScheme.secondary,
+            child: BlocBuilder<UserBloc, UserState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                  success: (user, _, __) {
+                    return Avatar(
+                      text: user.firstName[0] + user.lastName[0],
+                      size: 44,
+                      borderColor: AppTheme.of(context).colorScheme.secondary,
+                    );
+                  },
+                  orElse: () {
+                    return Avatar(
+                      text: 'A',
+                      size: 44,
+                      borderColor: AppTheme.of(context).colorScheme.secondary,
+                    );
+                  },
+                );
+              },
             ),
           ),
           Padding(

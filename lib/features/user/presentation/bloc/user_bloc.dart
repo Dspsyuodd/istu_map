@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:istu_map/core/domain/usecases/usecase.dart';
 import 'package:istu_map/core/errors/failure.dart';
@@ -39,12 +40,16 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   Future<void> _getUserData(Emitter<UserState> emit) async {
     emit(const UserState.loading());
     var userEither = await getUser(NoParams());
-    var scheduleEither = await getShedule(NoParams());
-    var resultEither = userEither.flatMap(
-      (user) {
-        return scheduleEither.map((shedule) {
-          return (user, shedule);
-        });
+    Either<Failure, (User, List<Lesson>?)> resultEither = await userEither.fold(
+      (l) async => Left(l),
+      (user) async {
+        if (user.role == 2) {
+          var scheduleEither = await getShedule(NoParams());
+          return scheduleEither.fold(
+              (l) => Left(l), (shedule) => Right((user, shedule)));
+        } else {
+          return Right((user, null));
+        }
       },
     );
     resultEither.fold(
@@ -52,7 +57,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       (r) {
         _user = r.$1;
         _shedule = r.$2;
-        emit(UserState.success(r.$1, r.$2, _selectedLesson));
+        emit(UserState.success(r.$1, r.$2 ?? [], _selectedLesson));
       },
     );
   }

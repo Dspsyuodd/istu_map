@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'app/ui/app.dart';
+import 'features/app/ui/app.dart';
 
 void main() {
   final uncaughtExceptionsController = StreamController<void>.broadcast();

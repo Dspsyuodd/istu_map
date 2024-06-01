@@ -29,6 +29,10 @@ class LoginEvent extends AuthenticationEvent {
   List<Object> get props => [data];
 }
 
+class LogoutEvent extends AuthenticationEvent {
+  const LogoutEvent();
+}
+
 class OauthEvent extends AuthenticationEvent {
   const OauthEvent(this.callbackUri);
   final WebUri callbackUri;

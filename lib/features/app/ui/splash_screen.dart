@@ -26,20 +26,28 @@ class SplashScreenState extends State<SplashScreen>
       ..addListener(() {
         setState(() {});
       });
-    Future.delayed(const Duration(seconds: 2), () {
-      animationController.forward().whenComplete(() {
-        setState(() {
-          transitionEnd = !transitionEnd;
-          Future.delayed(const Duration(milliseconds: 200), () {
-            setState(() {
-              blackLogoVisility = 1;
-            });
-          });
-        });
+    Future.delayed(const Duration(seconds: 2), () async {
+      await animationController.forward();
+      setState(() {
+        transitionEnd = !transitionEnd;
       });
+      await Future.delayed(const Duration(milliseconds: 200));
+      setState(() {
+        blackLogoVisility = 1;
+      });
+      await Future.delayed(const Duration(seconds: 2));
+      if (mounted) {
+        Navigator.of(context).pushReplacementNamed('/auth');
+      }
     });
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
   }
 
   @override

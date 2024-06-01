@@ -6,8 +6,8 @@ import 'package:istu_map/features/user/presentation/bloc/user_bloc.dart';
 import 'package:istu_map/features/user/presentation/widgets/shedule_drawer.dart';
 import '../../../../search/presentation/widgets/bottom_search_drawer.dart';
 import '../../../../search/presentation/widgets/bottom_search_drawer_content.dart';
-import '../../../../../app/ui/end_navigarion_drawer.dart';
-import '../../../../../app/ui/navigation_drawer.dart';
+import '../../../../app/ui/end_navigarion_drawer.dart';
+import '../../../../user/presentation/widgets/navigation_drawer.dart';
 import '../../../../search/presentation/widgets/search_bar.dart';
 import '../widgets/map_widget.dart';
 

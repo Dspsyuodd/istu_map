@@ -1,5 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:istu_map/features/authentication/domain/usecases/logout.dart';
 import 'core/authentication_interceptor.dart';
 import 'data/datasources/authentication_api.dart';
 import 'data/repositories/authentication_repository_impl.dart';
@@ -15,12 +16,13 @@ import 'presentation/bloc/authentication_bloc.dart';
 final sl = GetIt.instance;
 
 void initAuthenticationDependencies() {
-  sl.registerFactory(() => AuthenticationBloc(sl(), sl(), sl(), sl()));
+  sl.registerFactory(() => AuthenticationBloc(sl(), sl(), sl(), sl(), sl()));
 
   sl.registerLazySingleton(() => Initialize(sl(), sl()));
   sl.registerLazySingleton(() => Login(sl(), sl()));
   sl.registerLazySingleton(() => Register(sl()));
   sl.registerLazySingleton(() => LoginViaIstuAcc(sl(), sl()));
+  sl.registerLazySingleton(() => Logout(sl()));
 
   sl.registerLazySingleton(() => AuthenticationInterceptor(sl()));
 

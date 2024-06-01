@@ -15,6 +15,10 @@ class LoginSuccess extends AuthenticationState {
   const LoginSuccess();
 }
 
+class LogoutSuccess extends AuthenticationState {
+  const LogoutSuccess();
+}
+
 class RegistrationSuccess extends AuthenticationState {
   final UserDto data;
 

@@ -30,7 +30,10 @@ class OnClickBottomSheet extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => ObjectCardPage(objectId: building.id),
+                    builder: (_) => BlocProvider.value(
+                      value: BlocProvider.of<UserBloc>(context),
+                      child: ObjectCardPage(objectId: building.id),
+                    ),
                   ),
                 );
               },

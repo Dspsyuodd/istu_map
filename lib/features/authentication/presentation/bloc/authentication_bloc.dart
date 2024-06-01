@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:istu_map/core/domain/usecases/usecase.dart';
+import 'package:istu_map/features/authentication/domain/usecases/logout.dart';
 import '../../../../core/errors/failure.dart';
 import '../../domain/entities/user_data.dart';
 import '../../domain/entities/user_dto.dart';
@@ -17,14 +19,20 @@ part 'authentication_state.dart';
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   final Login login;
+  final Logout logout;
   final Register register;
   final LoginViaIstuAcc loginViaIstuAcc;
   final Initialize initialize;
 
-  AuthenticationBloc(
-      this.login, this.register, this.loginViaIstuAcc, this.initialize)
+  AuthenticationBloc(this.login, this.register, this.loginViaIstuAcc,
+      this.initialize, this.logout)
       : super(AuthenticationInitial()) {
     on<AuthenticationEvent>((event, emit) async {
+      if (event is LogoutEvent) {
+        emit(AuthenticationLoading());
+        await logout(NoParams());
+        emit(const LogoutSuccess());
+      }
       if (event is OauthEvent) {
         emit(AuthenticationLoading());
         var result = await loginViaIstuAcc(

@@ -14,4 +14,11 @@ class SearchRepositoryImpl extends ExceptionsHandler
   Future<Either<Failure, SearchResult>> search(String text, {int? limit}) {
     return getEither(() => searchApi.search(text: text, limit: limit));
   }
+
+  @override
+  Future<Either<Failure, SearchResult>> searchByObjectType(int type) {
+    return getEither(() => searchApi
+        .searchByObjectType(type)
+        .then((value) => SearchResult(results: value)));
+  }
 }

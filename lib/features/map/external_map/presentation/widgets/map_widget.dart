@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
+import 'package:istu_map/features/user/presentation/bloc/user_bloc.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../bloc/map_bloc.dart';
@@ -73,9 +74,12 @@ class _IstuMapWidgetState extends State<IstuMapWidget>
                 showBottomSheet(
                   elevation: 100,
                   context: context,
-                  builder: (context) {
-                    return CloseToBuildingBottomSheet(
-                        building: state.nearestBuillding!);
+                  builder: (sheetContext) {
+                    return BlocProvider.value(
+                      value: BlocProvider.of<UserBloc>(sheetContext),
+                      child: CloseToBuildingBottomSheet(
+                          building: state.nearestBuillding!),
+                    );
                   },
                 );
               }
@@ -129,8 +133,13 @@ class _IstuMapWidgetState extends State<IstuMapWidget>
                                   showBottomSheet(
                                     elevation: 100,
                                     context: context,
-                                    builder: (context) {
-                                      return OnClickBottomSheet(building: e);
+                                    builder: (sheetContext) {
+                                      return BlocProvider.value(
+                                        value:
+                                            BlocProvider.of<UserBloc>(
+                                            sheetContext),
+                                        child: OnClickBottomSheet(building: e),
+                                      );
                                     },
                                   );
                                 },
@@ -162,7 +171,6 @@ class _IstuMapWidgetState extends State<IstuMapWidget>
             ],
           ),
         ),
-        
         Align(
           alignment: Alignment.centerRight,
           child: Padding(

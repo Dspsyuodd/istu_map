@@ -5,11 +5,13 @@ class Avatar extends StatelessWidget {
       {Key? key,
       required this.size,
       this.borderColor = Colors.black,
-      this.fillColor = Colors.white})
+      this.fillColor = Colors.white,
+      required this.text})
       : super(key: key);
   final double size;
   final Color borderColor;
   final Color fillColor;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class Avatar extends StatelessWidget {
           backgroundColor: fillColor,
           child: Center(
             child: Text(
-              'КВ',
+              text,
               style: TextStyle(fontSize: size / 3),
             ),
           ),

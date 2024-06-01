@@ -1,40 +1,12 @@
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:istu_map/config/enums/object_type.dart';
 import 'package:istu_map/features/object_card/presentation/pages/object_card_page.dart';
 import 'package:istu_map/features/search/presentation/cubit/search_cubit.dart';
+import 'package:istu_map/features/user/presentation/bloc/user_bloc.dart';
 
 import '../../../user/presentation/widgets/avatar.dart';
-
-class Category {
-  final String name;
-  final int icon;
-
-  Category({required this.name, required this.icon});
-}
-
-final categories = {
-  Category(name: 'Аудитории', icon: Icons.school_outlined.codePoint),
-  Category(name: 'Преподаватели', icon: Icons.person_outlined.codePoint),
-  Category(name: 'Столовые', icon: Icons.restaurant_outlined.codePoint),
-  Category(name: 'Уборные', icon: Icons.wc_outlined.codePoint),
-  Category(name: 'Уборные', icon: Icons.wc_outlined.codePoint),
-  Category(name: 'Уборные', icon: Icons.wc_outlined.codePoint),
-  Category(name: 'Уборные', icon: Icons.wc_outlined.codePoint),
-};
-
-final searchResults = [
-  'Результат поиска',
-  'Результат поиска',
-  'Результат поиска',
-  'Результат поиска',
-  'Результат поиска',
-  'Результат поиска',
-  'Результат поиска',
-  'Результат поиска',
-  'Результат поиска',
-  'Результат поиска',
-];
 
 class BottomSearchDrawerContent extends StatefulWidget {
   const BottomSearchDrawerContent({Key? key, this.focusNode}) : super(key: key);
@@ -70,6 +42,7 @@ class _BottomSearchDrawerContentState extends State<BottomSearchDrawerContent> {
               GestureDetector(
                 onTap: () {},
                 child: Avatar(
+                  text: '',
                   size: 44,
                   borderColor: AppTheme.of(context).colorScheme.secondary,
                   fillColor: Colors.white.withOpacity(0.5),
@@ -118,15 +91,19 @@ class _BottomSearchDrawerContentState extends State<BottomSearchDrawerContent> {
               const SizedBox(
                 width: 15,
               ),
-              ...categories
+              ...ObjectType.values
+                  .sublist(1)
                   .map(
                     (e) => Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 3),
                       child: CategoryButton(
-                        onTap: () {},
+                        onTap: () {
+                          BlocProvider.of<SearchCubit>(context)
+                              .searchByObjectType(e.index);
+                        },
                         name: e.name,
                         icon: Icon(
-                          IconData(e.icon, fontFamily: 'MaterialIcons'),
+                          e.iconData,
                           color: AppTheme.of(context).colorScheme.secondary,
                         ),
                       ),
@@ -159,8 +136,13 @@ class _BottomSearchDrawerContentState extends State<BottomSearchDrawerContent> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => ObjectCardPage(
-                                          objectId: e.id,
+                                        builder: (_) =>
+                                            BlocProvider.value(
+                                          value: BlocProvider.of<UserBloc>(
+                                              context),
+                                          child: ObjectCardPage(
+                                            objectId: e.id,
+                                          ),
                                         ),
                                       ),
                                     );

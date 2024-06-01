@@ -6,6 +6,7 @@ import 'package:istu_map/core/presentation/ui/widgets/svg_picture.dart';
 import 'package:istu_map/features/object_card/presentation/bloc/object_card_bloc.dart';
 import 'package:istu_map/features/object_card/presentation/widgets/comment_text_field.dart';
 import 'package:istu_map/features/object_card/presentation/widgets/comment_view.dart';
+import 'package:istu_map/features/user/presentation/bloc/user_bloc.dart';
 
 class ObjectCardContent extends StatelessWidget {
   const ObjectCardContent({Key? key}) : super(key: key);
@@ -92,7 +93,20 @@ class ObjectCardContent extends StatelessWidget {
                               },
                             ),
                           ),
-                          const CommentTextField(),
+                          BlocBuilder<UserBloc, UserState>(
+                            builder: (context, state) {
+                              return state.maybeWhen(
+                                success: (user, _, __) {
+                                  if (user.role == 2) {
+                                    return const CommentTextField();
+                                  } else {
+                                    return Container();
+                                  }
+                                },
+                                orElse: () => Container(),
+                              );
+                            },
+                          ),
                         ],
                       );
                     },
