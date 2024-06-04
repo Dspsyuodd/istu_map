@@ -9,6 +9,7 @@ import 'package:istu_map/features/map/internal_map/presintation/bloc/building_ma
 import 'package:istu_map/features/map/internal_map/presintation/widgets/floor_select_button.dart';
 import 'package:istu_map/features/map/internal_map/presintation/widgets/object_bottom_sheet.dart';
 import 'package:istu_map/features/map/shared/domain/entities/building.dart';
+import 'package:istu_map/features/map/shared/presentation/widgets/object_marker.dart';
 import 'package:istu_map/features/user/presentation/bloc/user_bloc.dart';
 import 'package:istu_map/features/user/presentation/widgets/shedule_drawer.dart';
 
@@ -125,17 +126,14 @@ class _BuildingMapState extends State<BuildingMap> {
                             },
                           );
                         },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppTheme.of(context).colorScheme.secondary,
-                          ),
-                          padding: const EdgeInsets.all(5),
-                          child: Icon(
-                            ObjectType.values[e.type].iconData,
-                            color: Colors.white,
-                            size: 20,
-                          ),
+                        child: ObjectMarker(
+                          icon: ObjectType.values[e.type].iconData,
+                          title: switch (ObjectType.values[e.type]) {
+                            ObjectType.auditorium ||
+                            ObjectType.cabinet =>
+                              e.title,
+                            _ => null,
+                          },
                         ),
                       ),
                     ),
