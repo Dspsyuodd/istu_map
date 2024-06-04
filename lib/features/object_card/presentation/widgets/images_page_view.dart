@@ -33,14 +33,16 @@ class _ImagesPageViewState extends State<ImagesPageView> {
                 (imageBytes) => GestureDetector(
                   onTap: () {
                     showAdaptiveDialog(
-                        barrierDismissible: true,
-                        context: context,
-                        builder: (context) => AlertDialog(
-                              content: Image.memory(
-                                imageBytes,
-                                fit: BoxFit.cover,
-                              ),
-                            ));
+                      barrierDismissible: true,
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        backgroundColor: Colors.white,
+                        content: Image.memory(
+                          imageBytes,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
                   },
                   child: Image.memory(
                     imageBytes,

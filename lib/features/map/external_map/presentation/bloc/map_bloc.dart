@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:istu_map/features/map/external_map/domain/usecases/get_route_to_lesson.dart';
 import 'package:istu_map/features/user/domain/entities/lesson.dart';

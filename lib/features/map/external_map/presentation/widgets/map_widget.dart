@@ -98,8 +98,7 @@ class _IstuMapWidgetState extends State<IstuMapWidget>
               ),
               BlocBuilder<MapBloc, MapState>(
                 builder: (context, state) {
-                  if (state.status != MapStatus.failure &&
-                      state.route != null) {
+                  if (state.route != null) {
                     return PolylineLayer(
                       polylines: [
                         Polyline(
@@ -117,39 +116,35 @@ class _IstuMapWidgetState extends State<IstuMapWidget>
               ),
               BlocBuilder<MapBloc, MapState>(
                 builder: (context, state) {
-                  if (state.status != MapStatus.failure) {
-                    return MarkerLayer(
-                      markers: state.buildings
-                          .map(
-                            (e) => Marker(
-                              rotate: true,
-                              point: e.externalPosition,
-                              child: InkWell(
-                                child: const Icon(
-                                  Icons.location_on,
-                                  color: Colors.black,
-                                ),
-                                onTap: () {
-                                  showBottomSheet(
-                                    elevation: 100,
-                                    context: context,
-                                    builder: (sheetContext) {
-                                      return BlocProvider.value(
-                                        value:
-                                            BlocProvider.of<UserBloc>(
-                                            sheetContext),
-                                        child: OnClickBottomSheet(building: e),
-                                      );
-                                    },
-                                  );
-                                },
+                  return MarkerLayer(
+                    markers: state.buildings
+                        .map(
+                          (e) => Marker(
+                            rotate: true,
+                            point: e.externalPosition,
+                            child: InkWell(
+                              child: const Icon(
+                                Icons.location_on,
+                                color: Colors.black,
                               ),
+                              onTap: () {
+                                showBottomSheet(
+                                  elevation: 100,
+                                  context: context,
+                                  builder: (sheetContext) {
+                                    return BlocProvider.value(
+                                      value: BlocProvider.of<UserBloc>(
+                                          sheetContext),
+                                      child: OnClickBottomSheet(building: e),
+                                    );
+                                  },
+                                );
+                              },
                             ),
-                          )
-                          .toList(),
-                    );
-                  }
-                  return Container();
+                          ),
+                        )
+                        .toList(),
+                  );
                 },
               ),
               CurrentLocationLayer(
