@@ -19,6 +19,7 @@ class BuildingMapBloc extends Bloc<BuildingMapEvent, BuildingMapState> {
   Floor? _currentFloor;
   InternalRoute? _route;
   Uint8List? _currentFloorImage;
+  String? enterId;
 
   BuildingMapBloc(this.createRoute, this.loadFloor)
       : super(const BuildingMapState.initial()) {
@@ -54,6 +55,12 @@ class BuildingMapBloc extends Bloc<BuildingMapEvent, BuildingMapState> {
               ),
             );
             _currentFloor = r.$1;
+            for (var waypoint in r.$1.objects) {
+              if (waypoint.type == 7) {
+                enterId = waypoint.id;
+                break;
+              }
+            }
           },
         );
       }
@@ -66,18 +73,10 @@ class BuildingMapBloc extends Bloc<BuildingMapEvent, BuildingMapState> {
             _route,
           ),
         );
-        var fromId = event.fromId;
-        if (event.fromId == null) {
-          for (var waypoint in _currentFloor!.objects) {
-            if (waypoint.type == 7) {
-              fromId = waypoint.id;
-            }
-          }
-        }
 
         var route = await createRoute(CreateRouteParams(
-          fromId: fromId!,
-          toId: event.toId,
+          fromId: enterId!,
+          toId: event.fromId ?? event.toId,
         ));
         route.fold(
           (l) => _emitError(l, emit),

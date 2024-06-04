@@ -106,7 +106,7 @@ class MapPolylinePainter extends CustomPainter {
       final secondPoint = Offset(polyline.points[i + 1].dx * size.width,
           polyline.points[i + 1].dy * size.height);
       // var aliegment = _getLineGradiendAliegment(firstPoint, secondPoint);
-      
+
       canvas.drawLine(
           firstPoint,
           secondPoint,

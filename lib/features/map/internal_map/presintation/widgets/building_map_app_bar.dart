@@ -10,7 +10,7 @@ class BuildingMapAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       height: 70,
       decoration: BoxDecoration(
-        color: AppTheme.of(context).colorScheme.background,
+        color: AppTheme.of(context).colorScheme.secondary,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.3),
@@ -19,14 +19,27 @@ class BuildingMapAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
       ),
-      child: Center(
-          child: Text(
-        title,
-        style: AppTheme.of(context).textTheme.displayLarge,
-      )),
+      child: SafeArea(
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: IconButton(
+                icon: const Icon(Icons.arrow_back_ios, size: 15,),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ),
+            Center(
+                child: Text(
+              title,
+              style: AppTheme.of(context).textTheme.displayLarge,
+            )),
+          ],
+        ),
+      ),
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(70);
+  Size get preferredSize => const Size.fromHeight(80);
 }

@@ -25,7 +25,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
   List<Building> _buildings = [];
   ExternalRoute? _route;
-  Building? _routeEndpoint;
+  String? _routeEndpoint;
   var _currentPosition = const LatLng(0.0, 0.0);
   Building? _nearestBuillding;
 
@@ -50,9 +50,11 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       }
 
       if (event is CloseToBuilding) {
-        _nearestBuillding = event.building;
-        emit(MapState(_buildings, _route, MapStatus.success, _currentPosition,
-            event.building));
+        if (_nearestBuillding != event.building) {
+          _nearestBuillding = event.building;
+          emit(MapState(_buildings, _route, MapStatus.success, _currentPosition,
+              event.building));
+        }
       }
 
       if (event is InitGeolocation) {
@@ -127,20 +129,20 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       (l) => _emitError(l, emit),
       (r) {
         _route = r.$1;
-        _routeEndpoint = r.$2;
+        _routeEndpoint = r.$2.id;
         emit(MapState(_buildings, _route, MapStatus.success, _currentPosition,
             _nearestBuillding));
       },
     );
   }
 
-  Future<void> _createRoute(Building to, Emitter<MapState> emit) async {
+  Future<void> _createRoute(String to, Emitter<MapState> emit) async {
     emit(MapState(_buildings, _route, MapStatus.loading, _currentPosition,
         _nearestBuillding));
     var result = await getRoute(
       GetExternalRouteParams(
         from: LatLng(_currentPosition.latitude, _currentPosition.longitude),
-        to: to,
+        toId: to,
       ),
     );
 

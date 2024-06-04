@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:istu_map/features/authentication/authentication_injection_container.dart';
 import 'package:istu_map/features/map/external_map/presentation/bloc/map_bloc.dart';
+import 'package:istu_map/features/object_card/presentation/pages/object_card_page.dart';
 import 'package:istu_map/features/user/presentation/bloc/user_bloc.dart';
 import 'package:istu_map/features/user/presentation/widgets/shedule_drawer.dart';
 import '../../../../search/presentation/widgets/bottom_search_drawer.dart';
@@ -52,10 +53,6 @@ class _IstuMapState extends State<IstuMap> {
     }
   }
 
-  void _onPopInvoked(bool didPop) {
-    //TODO: implement _onPopInvoked
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -93,11 +90,21 @@ class _IstuMapState extends State<IstuMap> {
               child: ScheduleDrawer(
                 onTap: (lesson, selectedLesson) {
                   if (lesson == selectedLesson) {
-                    BlocProvider.of<MapBloc>(context).add(
-                      ExternalRouteCreatedToLesson(lesson),
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => ObjectCardPage(
+                          objectId: lesson.audienceId,
+                          onRouteCreatePressed: () {
+                            BlocProvider.of<MapBloc>(context).add(
+                              ExternalRouteCreatedToLesson(lesson),
+                            );
+                            Navigator.pop(context);
+                          },
+                          showCommentsField: true,
+                        ),
+                      ),
                     );
-                  }
-                  else {
+                  } else {
                     BlocProvider.of<MapBloc>(context).add(
                       ExternalLessonSelected(lesson),
                     );

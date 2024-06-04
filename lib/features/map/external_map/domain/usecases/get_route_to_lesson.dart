@@ -25,7 +25,7 @@ class GetRouteToLesson extends Usecase<(ExternalRoute, Building), GetRouteToLess
           (l) async => Left(l),
           (building) async {
             var route = await getRoute(
-                GetExternalRouteParams(from: params.from, to: building));
+                GetExternalRouteParams(from: params.from, toId: building.id));
             return route.fold(
               (l) => Left(l),
               (route) {

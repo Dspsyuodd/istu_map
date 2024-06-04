@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 enum ObjectType {
   node._('Узел', Icons.location_on),
   auditorium._('Аудитория', Icons.school),
-  cabinet._('Кабинет', Icons.person_pin_circle),
+  cabinet._('Кабинет', Icons.person),
   toilet._('Туалет', Icons.wc),
   cafe._('Кафе', Icons.dining),
   ladder._('Лестница', Icons.stairs),

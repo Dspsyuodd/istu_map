@@ -5,7 +5,7 @@ import 'package:istu_map/features/map/internal_map/presintation/pages/building_m
 import 'package:istu_map/features/user/presentation/bloc/user_bloc.dart';
 
 import '../../../shared/domain/entities/building.dart';
-import 'map_bottom_sheet.dart';
+import '../../../shared/presentation/widgets/map_bottom_sheet.dart';
 
 class CloseToBuildingBottomSheet extends StatelessWidget {
   const CloseToBuildingBottomSheet({Key? key, required this.building})

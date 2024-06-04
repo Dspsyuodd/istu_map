@@ -6,10 +6,13 @@ import 'package:istu_map/core/presentation/ui/widgets/svg_picture.dart';
 import 'package:istu_map/features/object_card/presentation/bloc/object_card_bloc.dart';
 import 'package:istu_map/features/object_card/presentation/widgets/comment_text_field.dart';
 import 'package:istu_map/features/object_card/presentation/widgets/comment_view.dart';
-import 'package:istu_map/features/user/presentation/bloc/user_bloc.dart';
 
 class ObjectCardContent extends StatelessWidget {
-  const ObjectCardContent({Key? key}) : super(key: key);
+  const ObjectCardContent(
+      {Key? key, this.showCommentsField = true, this.onRouteCreatePressed})
+      : super(key: key);
+  final bool showCommentsField;
+  final void Function()? onRouteCreatePressed;
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +63,24 @@ class ObjectCardContent extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Text(
-                            cardContent.card.address,
-                            style: AppTheme.of(context).textTheme.titleSmall,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                cardContent.card.address,
+                                style:
+                                    AppTheme.of(context).textTheme.titleSmall,
+                              ),
+                              ElevatedButton(
+                                onPressed: onRouteCreatePressed,
+                                child: const Row(
+                                  children: [
+                                    Text('Маршрут'),
+                                    Icon(Icons.route)
+                                  ],
+                                ),
+                              )
+                            ],
                           ),
                           const Gap(20),
                           if (cardContent.card.description != null)
@@ -93,20 +111,7 @@ class ObjectCardContent extends StatelessWidget {
                               },
                             ),
                           ),
-                          BlocBuilder<UserBloc, UserState>(
-                            builder: (context, state) {
-                              return state.maybeWhen(
-                                success: (user, _, __) {
-                                  if (user.role == 2) {
-                                    return const CommentTextField();
-                                  } else {
-                                    return Container();
-                                  }
-                                },
-                                orElse: () => Container(),
-                              );
-                            },
-                          ),
+                          if (showCommentsField) const CommentTextField(),
                         ],
                       );
                     },

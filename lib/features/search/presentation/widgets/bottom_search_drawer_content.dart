@@ -2,6 +2,7 @@ import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:istu_map/config/enums/object_type.dart';
+import 'package:istu_map/features/map/external_map/presentation/bloc/map_bloc.dart';
 import 'package:istu_map/features/object_card/presentation/pages/object_card_page.dart';
 import 'package:istu_map/features/search/presentation/cubit/search_cubit.dart';
 import 'package:istu_map/features/user/presentation/bloc/user_bloc.dart';
@@ -131,65 +132,78 @@ class _BottomSearchDrawerContentState extends State<BottomSearchDrawerContent> {
                               (e) => Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 10),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (_) =>
-                                            BlocProvider.value(
-                                          value: BlocProvider.of<UserBloc>(
-                                              context),
-                                          child: ObjectCardPage(
-                                            objectId: e.id,
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: Stack(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: AppTheme.of(context)
-                                              .colorScheme
-                                              .secondary
-                                              .withOpacity(0.6),
-                                        ),
-                                        height: 50,
-                                        child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 14),
-                                            child: Text(
-                                              e.title,
-                                              style:
-                                                  const TextStyle(fontSize: 15),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      const Align(
-                                        alignment: Alignment.centerRight,
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 10, right: 9),
-                                          child: RotatedBox(
-                                            quarterTurns: 1,
-                                            child: InkWell(
-                                              child: Icon(
-                                                Icons.assistant_navigation,
-                                                size: 30,
+                                child: BlocBuilder<UserBloc, UserState>(
+                                  builder: (context, state) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) => ObjectCardPage(
+                                              objectId: e.id,
+                                              onRouteCreatePressed: () {
+                                                BlocProvider.of<MapBloc>(
+                                                        context)
+                                                    .add(
+                                                  RouteCreated(to: e.id),
+                                                );
+                                                Navigator.pop(context);
+                                              },
+                                              showCommentsField: state.maybeMap(
+                                                success: (value) =>
+                                                    value.user.role == 2,
+                                                orElse: () => false,
                                               ),
                                             ),
                                           ),
-                                        ),
+                                        );
+                                      },
+                                      child: Stack(
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: AppTheme.of(context)
+                                                  .colorScheme
+                                                  .secondary
+                                                  .withOpacity(0.6),
+                                            ),
+                                            height: 50,
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 14),
+                                                child: Text(
+                                                  e.title,
+                                                  style: const TextStyle(
+                                                      fontSize: 15),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          const Align(
+                                            alignment: Alignment.centerRight,
+                                            child: Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: 10, right: 9),
+                                              child: RotatedBox(
+                                                quarterTurns: 1,
+                                                child: InkWell(
+                                                  child: Icon(
+                                                    Icons.assistant_navigation,
+                                                    size: 30,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    );
+                                  },
                                 ),
                               ),
                             )

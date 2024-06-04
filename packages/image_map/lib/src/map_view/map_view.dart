@@ -18,7 +18,7 @@ class ImageMap extends StatefulWidget {
     required this.options,
   }) : super(key: key);
 
-  final Image baseImage;
+  final Widget baseImage;
   final List<Widget> markupElements;
   final ImageMapController? controller;
   final ImageMapOptions options;
@@ -77,6 +77,7 @@ class ImageMapOptions extends Equatable {
   final double rotationGap;
   final double maxScale;
   final double minScale;
+  final Alignment? markersAlign;
   final List<BoxShadow>? boxShadow;
 
   const ImageMapOptions({
@@ -85,6 +86,7 @@ class ImageMapOptions extends Equatable {
     this.maxScale = 3.0,
     this.minScale = 0.5,
     this.boxShadow,
+    this.markersAlign,
   });
 
   @override

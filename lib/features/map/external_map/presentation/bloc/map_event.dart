@@ -19,7 +19,7 @@ class RouteCreated extends MapEvent {
   const RouteCreated({
     required this.to,
   });
-  final Building to;
+  final String to;
 
   @override
   List<Object> get props => [to];

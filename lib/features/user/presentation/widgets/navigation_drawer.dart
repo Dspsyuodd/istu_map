@@ -62,10 +62,20 @@ class IstuNavigationDrawer extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () {
-                            AppTheme.changeTheme(context, AppColorThemes.light);
+                            if (AppTheme.of(context).colorScheme.brightness ==
+                                Brightness.dark) {
+                              AppTheme.changeTheme(
+                                  context, AppColorThemes.light);
+                            } else {
+                              AppTheme.changeTheme(
+                                  context, AppColorThemes.dark);
+                            }
                           },
-                          child: const Icon(
-                            Icons.light_mode_outlined,
+                          child: Icon(
+                            AppTheme.of(context).colorScheme.brightness ==
+                                    Brightness.dark
+                                ? Icons.light_mode_outlined
+                                : Icons.dark_mode_outlined,
                             size: 40,
                           ),
                         ),

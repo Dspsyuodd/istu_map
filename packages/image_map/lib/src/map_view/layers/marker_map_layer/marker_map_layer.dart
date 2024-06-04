@@ -25,6 +25,12 @@ class _MarkerMapLayerState extends State<MarkerMapLayer> {
     super.didUpdateWidget(oldWidget);
   }
 
+  @override
+  void initState() {
+    _findOffsets();
+    super.initState();
+  }
+
   void _findOffsets() {
     _keys = List.generate(widget.markers.length, (_) => GlobalKey());
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -32,7 +38,7 @@ class _MarkerMapLayerState extends State<MarkerMapLayer> {
       for (var key in _keys) {
         var renderObject = key.currentContext!.findRenderObject() as RenderBox;
         offsets.add(Offset(
-          renderObject.size.width / 2,
+          renderObject.size.width,
           renderObject.size.height,
         ));
       }
@@ -45,40 +51,42 @@ class _MarkerMapLayerState extends State<MarkerMapLayer> {
   @override
   Widget build(BuildContext context) {
     final mapInfo = ImageMapInheritedWidget.of(context);
+
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         return Stack(
-          children: widget.markers
-              .mapIndexed(
-                (index, e) => Positioned(
-                  left: e.point.dx * constraints.maxWidth -
-                      (_offsetsByChildSize.length == widget.markers.length
-                          ? _offsetsByChildSize[index].dx
-                          : 0),
-                  top: e.point.dy * constraints.maxHeight -
-                      (_offsetsByChildSize.length == widget.markers.length
-                          ? _offsetsByChildSize[index].dy
-                          : 0),
-                  child: Transform.rotate(
-                    angle: -mapInfo.state.rotation,
-                    origin: _offsetsByChildSize.length == widget.markers.length
-                        ? Offset(0, _offsetsByChildSize[index].dy / 2)
-                        : null,
-                    child: Transform.scale(
-                      origin:
-                          _offsetsByChildSize.length == widget.markers.length
-                              ? Offset(0, _offsetsByChildSize[index].dy / 2)
-                              : null,
-                      scale: (1 / mapInfo.state.scale),
-                      child: Container(
-                        key: _keys[index],
-                        child: e.child,
-                      ),
-                    ),
+          children: widget.markers.mapIndexed((index, e) {
+            var leftSizeOffset = 0.0;
+            var topSizeOffset = 0.0;
+            Offset? origin;
+            var markersAliegment =
+                mapInfo.options.markersAlign ?? const Alignment(0, 0);
+            if (_offsetsByChildSize.length == widget.markers.length) {
+              leftSizeOffset = _offsetsByChildSize[index].dx *
+                  (0.5 + markersAliegment.x / 2);
+              topSizeOffset = _offsetsByChildSize[index].dy *
+                  (0.5 + markersAliegment.y / 2);
+              origin = Offset(
+                  _offsetsByChildSize[index].dx * markersAliegment.x / 2,
+                  _offsetsByChildSize[index].dy * markersAliegment.y / 2);
+            }
+            return Positioned(
+              left: e.point.dx * constraints.maxWidth - leftSizeOffset,
+              top: e.point.dy * constraints.maxHeight - topSizeOffset,
+              child: Transform.rotate(
+                angle: -mapInfo.state.rotation,
+                origin: origin,
+                child: Transform.scale(
+                  origin: origin,
+                  scale: (1 / mapInfo.state.scale),
+                  child: Container(
+                    key: _keys[index],
+                    child: e.child,
                   ),
                 ),
-              )
-              .toList(),
+              ),
+            );
+          }).toList(),
         );
       },
     );

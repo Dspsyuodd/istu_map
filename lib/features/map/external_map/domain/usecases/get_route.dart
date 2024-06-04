@@ -3,7 +3,6 @@ import 'package:latlong2/latlong.dart';
 
 import '../../../../../core/domain/usecases/usecase.dart';
 import '../../../../../core/errors/failure.dart';
-import '../../../shared/domain/entities/building.dart';
 import '../entities/exteral_route.dart';
 import '../repositories/external_route_repository.dart';
 
@@ -13,16 +12,16 @@ class GetExternalRoute extends Usecase<ExternalRoute, GetExternalRouteParams> {
   GetExternalRoute(this.externalRouteRepository);
   @override
   Future<Either<Failure, ExternalRoute>> call(params) async {
-    return await externalRouteRepository.getRoute(params.from, params.to.id);
+    return await externalRouteRepository.getRoute(params.from, params.toId);
   }
 }
 
 class GetExternalRouteParams extends NoParams {
   final LatLng from;
-  final Building to;
+  final String toId;
 
-  GetExternalRouteParams({required this.from, required this.to});
+  GetExternalRouteParams({required this.from, required this.toId});
 
   @override
-  List<Object?> get props => [from, to];
+  List<Object?> get props => [from, toId];
 }
