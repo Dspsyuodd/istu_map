@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
+import 'package:gap/gap.dart';
 import 'package:istu_map/features/map/shared/presentation/widgets/object_marker.dart';
 import 'package:istu_map/features/user/presentation/bloc/user_bloc.dart';
 import 'package:latlong2/latlong.dart';
@@ -188,10 +189,43 @@ class _IstuMapWidgetState extends State<IstuMapWidget>
             ),
           ),
         ),
-        MapFocusButton(
-          onTap: () {
-            var pos = BlocProvider.of<MapBloc>(context).state.currentPosition;
-            mapController.move(pos, mapController.camera.zoom);
+        BlocBuilder<MapBloc, MapState>(
+          builder: (context, state) {
+            return Align(
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 27, bottom: 38),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (state.route != null)
+                      InkWell(
+                        onTap: () {
+                          BlocProvider.of<MapBloc>(context)
+                              .add(const RouteRemoved());
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppTheme.of(context).colorScheme.background,
+                          ),
+                          padding: const EdgeInsets.all(5),
+                          child: const Icon(Icons.close),
+                        ),
+                      ),
+                    const Gap(5),
+                    MapFocusButton(
+                      onTap: () {
+                        var pos = BlocProvider.of<MapBloc>(context)
+                            .state
+                            .currentPosition;
+                        mapController.move(pos, mapController.camera.zoom);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            );
           },
         ),
       ],

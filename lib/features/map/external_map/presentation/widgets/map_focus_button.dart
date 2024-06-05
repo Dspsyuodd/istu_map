@@ -5,22 +5,16 @@ class MapFocusButton extends StatelessWidget {
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.bottomRight,
-      child: Padding(
-        padding: const EdgeInsets.only(right: 27, bottom: 38),
-        child: InkWell(
-          onTap: onTap,
-          child: Container(
-            width: 61,
-            height: 61,
-            decoration: const BoxDecoration(
-                color: Colors.black, shape: BoxShape.circle),
-            child: const Icon(
-              Icons.navigation,
-              size: 35,
-            ),
-          ),
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        width: 61,
+        height: 61,
+        decoration:
+            const BoxDecoration(color: Colors.black, shape: BoxShape.circle),
+        child: const Icon(
+          Icons.navigation,
+          size: 35,
         ),
       ),
     );

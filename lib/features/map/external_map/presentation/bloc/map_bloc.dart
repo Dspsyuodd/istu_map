@@ -34,7 +34,11 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       : super(const MapState.initial()) {
     on<MapEvent>((event, emit) async {
       log(event.runtimeType.toString());
-
+      if (event is RouteRemoved) {
+        _route = null;
+        emit(MapState(_buildings, _route, MapStatus.success, _currentPosition,
+              _nearestBuillding));
+      }
       if (event is ExternalLessonSelected) {
         if (_route != null) {
           await _createRouteToLesson(event.lesson, emit);

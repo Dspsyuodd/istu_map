@@ -55,3 +55,10 @@ class ExternalRouteCreatedToLesson extends MapEvent {
   @override
   List<Object> get props => [lesson];
 }
+
+class RouteRemoved extends MapEvent {
+  const RouteRemoved();
+
+  @override
+  List<Object> get props => [];
+}
