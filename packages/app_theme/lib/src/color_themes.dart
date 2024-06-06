@@ -13,10 +13,17 @@ final _colorThemes = {
 };
 
 final _dark = ThemeData(
+  iconTheme: const IconThemeData(
+    color: Colors.white,
+  ),
   textTheme: const TextTheme(
     displayLarge: TextStyle(
       color: Color.fromARGB(255, 226, 228, 238),
       fontSize: 20,
+    ),
+    displaySmall: TextStyle(
+      color: Color.fromARGB(255, 226, 228, 238),
+      fontSize: 14,
     ),
     titleLarge: TextStyle(
       color: Color.fromARGB(255, 226, 228, 238),
@@ -35,31 +42,42 @@ final _dark = ThemeData(
     onSecondary: Color.fromRGBO(59, 71, 126, 1),
     error: Colors.red,
     onError: Colors.red,
-    background: Color.fromRGBO(10, 10, 15, 1),
-    onBackground: Color.fromRGBO(10, 10, 15, 1),
-    surface: Colors.white,
-    onSurface: Colors.white,
+    surface: Color.fromRGBO(10, 10, 15, 1),
+    onSurface: Color.fromRGBO(10, 10, 15, 1),
   ),
 );
 
 final _light = ThemeData(
+  iconTheme: const IconThemeData(
+    color: Colors.black
+  ),
   textTheme: const TextTheme(
     displayLarge: TextStyle(
-      color: Color.fromARGB(255, 17, 19, 29),
+      color: Colors.black,
       fontSize: 20,
+    ),
+    displaySmall: TextStyle(
+      color: Colors.black,
+      fontSize: 14,
+    ),
+    titleLarge: TextStyle(
+      color: Colors.black,
+      fontSize: 20,
+    ),
+    titleSmall: TextStyle(
+      color: Colors.grey,
+      fontSize: 14,
     ),
   ),
   colorScheme: const ColorScheme(
     brightness: Brightness.light,
-    primary: Color.fromRGBO(124, 134, 182, 1),
+    primary: Color.fromRGBO(12, 59, 139, 1),
     onPrimary: Color.fromRGBO(124, 134, 182, 1),
-    secondary: Color.fromRGBO(130, 142, 196, 1),
+    secondary: Color.fromRGBO(119, 20, 69, 1),
     onSecondary: Color.fromRGBO(130, 142, 196, 1),
     error: Colors.red,
     onError: Colors.red,
-    background: Color.fromRGBO(240, 240, 245, 1),
-    onBackground: Color.fromRGBO(240, 240, 245, 1),
-    surface: Colors.white,
-    onSurface: Colors.white,
+    surface: Color.fromRGBO(240, 240, 245, 1),
+    onSurface: Color.fromRGBO(240, 240, 245, 1),
   ),
 );

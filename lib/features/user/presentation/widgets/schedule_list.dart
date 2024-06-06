@@ -180,7 +180,9 @@ class _ScheduleListState extends State<ScheduleList>
     return widget.shedule.asMap().entries.map((e) {
       var color = AppTheme.of(context).colorScheme.secondary.withOpacity(0.5);
       if (e.key > currentPosition) {
-        color = Colors.white.withOpacity(0.1);
+        color = AppTheme.of(context).colorScheme.brightness == Brightness.dark
+            ? Colors.white.withOpacity(0.1)
+            : Colors.black.withOpacity(0.1);
       }
       if (e.key < currentPosition) {
         color = Colors.transparent;
@@ -208,10 +210,12 @@ class _ScheduleListState extends State<ScheduleList>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(e.value.name, style: const TextStyle(fontSize: 12)),
+                    Text(e.value.name,
+                        style: AppTheme.of(context).textTheme.displaySmall),
                     Text(e.value.auditory,
-                        style: const TextStyle(fontSize: 12)),
-                    Text(e.value.teacher, style: const TextStyle(fontSize: 12)),
+                        style: AppTheme.of(context).textTheme.displaySmall),
+                    Text(e.value.teacher,
+                        style: AppTheme.of(context).textTheme.displaySmall),
                   ],
                 ),
               ),
@@ -225,6 +229,9 @@ class _ScheduleListState extends State<ScheduleList>
   void _buildCircles() {
     if (scheduleKeys.isEmpty) return;
     final theme = AppTheme.of(context);
+    final notSelectedColor = theme.colorScheme.brightness == Brightness.dark
+        ? Colors.white
+        : Colors.black;
     var circlesList = <Widget>[];
     var circleSize = 47.0;
     var height =
@@ -238,7 +245,7 @@ class _ScheduleListState extends State<ScheduleList>
       circlesList.add(ScheduleListCircle(
         color: i == currentPosition
             ? theme.colorScheme.secondary
-            : Colors.white.withOpacity(0.5),
+            : notSelectedColor.withOpacity(0.5),
       ));
       if (i < scheduleKeys.length - 1) {
         var height = _getContainerHeight(scheduleKeys[i].currentContext) - 47;
@@ -247,11 +254,11 @@ class _ScheduleListState extends State<ScheduleList>
         circlesList.add(ScheduleListLine(
           firstColor: i == currentPosition
               ? theme.colorScheme.secondary
-              : Colors.white.withOpacity(0.5),
+              : notSelectedColor.withOpacity(0.5),
           height: height / 2 + nextHeight / 2 + widget.spacing,
           secondColor: i + 1 == currentPosition
               ? theme.colorScheme.secondary
-              : Colors.white.withOpacity(0.5),
+              : notSelectedColor.withOpacity(0.5),
         ));
       }
     }

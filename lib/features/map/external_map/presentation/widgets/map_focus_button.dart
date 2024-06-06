@@ -1,3 +1,4 @@
+import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class MapFocusButton extends StatelessWidget {
@@ -10,8 +11,10 @@ class MapFocusButton extends StatelessWidget {
       child: Container(
         width: 61,
         height: 61,
-        decoration:
-            const BoxDecoration(color: Colors.black, shape: BoxShape.circle),
+        decoration: BoxDecoration(
+          color: AppTheme.of(context).colorScheme.surface,
+          shape: BoxShape.circle,
+        ),
         child: const Icon(
           Icons.navigation,
           size: 35,

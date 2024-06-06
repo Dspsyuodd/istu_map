@@ -207,7 +207,7 @@ class _IstuMapWidgetState extends State<IstuMapWidget>
                         child: Container(
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: AppTheme.of(context).colorScheme.background,
+                            color: AppTheme.of(context).colorScheme.surface,
                           ),
                           padding: const EdgeInsets.all(5),
                           child: const Icon(Icons.close),

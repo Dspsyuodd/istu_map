@@ -1,3 +1,4 @@
+import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import '../../../core/presentation/ui/widgets/svg_clipper.dart';
 
@@ -130,7 +131,7 @@ class EndDrawerState extends State<EndDrawer>
                             blurRadius: 10,
                           ),
                       ],
-                      color: Colors.black,
+                      color: AppTheme.of(context).colorScheme.surface,
                     ),
                     height: 106,
                     width: 48,
@@ -138,7 +139,6 @@ class EndDrawerState extends State<EndDrawer>
                       child: AnimatedIcon(
                         icon: AnimatedIcons.menu_close,
                         progress: animation,
-                        color: Colors.white,
                         size: 20.0,
                       ),
                     ),
@@ -162,7 +162,7 @@ class EndDrawerState extends State<EndDrawer>
                           offset: Offset(-1, 0),
                           blurRadius: 10),
                   ],
-                  color: Colors.black,
+                  color: AppTheme.of(context).colorScheme.surface,
                 ),
                 child: widget.child,
               ),

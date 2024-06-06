@@ -5,6 +5,7 @@ import 'package:istu_map/config/enums/object_type.dart';
 import 'package:istu_map/features/map/external_map/presentation/bloc/map_bloc.dart';
 import 'package:istu_map/features/object_card/presentation/pages/object_card_page.dart';
 import 'package:istu_map/features/search/presentation/cubit/search_cubit.dart';
+import 'package:istu_map/features/search/presentation/widgets/search_result_element.dart';
 import 'package:istu_map/features/user/presentation/bloc/user_bloc.dart';
 
 import '../../../user/presentation/widgets/avatar.dart';
@@ -42,11 +43,20 @@ class _BottomSearchDrawerContentState extends State<BottomSearchDrawerContent> {
             children: [
               GestureDetector(
                 onTap: () {},
-                child: Avatar(
-                  text: '',
-                  size: 44,
-                  borderColor: AppTheme.of(context).colorScheme.secondary,
-                  fillColor: Colors.white.withOpacity(0.5),
+                child: BlocBuilder<UserBloc, UserState>(
+                  builder: (context, state) {
+                    return Avatar(
+                      text: state.maybeWhen(
+                        success: (user, shedule, selectedLesson) {
+                          return user.firstName[0] + user.lastName[0];
+                        },
+                        orElse: () => "A",
+                      ),
+                      size: 44,
+                      borderColor: AppTheme.of(context).colorScheme.secondary,
+                      fillColor: Colors.white.withOpacity(0.5),
+                    );
+                  },
                 ),
               ),
               Padding(
@@ -55,6 +65,7 @@ class _BottomSearchDrawerContentState extends State<BottomSearchDrawerContent> {
                   width: MediaQuery.of(context).size.width / 2,
                   height: 36,
                   child: TextField(
+                    style: AppTheme.of(context).textTheme.displayLarge,
                     onChanged: (value) {
                       BlocProvider.of<SearchCubit>(context).search(value);
                     },
@@ -69,10 +80,7 @@ class _BottomSearchDrawerContentState extends State<BottomSearchDrawerContent> {
                         borderRadius: BorderRadius.circular(200),
                       ),
                       hintText: 'Поиск',
-                      hintStyle: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white.withOpacity(0.7),
-                      ),
+                      hintStyle: AppTheme.of(context).textTheme.displayLarge,
                     ),
                   ),
                 ),
@@ -134,7 +142,8 @@ class _BottomSearchDrawerContentState extends State<BottomSearchDrawerContent> {
                                     const EdgeInsets.symmetric(vertical: 10),
                                 child: BlocBuilder<UserBloc, UserState>(
                                   builder: (context, state) {
-                                    return GestureDetector(
+                                    return SearchResultElement(
+                                      text: e.title,
                                       onTap: () {
                                         Navigator.push(
                                           context,
@@ -158,50 +167,6 @@ class _BottomSearchDrawerContentState extends State<BottomSearchDrawerContent> {
                                           ),
                                         );
                                       },
-                                      child: Stack(
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              color: AppTheme.of(context)
-                                                  .colorScheme
-                                                  .secondary
-                                                  .withOpacity(0.6),
-                                            ),
-                                            height: 50,
-                                            child: Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 14),
-                                                child: Text(
-                                                  e.title,
-                                                  style: const TextStyle(
-                                                      fontSize: 15),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          const Align(
-                                            alignment: Alignment.centerRight,
-                                            child: Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: 10, right: 9),
-                                              child: RotatedBox(
-                                                quarterTurns: 1,
-                                                child: InkWell(
-                                                  child: Icon(
-                                                    Icons.assistant_navigation,
-                                                    size: 30,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
                                     );
                                   },
                                 ),
@@ -250,7 +215,10 @@ class CategoryButton extends StatelessWidget {
           child: Column(
             children: [
               if (icon != null) icon!,
-              Text(name),
+              Text(
+                name,
+                style: AppTheme.of(context).textTheme.displaySmall,
+              ),
             ],
           ),
         ),

@@ -42,8 +42,9 @@ class _BuildingMapState extends State<BuildingMap> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 4,
-        backgroundColor: AppTheme.of(context).colorScheme.secondary,
+        elevation: 10,
+        shadowColor: Colors.black,
+        backgroundColor: AppTheme.of(context).colorScheme.surface,
         title: Text(
           widget.building.title,
           style: AppTheme.of(context).textTheme.displayLarge,
@@ -170,14 +171,9 @@ class _BuildingMapState extends State<BuildingMap> {
                       ),
                     ],
                     options: ImageMapOptions(
-                      backgroundColor: AppTheme.of(context).colorScheme.primary,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.3),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                        ),
-                      ],
+                      maxScale: 8,
+                      minScale: 0.7,
+                      backgroundColor: AppTheme.of(context).colorScheme.primary.withOpacity(0.8),
                     ),
                   ),
                   Align(

@@ -12,9 +12,7 @@ class MapBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppTheme.of(context).colorScheme.brightness == Brightness.dark
-            ? Colors.black
-            : Colors.white,
+        color: AppTheme.of(context).colorScheme.surface,
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),

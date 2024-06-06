@@ -13,6 +13,7 @@ class IstuNavigationDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var theme = AppTheme.of(context);
     return Container(
       clipBehavior: Clip.hardEdge,
       width: MediaQuery.of(context).size.width * 0.78,
@@ -20,15 +21,19 @@ class IstuNavigationDrawer extends StatelessWidget {
         boxShadow: const [
           BoxShadow(color: Colors.black, offset: Offset(1, 0), blurRadius: 10)
         ],
-        color: AppTheme.of(context).colorScheme.secondary,
+        color: theme.colorScheme.secondary,
         borderRadius: const BorderRadius.only(
             topRight: Radius.circular(15), bottomRight: Radius.circular(15)),
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            AppTheme.of(context).colorScheme.primary,
-            Colors.black,
+            theme.brightness == Brightness.dark
+                ? theme.colorScheme.primary
+                : Colors.white,
+            theme.brightness == Brightness.dark
+                ? AppTheme.of(context).colorScheme.surface
+                : AppTheme.of(context).colorScheme.primary,
           ],
         ),
       ),
@@ -89,23 +94,23 @@ class IstuNavigationDrawer extends StatelessWidget {
                           return [
                             Text(
                               [user.firstName, user.lastName].join(' '),
-                              style: const TextStyle(fontSize: 18),
+                              style:
+                                  AppTheme.of(context).textTheme.displayLarge,
                             ),
                             Opacity(
                               opacity: 0.54,
                               child: Text(
                                 user.email,
-                                style: const TextStyle(
-                                  fontSize: 13,
-                                ),
+                                style:
+                                    AppTheme.of(context).textTheme.displaySmall,
                               ),
                             ),
                           ];
                         },
                         orElse: () => [
-                          const Text(
+                          Text(
                             'Незарегистрированный пользователь',
-                            style: TextStyle(fontSize: 18),
+                            style: AppTheme.of(context).textTheme.displayLarge,
                           ),
                         ],
                       ),

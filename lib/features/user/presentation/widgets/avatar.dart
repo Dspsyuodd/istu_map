@@ -29,7 +29,7 @@ class Avatar extends StatelessWidget {
           child: Center(
             child: Text(
               text,
-              style: TextStyle(fontSize: size / 3),
+              style: TextStyle(fontSize: size / 3, color: Colors.black),
             ),
           ),
         ),

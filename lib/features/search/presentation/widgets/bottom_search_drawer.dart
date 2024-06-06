@@ -132,7 +132,7 @@ class _BottomSearchDrawerState extends State<BottomSearchDrawer>
                   child: Container(
                     height: height,
                     decoration: BoxDecoration(
-                      color: AppTheme.of(context).colorScheme.background,
+                      color: AppTheme.of(context).colorScheme.surface,
                       borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(36),
                           topRight: Radius.circular(36)),

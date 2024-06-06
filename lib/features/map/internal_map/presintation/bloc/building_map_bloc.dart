@@ -104,5 +104,6 @@ class BuildingMapBloc extends Bloc<BuildingMapEvent, BuildingMapState> {
     if (l is ServerFailure) {
       log(l.message);
     }
+    emit(BuildingMapState(BuildingMapStatus.success, _currentFloor, _currentFloorImage, _route));
   }
 }

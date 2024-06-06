@@ -47,15 +47,17 @@ class _CommentTextFieldState extends State<CommentTextField> {
           child: SizedBox(
             height: 50,
             child: TextField(
+              style: AppTheme.of(context).textTheme.displaySmall,
               controller: controller,
               onChanged: (comment) => commentText = comment,
               onTapOutside: (event) => FocusScope.of(context).unfocus(),
-              cursorColor: Colors.white,
+              cursorColor: AppTheme.of(context).textTheme.displaySmall!.color,
               decoration: InputDecoration(
                 hintText: 'Напишите комментарий...',
                 labelStyle: AppTheme.of(context).textTheme.titleSmall,
                 border: InputBorder.none,
                 focusedBorder: InputBorder.none,
+                
               ),
             ),
           ),

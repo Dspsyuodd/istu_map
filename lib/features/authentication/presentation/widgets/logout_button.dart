@@ -20,6 +20,10 @@ class LogoutButton extends StatelessWidget {
           }
         },
         builder: (context, state) {
+          final color = AppTheme.of(context).colorScheme.brightness ==
+                            Brightness.dark
+                        ? AppTheme.of(context).colorScheme.primary
+                        : Colors.black;
           return InkWell(
             onTap: () {
               BlocProvider.of<AuthenticationBloc>(context)
@@ -30,15 +34,15 @@ class LogoutButton extends StatelessWidget {
                 Text(
                   'Выйти',
                   style: TextStyle(
-                    color: AppTheme.of(context).colorScheme.primary,
+                    color: color,
                     decoration: TextDecoration.underline,
-                    decorationColor: AppTheme.of(context).colorScheme.primary,
+                    decorationColor: color,
                   ),
                 ),
                 const Gap(5),
                 Icon(
                   Icons.logout,
-                  color: AppTheme.of(context).colorScheme.primary,
+                  color: color,
                 ),
               ],
             ),

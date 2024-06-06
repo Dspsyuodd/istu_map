@@ -1,3 +1,4 @@
+import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class NavigationDrawerButton extends StatelessWidget {
@@ -20,7 +21,7 @@ class NavigationDrawerButton extends StatelessWidget {
               child: icon,
             ),
           ),
-          Text(text),
+          Text(text, style: AppTheme.of(context).textTheme.displaySmall),
         ],
       ),
     );

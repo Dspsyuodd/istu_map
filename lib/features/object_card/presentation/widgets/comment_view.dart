@@ -34,11 +34,23 @@ class CommentView extends StatelessWidget {
                   ),
                 ),
                 const Gap(10),
-                Text(comment.creatorName),
+                Text(
+                  comment.creatorName,
+                  style: AppTheme.of(context)
+                      .textTheme
+                      .displaySmall!
+                      .copyWith(color: Colors.white),
+                ),
               ],
             ),
             const Gap(5),
-            Text(comment.text)
+            Text(
+              comment.text,
+              style: AppTheme.of(context)
+                  .textTheme
+                  .displaySmall!
+                  .copyWith(color: Colors.white),
+            )
           ],
         ),
       ),

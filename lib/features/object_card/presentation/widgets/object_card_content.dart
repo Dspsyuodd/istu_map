@@ -16,7 +16,11 @@ class ObjectCardContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
+    final backgroundColor =
+        AppTheme.of(context).colorScheme.brightness == Brightness.dark
+            ? AppTheme.of(context).colorScheme.primary
+            : AppTheme.of(context).colorScheme.surface;
     return BlocBuilder<ObjectCardBloc, ObjectCardState>(
       builder: (context, state) {
         return Align(
@@ -25,7 +29,7 @@ class ObjectCardContent extends StatelessWidget {
             height: size.height * 0.76,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: AppTheme.of(context).colorScheme.primary,
+              color: backgroundColor,
               borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10), topRight: Radius.circular(10)),
             ),
@@ -44,7 +48,8 @@ class ObjectCardContent extends StatelessWidget {
                   left: false,
                   right: false,
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                    padding:
+                        const EdgeInsets.only(top: 20, left: 20, right: 20),
                     child: state.maybeWhen(
                       loadingSuccess: (cardContent) {
                         return Column(
@@ -76,11 +81,27 @@ class ObjectCardContent extends StatelessWidget {
                                       AppTheme.of(context).textTheme.titleSmall,
                                 ),
                                 ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppTheme.of(context)
+                                                .colorScheme
+                                                .brightness ==
+                                            Brightness.dark
+                                        ? Colors.white
+                                        : Colors.black,
+                                  ),
                                   onPressed: onRouteCreatePressed,
-                                  child: const Row(
+                                  child: Row(
                                     children: [
-                                      Text('Маршрут'),
-                                      Icon(Icons.route)
+                                      Text(
+                                        'Маршрут',
+                                        style: TextStyle(
+                                          color: backgroundColor,
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.route,
+                                        color: backgroundColor,
+                                      )
                                     ],
                                   ),
                                 )
@@ -88,15 +109,21 @@ class ObjectCardContent extends StatelessWidget {
                             ),
                             const Gap(20),
                             if (cardContent.card.description != null)
-                              Text(cardContent.card.description ??
-                                  "Без описания."),
+                              Text(
+                                cardContent.card.description ?? "Без описания.",
+                                style:
+                                    AppTheme.of(context).textTheme.displaySmall,
+                              ),
                             const Gap(20),
                             Divider(
                               color: Colors.white.withOpacity(0.1),
                             ),
-                            const Text(
+                            Text(
                               'Комментарии',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: AppTheme.of(context)
+                                  .textTheme
+                                  .displaySmall!
+                                  .copyWith(fontWeight: FontWeight.bold),
                             ),
                             Text(
                               cardContent.comments.length.toString() +
@@ -110,7 +137,9 @@ class ObjectCardContent extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   return CommentView(
                                     comment: cardContent.comments[
-                                        cardContent.comments.length - index - 1],
+                                        cardContent.comments.length -
+                                            index -
+                                            1],
                                   );
                                 },
                               ),
