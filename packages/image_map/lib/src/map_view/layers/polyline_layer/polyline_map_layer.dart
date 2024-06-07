@@ -12,10 +12,12 @@ class PolylineMapLayer extends StatefulWidget {
     Key? key,
     required this.polylines,
     this.useAnimation = false,
+    this.polylineMaxWidth,
   }) : super(key: key);
 
   final List<MapPolyline> polylines;
   final bool useAnimation;
+  final double? polylineMaxWidth;
 
   @override
   State<PolylineMapLayer> createState() => _PolylineMapLayerState();
@@ -60,6 +62,7 @@ class _PolylineMapLayerState extends State<PolylineMapLayer>
                 (e) => CustomPaint(
                   size: size,
                   painter: MapPolylinePainter(
+                    polylineMaxWidth: widget.polylineMaxWidth,
                     animation:
                         widget.useAnimation ? _animationController!.value : 0,
                     polyline: e,
@@ -82,6 +85,7 @@ class MapPolylinePainter extends CustomPainter {
   final InteractiveViewerState state;
   final double animation;
   final bool useAnimation;
+  final double? polylineMaxWidth;
 
   MapPolylinePainter({
     super.repaint,
@@ -90,13 +94,20 @@ class MapPolylinePainter extends CustomPainter {
     required this.state,
     this.animation = 0,
     required this.useAnimation,
+    this.polylineMaxWidth,
   });
   @override
   void paint(Canvas canvas, Size size) {
     const arrowOffset = 10.0;
+    var strokeWidth = (1 / state.scale) * polyline.strokeWidth;
+    if (polylineMaxWidth != null) {
+      if (strokeWidth > polylineMaxWidth!) {
+        strokeWidth = polylineMaxWidth!;
+      }
+    }
     final paint = Paint();
     paint
-      ..strokeWidth = (1 / state.scale) * polyline.strokeWidth
+      ..strokeWidth = strokeWidth
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 
@@ -111,8 +122,7 @@ class MapPolylinePainter extends CustomPainter {
           firstPoint,
           secondPoint,
           paint
-            ..color = polyline.color
-            ..strokeWidth = (1 / state.scale) * polyline.strokeWidth);
+            ..color = polyline.color);
       if (useAnimation) {
         paint
           ..color = polyline.arrowsColor

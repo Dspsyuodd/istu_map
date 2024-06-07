@@ -5,7 +5,9 @@ import 'package:collection/collection.dart';
 import '../../image_map_interactive_viewer/image_map_inherited_widget.dart';
 
 class MarkerMapLayer extends StatefulWidget {
-  const MarkerMapLayer({Key? key, required this.markers}) : super(key: key);
+  const MarkerMapLayer({Key? key, required this.markers, this.markersMaxScale})
+      : super(key: key);
+  final double? markersMaxScale;
 
   final List<MapMarker> markers;
 
@@ -70,6 +72,12 @@ class _MarkerMapLayerState extends State<MarkerMapLayer> {
                   _offsetsByChildSize[index].dx * markersAliegment.x / 2,
                   _offsetsByChildSize[index].dy * markersAliegment.y / 2);
             }
+            var scale = (1 / mapInfo.state.scale);
+            if (widget.markersMaxScale != null) {
+              if (scale > widget.markersMaxScale!) {
+                scale = widget.markersMaxScale!;
+              }
+            }
             return Positioned(
               left: e.point.dx * constraints.maxWidth - leftSizeOffset,
               top: e.point.dy * constraints.maxHeight - topSizeOffset,
@@ -78,7 +86,7 @@ class _MarkerMapLayerState extends State<MarkerMapLayer> {
                 origin: origin,
                 child: Transform.scale(
                   origin: origin,
-                  scale: (1 / mapInfo.state.scale),
+                  scale: scale,
                   child: Container(
                     key: _keys[index],
                     child: e.child,

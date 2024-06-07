@@ -162,11 +162,13 @@ class _BuildingMapState extends State<BuildingMap> {
                     markupElements: [
                       if (state.route != null)
                         PolylineMapLayer(
+                          polylineMaxWidth: 2.5,
                           polylines: [
                             if (mapPolyline != null) mapPolyline,
                           ],
                         ),
                       MarkerMapLayer(
+                        markersMaxScale: 0.3,
                         markers: markers ?? [],
                       ),
                     ],
