@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:istu_map/config/theme/app_theme/app_theme.dart';
+import 'package:intl/intl.dart';
 
 class SheduleListElement {
   final String name;
   final String teacher;
   final String auditory;
+  final DateTime startTime;
+  final DateTime endTime;
 
   SheduleListElement({
     required this.name,
     required this.teacher,
     required this.auditory,
+    required this.startTime,
+    required this.endTime,
   });
 }
 
@@ -212,8 +218,18 @@ class _ScheduleListState extends State<ScheduleList>
                   children: [
                     Text(e.value.name,
                         style: AppTheme.of(context).textTheme.displaySmall),
-                    Text(e.value.auditory,
-                        style: AppTheme.of(context).textTheme.displaySmall),
+                    Row(
+                      children: [
+                        Text(e.value.auditory,
+                            style: AppTheme.of(context).textTheme.displaySmall),
+                        const Gap(15),
+                        Text(
+                            DateFormat.Hm().format(
+                              e.value.startTime.toLocal(),
+                            ),
+                            style: AppTheme.of(context).textTheme.displaySmall),
+                      ],
+                    ),
                     Text(e.value.teacher,
                         style: AppTheme.of(context).textTheme.displaySmall),
                   ],

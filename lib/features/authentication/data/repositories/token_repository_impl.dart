@@ -59,9 +59,9 @@ class TokenRepositoryImpl extends ExceptionsHandler implements TokenRepository {
     return Right(token);
   }
 
-  Future<void> _setToken(String key, String token) {
+  Future<void> _setToken(String key, String token) async {
     _tokens[key] = token;
-    return _storage.write(key: key, value: token);
+    return await _storage.write(key: key, value: token);
   }
 
   @override

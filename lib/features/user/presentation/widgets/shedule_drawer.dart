@@ -39,6 +39,8 @@ class ScheduleDrawer extends StatelessWidget {
                         name: e.title,
                         teacher: e.lector,
                         auditory: e.audience,
+                        startTime: DateTime.parse(e.startTime),
+                        endTime: DateTime.parse(e.endTime)
                       ),
                     )
                     .toList(),
