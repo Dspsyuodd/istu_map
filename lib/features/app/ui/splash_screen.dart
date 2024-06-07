@@ -1,5 +1,5 @@
-import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:istu_map/config/theme/app_theme/app_theme.dart';
 
 import '../../../core/presentation/ui/widgets/svg_picture.dart';
 
@@ -56,7 +56,7 @@ class SplashScreenState extends State<SplashScreen>
     return Scaffold(
       backgroundColor: transitionEnd
           ? theme.colorScheme.secondary
-          : theme.colorScheme.background,
+          : theme.colorScheme.surface,
       body: Stack(
         children: [
           Center(

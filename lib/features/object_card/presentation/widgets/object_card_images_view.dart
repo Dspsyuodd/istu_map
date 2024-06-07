@@ -1,6 +1,6 @@
-import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:istu_map/config/theme/app_theme/app_theme.dart';
 import 'package:istu_map/features/object_card/presentation/bloc/object_card_bloc.dart';
 import 'package:istu_map/features/object_card/presentation/widgets/images_page_view.dart';
 

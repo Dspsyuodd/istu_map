@@ -1,5 +1,5 @@
-import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:istu_map/config/theme/app_theme/app_theme.dart';
 import '../../../core/presentation/ui/widgets/svg_clipper.dart';
 
 import '../../../core/presentation/ui/widgets/clip_shadow_path.dart';

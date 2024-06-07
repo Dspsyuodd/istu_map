@@ -1,7 +1,7 @@
-import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:istu_map/config/theme/app_theme/app_theme.dart';
 import 'package:istu_map/features/map/shared/presentation/widgets/map_bottom_sheet.dart';
 import 'package:istu_map/features/map/internal_map/presintation/bloc/building_map_bloc.dart';
 import 'package:istu_map/features/object_card/presentation/pages/object_card_page.dart';

@@ -1,5 +1,5 @@
-import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:istu_map/config/theme/app_theme/app_theme.dart';
 
 class ObjectMarker extends StatelessWidget {
   const ObjectMarker({Key? key, required this.icon, this.title})

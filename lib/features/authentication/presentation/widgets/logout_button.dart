@@ -1,7 +1,7 @@
-import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:istu_map/config/theme/app_theme/app_theme.dart';
 import '../../authentication_injection_container.dart';
 import '../bloc/authentication_bloc.dart';
 

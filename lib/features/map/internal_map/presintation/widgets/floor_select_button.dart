@@ -1,5 +1,5 @@
-import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:istu_map/config/theme/app_theme/app_theme.dart';
 
 class FloorSelectButton extends StatelessWidget {
   const FloorSelectButton({Key? key, required this.text, this.onTap})
@@ -15,7 +15,7 @@ class FloorSelectButton extends StatelessWidget {
         width: 50,
         height: 50,
         decoration: BoxDecoration(
-            color: AppTheme.of(context).colorScheme.background,
+            color: AppTheme.of(context).colorScheme.surface,
             borderRadius: const BorderRadius.all(Radius.circular(10))),
         child: Center(
           child: Text(

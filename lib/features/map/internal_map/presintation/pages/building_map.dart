@@ -1,8 +1,8 @@
-import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_map/image_map.dart';
 import 'package:istu_map/config/enums/object_type.dart';
+import 'package:istu_map/config/theme/app_theme/app_theme.dart';
 import 'package:istu_map/features/app/ui/end_navigarion_drawer.dart';
 import 'package:istu_map/features/authentication/authentication_injection_container.dart';
 import 'package:istu_map/features/map/internal_map/presintation/bloc/building_map_bloc.dart';

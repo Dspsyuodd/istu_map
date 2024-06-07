@@ -1,6 +1,6 @@
-import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:istu_map/config/theme/app_theme/app_theme.dart';
 import '../../../../core/presentation/ui/widgets/svg_picture.dart';
 import 'dart:math' as math;
 
@@ -64,15 +64,18 @@ class TopLogo extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppTheme.of(context).colorScheme.secondary,
             ),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IstuSvgPicture(SvgIstuIcons.istuLogoBlack,
+                const IstuSvgPicture(SvgIstuIcons.istuLogoBlack,
                     width: 130, height: 130),
-                SizedBox(width: 34),
+                const SizedBox(width: 34),
                 Text(
-                  'Личный\nкабинет',
-                  style: TextStyle(fontSize: 32),
+                  'ИжГТУ',
+                  style: AppTheme.of(context)
+                      .textTheme
+                      .titleLarge!
+                      .copyWith(fontSize: 32),
                 )
               ],
             ),

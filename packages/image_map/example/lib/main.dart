@@ -99,7 +99,7 @@ class _MainAppState extends State<MainApp> {
                         onPressed: () {
                           mapController.rotate(
                             angle: mapController.rotation - pi / 8,
-                            origin: mapController.offset + Offset(100, 100),
+                            origin: mapController.offset + const Offset(100, 100),
                           );
                         },
                         icon: const Icon(
@@ -110,7 +110,7 @@ class _MainAppState extends State<MainApp> {
                         onPressed: () {
                           mapController.rotate(
                             angle: mapController.rotation + pi / 8,
-                            origin: mapController.offset + Offset(100, 100),
+                            origin: mapController.offset + const Offset(100, 100),
                           );
                         },
                         icon: const Icon(

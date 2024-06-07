@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../app_theme.dart';
+import 'package:istu_map/config/theme/app_theme/app_theme.dart';
 
 class AppColorTheme {
   static ThemeData getTheme(AppColorThemes theme) =>
@@ -13,6 +12,7 @@ final _colorThemes = {
 };
 
 final _dark = ThemeData(
+  fontFamily: 'Cuprum',
   iconTheme: const IconThemeData(
     color: Colors.white,
   ),
@@ -48,9 +48,8 @@ final _dark = ThemeData(
 );
 
 final _light = ThemeData(
-  iconTheme: const IconThemeData(
-    color: Colors.black
-  ),
+  fontFamily: 'Cuprum',
+  iconTheme: const IconThemeData(color: Colors.black),
   textTheme: const TextTheme(
     displayLarge: TextStyle(
       color: Colors.black,

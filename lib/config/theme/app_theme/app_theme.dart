@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../color_themes.dart';
+import 'color_themes.dart';
 
 import 'dart:async';
 enum AppColorThemes {

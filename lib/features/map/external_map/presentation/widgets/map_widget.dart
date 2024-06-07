@@ -1,9 +1,9 @@
-import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:gap/gap.dart';
+import 'package:istu_map/config/theme/app_theme/app_theme.dart';
 import 'package:istu_map/features/map/shared/presentation/widgets/object_marker.dart';
 import 'package:istu_map/features/user/presentation/bloc/user_bloc.dart';
 import 'package:latlong2/latlong.dart';

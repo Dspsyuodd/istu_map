@@ -1,5 +1,5 @@
-import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:istu_map/config/theme/app_theme/app_theme.dart';
 
 class ScaleButton extends StatelessWidget {
   const ScaleButton({Key? key, required this.icon, this.onTap})
@@ -15,7 +15,7 @@ class ScaleButton extends StatelessWidget {
         height: 56,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: AppTheme.of(context).colorScheme.background,
+          color: AppTheme.of(context).colorScheme.surface,
         ),
         child: Center(
           child: Icon(icon, size: 30,),

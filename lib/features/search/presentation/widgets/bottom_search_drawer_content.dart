@@ -1,7 +1,7 @@
-import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:istu_map/config/enums/object_type.dart';
+import 'package:istu_map/config/theme/app_theme/app_theme.dart';
 import 'package:istu_map/features/map/external_map/presentation/bloc/map_bloc.dart';
 import 'package:istu_map/features/object_card/presentation/pages/object_card_page.dart';
 import 'package:istu_map/features/search/presentation/cubit/search_cubit.dart';

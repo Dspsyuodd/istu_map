@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:istu_map/config/theme/app_theme/app_theme.dart';
 
 class AuthenticationTextField extends StatelessWidget {
   const AuthenticationTextField({
@@ -22,13 +23,12 @@ class AuthenticationTextField extends StatelessWidget {
       children: [
         Text(
           label,
-          style: const TextStyle(
-            fontSize: 16,
-          ),
+          style: AppTheme.of(context).textTheme.displayLarge,
         ),
         SizedBox(
           height: 65,
           child: TextField(
+            style: AppTheme.of(context).textTheme.displaySmall,
             controller: controller,
             obscureText: obscureText,
             onChanged: onChanged,

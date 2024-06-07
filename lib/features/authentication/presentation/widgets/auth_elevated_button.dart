@@ -1,5 +1,5 @@
-import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:istu_map/config/theme/app_theme/app_theme.dart';
 
 class AuthElevatedButton extends StatelessWidget {
   const AuthElevatedButton({Key? key, this.onPressed, required this.text})
