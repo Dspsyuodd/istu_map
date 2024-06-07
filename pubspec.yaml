@@ -58,27 +58,27 @@ flutter:
   fonts:
     - family: OpenSans
       fonts:
-        - asset: assets/fonts/OpenSans-Light.ttf
+        - asset: assets/fonts/open_sans/OpenSans-Light.ttf
           weight: 300
-        - asset: assets/fonts/OpenSans-Regular.ttf
+        - asset: assets/fonts/open_sans/OpenSans-Regular.ttf
           weight: 400
-        - asset: assets/fonts/OpenSans-Medium.ttf
+        - asset: assets/fonts/open_sans/OpenSans-Medium.ttf
           weight: 500
-        - asset: assets/fonts/OpenSans-Semibold.ttf
+        - asset: assets/fonts/open_sans/OpenSans-Semibold.ttf
           weight: 600
-        - asset: assets/fonts/OpenSans-Bold.ttf
+        - asset: assets/fonts/open_sans/OpenSans-Bold.ttf
           weight: 700
-        - asset: assets/fonts/OpenSans-ExtraBold.ttf
+        - asset: assets/fonts/open_sans/OpenSans-ExtraBold.ttf
           weight: 800
     - family: Cuprum
       fonts:
-        - asset: assets/fonts/Cuprum-Regular.ttf
+        - asset: assets/fonts/cuprum/Cuprum-Regular.ttf
           weight: 400
-        - asset: assets/fonts/Cuprum-Medium.ttf
+        - asset: assets/fonts/cuprum/Cuprum-Medium.ttf
           weight: 500
-        - asset: assets/fonts/Cuprum-Semibold.ttf
+        - asset: assets/fonts/cuprum/Cuprum-Semibold.ttf
           weight: 600
-        - asset: assets/fonts/Cuprum-Bold.ttf
+        - asset: assets/fonts/cuprum/Cuprum-Bold.ttf
           weight: 700
   #
   # For details regarding fonts from package dependencies,

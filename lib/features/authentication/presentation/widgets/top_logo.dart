@@ -68,14 +68,14 @@ class TopLogo extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const IstuSvgPicture(SvgIstuIcons.istuLogoBlack,
-                    width: 130, height: 130),
+                    width: 130, height: 130, color: Colors.white),
                 const SizedBox(width: 34),
                 Text(
                   'ИжГТУ',
                   style: AppTheme.of(context)
                       .textTheme
                       .titleLarge!
-                      .copyWith(fontSize: 32),
+                      .copyWith(fontSize: 40, fontWeight: FontWeight.bold),
                 )
               ],
             ),
