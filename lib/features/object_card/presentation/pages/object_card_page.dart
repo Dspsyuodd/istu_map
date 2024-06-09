@@ -24,11 +24,9 @@ class ObjectCardPage extends StatelessWidget {
         body: Stack(
           children: [
             const ObjecCardImagesView(),
-            SafeArea(
-              child: ObjectCardContent(
-                onRouteCreatePressed: onRouteCreatePressed,
-                showCommentsField: showCommentsField,
-              ),
+            ObjectCardContent(
+              onRouteCreatePressed: onRouteCreatePressed,
+              showCommentsField: showCommentsField,
             ),
           ],
         ),

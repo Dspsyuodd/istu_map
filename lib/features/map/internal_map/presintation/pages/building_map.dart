@@ -6,7 +6,6 @@ import 'package:istu_map/config/enums/object_type.dart';
 import 'package:istu_map/features/app/ui/end_navigarion_drawer.dart';
 import 'package:istu_map/features/authentication/authentication_injection_container.dart';
 import 'package:istu_map/features/map/internal_map/presintation/bloc/building_map_bloc.dart';
-import 'package:istu_map/features/map/internal_map/presintation/widgets/building_map_app_bar.dart';
 import 'package:istu_map/features/map/internal_map/presintation/widgets/floor_select_button.dart';
 import 'package:istu_map/features/map/internal_map/presintation/widgets/object_bottom_sheet.dart';
 import 'package:istu_map/features/map/shared/domain/entities/building.dart';
@@ -41,7 +40,22 @@ class _BuildingMapState extends State<BuildingMap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BuildingMapAppBar(title: widget.building.title),
+      appBar: AppBar(
+        elevation: 4,
+        backgroundColor: AppTheme.of(context).colorScheme.secondary,
+        title: Text(
+          widget.building.title,
+          style: AppTheme.of(context).textTheme.displayLarge,
+        ),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+            size: 15,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
       body: BlocProvider<BuildingMapBloc>(
         create: (context2) {
           var bloc = sl<BuildingMapBloc>();

@@ -39,85 +39,90 @@ class ObjectCardContent extends StatelessWidget {
                     width: 400,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-                  child: state.maybeWhen(
-                    loadingSuccess: (cardContent) {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                cardContent.card.title,
-                                style:
-                                    AppTheme.of(context).textTheme.titleLarge,
-                              ),
-                              InkWell(
-                                child: const Icon(Icons.close),
-                                onTap: () {
-                                  Navigator.of(context).pop();
+                SafeArea(
+                  top: false,
+                  left: false,
+                  right: false,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                    child: state.maybeWhen(
+                      loadingSuccess: (cardContent) {
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  cardContent.card.title,
+                                  style:
+                                      AppTheme.of(context).textTheme.titleLarge,
+                                ),
+                                InkWell(
+                                  child: const Icon(Icons.close),
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  cardContent.card.address,
+                                  style:
+                                      AppTheme.of(context).textTheme.titleSmall,
+                                ),
+                                ElevatedButton(
+                                  onPressed: onRouteCreatePressed,
+                                  child: const Row(
+                                    children: [
+                                      Text('Маршрут'),
+                                      Icon(Icons.route)
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            const Gap(20),
+                            if (cardContent.card.description != null)
+                              Text(cardContent.card.description ??
+                                  "Без описания."),
+                            const Gap(20),
+                            Divider(
+                              color: Colors.white.withOpacity(0.1),
+                            ),
+                            const Text(
+                              'Комментарии',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              cardContent.comments.length.toString() +
+                                  _getCommentsWordByNumber(
+                                      cardContent.comments.length),
+                              style: AppTheme.of(context).textTheme.titleSmall,
+                            ),
+                            Expanded(
+                              child: ListView.builder(
+                                itemCount: cardContent.comments.length,
+                                itemBuilder: (context, index) {
+                                  return CommentView(
+                                    comment: cardContent.comments[
+                                        cardContent.comments.length - index - 1],
+                                  );
                                 },
                               ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                cardContent.card.address,
-                                style:
-                                    AppTheme.of(context).textTheme.titleSmall,
-                              ),
-                              ElevatedButton(
-                                onPressed: onRouteCreatePressed,
-                                child: const Row(
-                                  children: [
-                                    Text('Маршрут'),
-                                    Icon(Icons.route)
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                          const Gap(20),
-                          if (cardContent.card.description != null)
-                            Text(cardContent.card.description ??
-                                "Без описания."),
-                          const Gap(20),
-                          Divider(
-                            color: Colors.white.withOpacity(0.1),
-                          ),
-                          const Text(
-                            'Комментарии',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            cardContent.comments.length.toString() +
-                                _getCommentsWordByNumber(
-                                    cardContent.comments.length),
-                            style: AppTheme.of(context).textTheme.titleSmall,
-                          ),
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount: cardContent.comments.length,
-                              itemBuilder: (context, index) {
-                                return CommentView(
-                                  comment: cardContent.comments[
-                                      cardContent.comments.length - index - 1],
-                                );
-                              },
                             ),
-                          ),
-                          if (showCommentsField) const CommentTextField(),
-                        ],
-                      );
-                    },
-                    orElse: () => const Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.black,
+                            if (showCommentsField) const CommentTextField(),
+                          ],
+                        );
+                      },
+                      orElse: () => const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.black,
+                        ),
                       ),
                     ),
                   ),
