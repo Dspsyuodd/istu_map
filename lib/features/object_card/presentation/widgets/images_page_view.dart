@@ -30,9 +30,22 @@ class _ImagesPageViewState extends State<ImagesPageView> {
           controller: pageController,
           children: widget.images
               .map(
-                (imageBytes) => Image.memory(
-                  imageBytes,
-                  fit: BoxFit.cover,
+                (imageBytes) => GestureDetector(
+                  onTap: () {
+                    showAdaptiveDialog(
+                        barrierDismissible: true,
+                        context: context,
+                        builder: (context) => AlertDialog(
+                              content: Image.memory(
+                                imageBytes,
+                                fit: BoxFit.cover,
+                              ),
+                            ));
+                  },
+                  child: Image.memory(
+                    imageBytes,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               )
               .toList(),
