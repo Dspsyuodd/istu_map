@@ -18,11 +18,11 @@ final class FloorOpened extends BuildingMapEvent {
   List<Object> get props => [buildingId, floorNumber];
 }
 
-final class RouteCreated extends BuildingMapEvent {
+final class InternalRouteCreated extends BuildingMapEvent {
   final String? fromId;
   final String toId;
 
-  const RouteCreated({this.fromId, required this.toId});
+  const InternalRouteCreated({this.fromId, required this.toId});
 
   @override
   List<Object?> get props => [fromId, toId];

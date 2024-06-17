@@ -151,11 +151,19 @@ class _BottomSearchDrawerContentState extends State<BottomSearchDrawerContent> {
                                             builder: (_) => ObjectCardPage(
                                               objectId: e.id,
                                               onRouteCreatePressed: () {
-                                                BlocProvider.of<MapBloc>(
-                                                        context)
-                                                    .add(
-                                                  RouteCreated(to: e.id),
-                                                );
+                                                if (e.type == 0) {
+                                                  BlocProvider.of<MapBloc>(
+                                                          context)
+                                                      .add(
+                                                    RouteCreated(to: e.id),
+                                                  );
+                                                } else if (e.type == 1) {
+                                                  BlocProvider.of<MapBloc>(
+                                                          context)
+                                                      .add(
+                                                    RouteCreatedToObject(e.id),
+                                                  );
+                                                }
                                                 Navigator.pop(context);
                                               },
                                               showCommentsField: state.maybeMap(

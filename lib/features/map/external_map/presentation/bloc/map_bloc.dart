@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:istu_map/features/map/external_map/domain/usecases/get_route_to_lesson.dart';
+import 'package:istu_map/features/map/external_map/domain/usecases/get_route_to_object.dart';
 import 'package:istu_map/features/user/domain/entities/lesson.dart';
 import '../../../../../core/errors/failure.dart';
 import '../../../../../core/domain/usecases/usecase.dart';
@@ -22,22 +23,39 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   final LoadMap loadMap;
   final GeopositionRepository geopositionRepository;
   final GetRouteToLesson getRouteToLesson;
+  final GetRouteToObject getRouteToObject;
 
   List<Building> _buildings = [];
   ExternalRoute? _route;
   String? _routeEndpoint;
   var _currentPosition = const LatLng(0.0, 0.0);
   Building? _nearestBuillding;
+  String? auditoryEndpointId;
 
   MapBloc(this.getRoute, this.loadMap, this.geopositionRepository,
-      this.getRouteToLesson)
+      this.getRouteToLesson, this.getRouteToObject)
       : super(const MapState.initial()) {
     on<MapEvent>((event, emit) async {
+      if (event is RouteCreatedToObject) {
+        emit(MapState(_buildings, _route, MapStatus.loading, _currentPosition,
+            _nearestBuillding, auditoryEndpointId));
+        var routeEither = await getRouteToObject(
+            GetRouteToObjectParams(event.objectId, _currentPosition));
+        routeEither.fold(
+          (l) => _emitError(l, emit),
+          (r) {
+            _route = r;
+            auditoryEndpointId = event.objectId;
+            emit(MapState(_buildings, _route, MapStatus.success,
+                _currentPosition, _nearestBuillding, auditoryEndpointId));
+          },
+        );
+      }
       log(event.runtimeType.toString());
       if (event is RouteRemoved) {
         _route = null;
         emit(MapState(_buildings, _route, MapStatus.success, _currentPosition,
-              _nearestBuillding));
+            _nearestBuillding, auditoryEndpointId));
       }
       if (event is ExternalLessonSelected) {
         if (_route != null) {
@@ -57,7 +75,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         if (_nearestBuillding != event.building) {
           _nearestBuillding = event.building;
           emit(MapState(_buildings, _route, MapStatus.success, _currentPosition,
-              event.building));
+              event.building, auditoryEndpointId));
         }
       }
 
@@ -66,8 +84,8 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         position.fold(
           (l) => _emitError(l, emit),
           (r) {
-            emit(MapState(
-                _buildings, _route, MapStatus.initial, r, _nearestBuillding));
+            emit(MapState(_buildings, _route, MapStatus.initial, r,
+                _nearestBuillding, auditoryEndpointId));
           },
         );
 
@@ -105,7 +123,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       }
       if (event is MapLoaded) {
         emit(MapState(_buildings, _route, MapStatus.loading, _currentPosition,
-            _nearestBuillding));
+            _nearestBuillding, auditoryEndpointId));
         var result = await loadMap(NoParams());
 
         result.fold(
@@ -113,7 +131,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
           (r) {
             _buildings = r;
             emit(MapState(_buildings, _route, MapStatus.success,
-                _currentPosition, _nearestBuillding));
+                _currentPosition, _nearestBuillding, auditoryEndpointId));
           },
         );
       }
@@ -126,7 +144,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
   Future<void> _createRouteToLesson(Lesson to, Emitter<MapState> emit) async {
     emit(MapState(_buildings, _route, MapStatus.loading, _currentPosition,
-        _nearestBuillding));
+        _nearestBuillding, auditoryEndpointId));
     var route =
         await getRouteToLesson(GetRouteToLessonParams(to, _currentPosition));
     route.fold(
@@ -135,14 +153,14 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         _route = r.$1;
         _routeEndpoint = r.$2.id;
         emit(MapState(_buildings, _route, MapStatus.success, _currentPosition,
-            _nearestBuillding));
+            _nearestBuillding, auditoryEndpointId));
       },
     );
   }
 
   Future<void> _createRoute(String to, Emitter<MapState> emit) async {
     emit(MapState(_buildings, _route, MapStatus.loading, _currentPosition,
-        _nearestBuillding));
+        _nearestBuillding, auditoryEndpointId));
     var result = await getRoute(
       GetExternalRouteParams(
         from: LatLng(_currentPosition.latitude, _currentPosition.longitude),
@@ -156,7 +174,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         _route = r;
         _routeEndpoint = to;
         emit(MapState(_buildings, _route, MapStatus.success, _currentPosition,
-            _nearestBuillding));
+            _nearestBuillding, auditoryEndpointId));
       },
     );
   }
@@ -176,6 +194,6 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       log(l.message);
     }
     emit(MapState(_buildings, _route, MapStatus.failure, _currentPosition,
-        _nearestBuillding));
+        _nearestBuillding, auditoryEndpointId));
   }
 }

@@ -64,7 +64,7 @@ class BuildingMapBloc extends Bloc<BuildingMapEvent, BuildingMapState> {
           },
         );
       }
-      if (event is RouteCreated) {
+      if (event is InternalRouteCreated) {
         emit(
           BuildingMapState(
             BuildingMapStatus.loading,

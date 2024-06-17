@@ -1,4 +1,5 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:istu_map/features/map/shared/domain/entities/waypoint.dart';
 import '../../../../../core/errors/failure.dart';
 import '../../../../../core/errors/server_errors_handler.dart';
 import '../datasources/building_data_source.dart';
@@ -25,5 +26,11 @@ class BuildingRepositoryImpl extends ExceptionsHandler
   Future<Either<Failure, String>> getBuildingIdByObjectId(String objectId) {
     return getEither(() =>
         _buildingApi.getObject(objectId).then((value) => value.buildingId));
+  }
+
+  @override
+  Future<Either<Failure, Waypoint>> getObject(String objectId) {
+    return getEither(() =>
+        _buildingApi.getObject(objectId));
   }
 }

@@ -62,3 +62,12 @@ class RouteRemoved extends MapEvent {
   @override
   List<Object> get props => [];
 }
+
+final class RouteCreatedToObject extends MapEvent {
+  final String objectId;
+
+  const RouteCreatedToObject(this.objectId);
+
+  @override
+  List<Object?> get props => [objectId];
+}

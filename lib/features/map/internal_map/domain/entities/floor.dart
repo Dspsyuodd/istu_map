@@ -8,11 +8,11 @@ part 'floor.g.dart';
 @Freezed()
 class Floor with _$Floor {
   const factory Floor({
-    required String buildingId,
-    required String floorId,
-    required int floorNumber,
-    required List<Waypoint> objects,
-    required List<Edge> edges,
+    required final String buildingId,
+    required final String floorId,
+    required final int floorNumber,
+    required final List<Waypoint> objects,
+    required final List<Edge> edges,
   }) = _Floor;
 
   factory Floor.fromJson(Map<String, dynamic> json) => _$FloorFromJson(json);

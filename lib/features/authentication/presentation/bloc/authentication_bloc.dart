@@ -44,7 +44,7 @@ class AuthenticationBloc
       }
       if (event is InitEvent) {
         emit(AuthenticationInitial());
-        var userData = await initialize();
+        var userData = await initialize(NoParams());
         userData.fold(
           (l) => _emitError(l, emit),
           (r) => emit(const LoginSuccess()),

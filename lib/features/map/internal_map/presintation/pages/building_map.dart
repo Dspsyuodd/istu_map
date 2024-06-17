@@ -5,6 +5,7 @@ import 'package:istu_map/config/enums/object_type.dart';
 import 'package:istu_map/config/theme/app_theme/app_theme.dart';
 import 'package:istu_map/features/app/ui/end_navigarion_drawer.dart';
 import 'package:istu_map/features/authentication/authentication_injection_container.dart';
+import 'package:istu_map/features/map/external_map/presentation/bloc/map_bloc.dart';
 import 'package:istu_map/features/map/internal_map/presintation/bloc/building_map_bloc.dart';
 import 'package:istu_map/features/map/internal_map/presintation/widgets/floor_select_button.dart';
 import 'package:istu_map/features/map/internal_map/presintation/widgets/object_bottom_sheet.dart';
@@ -23,6 +24,7 @@ class BuildingMap extends StatefulWidget {
 
 class _BuildingMapState extends State<BuildingMap> {
   int? initialIndex;
+  String? initiaId;
 
   @override
   void initState() {
@@ -35,6 +37,7 @@ class _BuildingMapState extends State<BuildingMap> {
     if (selectedLesson != null && selectedLesson != -1) {
       initialIndex = selectedLesson;
     }
+    initiaId = BlocProvider.of<MapBloc>(context).state.auditoryEndpointId;
     super.initState();
   }
 
@@ -75,12 +78,19 @@ class _BuildingMapState extends State<BuildingMap> {
               listener: (context, state) {
                 if (state.status != BuildingMapStatus.initial) return;
                 if (initialIndex != null) {
-                  BlocProvider.of<BuildingMapBloc>(context).add(RouteCreated(
+                  BlocProvider.of<BuildingMapBloc>(context)
+                      .add(InternalRouteCreated(
                     toId: BlocProvider.of<UserBloc>(context).state.whenOrNull(
                       success: (user, shedule, selectedLesson) {
                         return shedule[initialIndex!].audienceId;
                       },
                     )!,
+                  ));
+                }
+                if (initiaId != null) {
+                  BlocProvider.of<BuildingMapBloc>(context)
+                      .add(InternalRouteCreated(
+                    toId: initiaId!,
                   ));
                 }
               },
@@ -175,7 +185,10 @@ class _BuildingMapState extends State<BuildingMap> {
                     options: ImageMapOptions(
                       maxScale: 8,
                       minScale: 0.7,
-                      backgroundColor: AppTheme.of(context).colorScheme.primary.withOpacity(0.8),
+                      backgroundColor: AppTheme.of(context)
+                          .colorScheme
+                          .primary
+                          .withOpacity(0.8),
                     ),
                   ),
                   Align(
@@ -187,6 +200,8 @@ class _BuildingMapState extends State<BuildingMap> {
                             (e) => Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: FloorSelectButton(
+                                isSelected: state.floor != null &&
+                                    state.floor!.floorNumber == e.floorNumber,
                                 text: e.floorNumber.toString(),
                                 onTap: () {
                                   if (state.floor != null &&

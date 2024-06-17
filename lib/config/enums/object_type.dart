@@ -10,7 +10,9 @@ enum ObjectType {
   elevator._('Лифт', Icons.elevator),
   entrance._('Вход', Icons.door_front_door),
   cashRegister._('Касса', Icons.currency_ruble),
-  showplace._('Достопримечаетльность', Icons.museum);
+  showplace._('Достопримечаетльность', Icons.museum),
+  wardrobe._('Гардероб', Icons.checkroom),
+  sportArea._('Спортзал', Icons.fitness_center);
 
   final String name;
   final IconData iconData;

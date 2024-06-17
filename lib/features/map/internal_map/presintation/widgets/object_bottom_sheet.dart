@@ -26,7 +26,7 @@ class ObjectBottomSheet extends StatelessWidget {
               builder: (context, state) {
                 return MapBottomSheetButton(
                   color: AppTheme.of(context).colorScheme.primary,
-                  text: "Комментарии",
+                  text: "Описание",
                   icon: const Icon(Icons.chat),
                   onPressed: () {
                     Navigator.of(context).push(
@@ -35,7 +35,7 @@ class ObjectBottomSheet extends StatelessWidget {
                           objectId: id,
                           onRouteCreatePressed: () {
                             BlocProvider.of<BuildingMapBloc>(context).add(
-                              RouteCreated(toId: id),
+                              InternalRouteCreated(toId: id),
                             );
                             Navigator.pop(context);
                           },
@@ -57,7 +57,7 @@ class ObjectBottomSheet extends StatelessWidget {
               icon: const Icon(Icons.route),
               onPressed: () {
                 BlocProvider.of<BuildingMapBloc>(context).add(
-                  RouteCreated(toId: id),
+                  InternalRouteCreated(toId: id),
                 );
                 Navigator.pop(context);
               },

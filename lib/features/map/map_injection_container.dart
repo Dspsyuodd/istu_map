@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:istu_map/features/map/external_map/domain/usecases/get_route_to_lesson.dart';
+import 'package:istu_map/features/map/external_map/domain/usecases/get_route_to_object.dart';
 import 'package:istu_map/features/map/internal_map/data/datasources/floor_api.dart';
 import 'package:istu_map/features/shared/data/datasources/image_api.dart';
 import 'package:istu_map/features/map/internal_map/data/datasources/image_local_data_source.dart';
@@ -25,9 +26,10 @@ import 'shared/domain/repositories/building_repository.dart';
 final sl = GetIt.instance;
 
 void initMapDependencies() {
-  sl.registerFactory(() => MapBloc(sl(), sl(), sl(), sl()));
+  sl.registerFactory(() => MapBloc(sl(), sl(), sl(), sl(), sl()));
   sl.registerFactory(() => BuildingMapBloc(sl(), sl()));
 
+  sl.registerLazySingleton(() => GetRouteToObject(sl(), sl()));
   sl.registerLazySingleton(() => GetRouteToLesson(sl(), sl()));
   sl.registerLazySingleton(() => GetExternalRoute(sl()));
   sl.registerLazySingleton(() => LoadMap(sl()));

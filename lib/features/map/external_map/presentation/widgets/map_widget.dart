@@ -28,6 +28,8 @@ class _IstuMapWidgetState extends State<IstuMapWidget>
   final mapController = MapController();
   bool isZoomIn = false;
 
+  
+
   @override
   void initState() {
     animationController = AnimationController(

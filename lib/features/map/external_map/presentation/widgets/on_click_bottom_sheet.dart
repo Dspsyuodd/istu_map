@@ -27,7 +27,7 @@ class OnClickBottomSheet extends StatelessWidget {
               builder: (context, state) {
                 return MapBottomSheetButton(
                   color: AppTheme.of(context).colorScheme.primary,
-                  text: "Комментарии",
+                  text: "Описание",
                   icon: const Icon(Icons.chat),
                   onPressed: () {
                     Navigator.of(context).push(
@@ -73,8 +73,11 @@ class OnClickBottomSheet extends StatelessWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (_) => BlocProvider.value(
-                      value: BlocProvider.of<UserBloc>(context),
-                      child: BuildingMap(building: building),
+                      value: BlocProvider.of<MapBloc>(context),
+                      child: BlocProvider.value(
+                        value: BlocProvider.of<UserBloc>(context),
+                        child: BuildingMap(building: building),
+                      ),
                     ),
                   ),
                 );
