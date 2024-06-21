@@ -24,7 +24,7 @@ class MapBottomSheet extends StatelessWidget {
           ),
         ],
       ),
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width,
       child: Padding(
         padding: const EdgeInsets.all(30),
         child: Column(
@@ -36,9 +36,12 @@ class MapBottomSheet extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    title,
-                    style: AppTheme.of(context).textTheme.displayLarge,
+                  Expanded(
+                    child: Text(
+                      title,
+                      style: AppTheme.of(context).textTheme.displayLarge,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                   IconButton(
                     color: Colors.grey,
@@ -53,7 +56,13 @@ class MapBottomSheet extends StatelessWidget {
                 ],
               ),
             ),
-            if (content != null) content!,
+            if (content != null)
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: MediaQuery.of(context).size.width - 60,
+                ),
+                child: content!,
+              ),
           ],
         ),
       ),
@@ -62,13 +71,13 @@ class MapBottomSheet extends StatelessWidget {
 }
 
 class MapBottomSheetButton extends StatelessWidget {
-  const MapBottomSheetButton(
-      {Key? key,
-      required this.color,
-      this.onPressed,
-      this.icon,
-      required this.text})
-      : super(key: key);
+  const MapBottomSheetButton({
+    Key? key,
+    required this.color,
+    this.onPressed,
+    this.icon,
+    required this.text,
+  }) : super(key: key);
   final Color color;
   final void Function()? onPressed;
   final Widget? icon;

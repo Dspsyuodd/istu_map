@@ -20,10 +20,17 @@ final class FloorOpened extends BuildingMapEvent {
 
 final class InternalRouteCreated extends BuildingMapEvent {
   final String? fromId;
-  final String toId;
+  final String? toId;
 
-  const InternalRouteCreated({this.fromId, required this.toId});
+  const InternalRouteCreated({this.fromId, this.toId});
 
   @override
   List<Object?> get props => [fromId, toId];
+}
+
+final class RouteCleared extends BuildingMapEvent {
+  const RouteCleared();
+
+  @override
+  List<Object?> get props => [];
 }

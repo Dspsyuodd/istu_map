@@ -17,53 +17,73 @@ class ObjectBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return MapBottomSheet(
       title: title,
-      content: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            BlocBuilder<UserBloc, UserState>(
-              builder: (context, state) {
-                return MapBottomSheetButton(
-                  color: AppTheme.of(context).colorScheme.primary,
-                  text: "Описание",
-                  icon: const Icon(Icons.chat),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => ObjectCardPage(
-                          objectId: id,
-                          onRouteCreatePressed: () {
-                            BlocProvider.of<BuildingMapBloc>(context).add(
-                              InternalRouteCreated(toId: id),
-                            );
-                            Navigator.pop(context);
-                          },
-                          showCommentsField: state.maybeMap(
-                            success: (value) => value.user.role == 2,
-                            orElse: () => false,
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: MapBottomSheetButton(
+                    color: AppTheme.of(context).colorScheme.primary,
+                    text: "Описание",
+                    icon: const Icon(Icons.chat),
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => ObjectCardPage(
+                            objectId: id,
+                            onRouteCreatePressed: () {
+                              BlocProvider.of<BuildingMapBloc>(context).add(
+                                InternalRouteCreated(toId: id),
+                              );
+                              Navigator.pop(context);
+                            },
+                            showCommentsField:
+                                BlocProvider.of<UserBloc>(context).state.maybeMap(
+                                      success: (value) => value.user.role == 2,
+                                      orElse: () => false,
+                                    ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                );
-              },
+                      );
+                    },
+                  ),
+                ),
+                const Gap(10),
+                Expanded(
+                  child: MapBottomSheetButton(
+                    color: AppTheme.of(context).colorScheme.secondary,
+                    text: "Маршрут",
+                    icon: const Icon(Icons.route),
+                    onPressed: () {
+                      BlocProvider.of<BuildingMapBloc>(context).add(
+                        InternalRouteCreated(toId: id),
+                      );
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+              ],
             ),
-            const Gap(10),
-            MapBottomSheetButton(
+          ),
+          SizedBox(
+            width: double.infinity,
+            child: MapBottomSheetButton(
               color: AppTheme.of(context).colorScheme.secondary,
-              text: "Маршрут",
+              text: "Маршрут отсюда",
               icon: const Icon(Icons.route),
               onPressed: () {
                 BlocProvider.of<BuildingMapBloc>(context).add(
-                  InternalRouteCreated(toId: id),
+                  InternalRouteCreated(fromId: id),
                 );
                 Navigator.pop(context);
               },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:istu_map/config/theme/app_theme/app_theme.dart';
 
 class ObjectMarker extends StatelessWidget {
-  const ObjectMarker({Key? key, required this.icon, this.title})
+  const ObjectMarker(
+      {Key? key, required this.icon, this.title, this.isSelected = false})
       : super(key: key);
   final IconData icon;
   final String? title;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,9 @@ class ObjectMarker extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: AppTheme.of(context).colorScheme.secondary,
+            color: isSelected
+                ? AppTheme.of(context).colorScheme.primary
+                : AppTheme.of(context).colorScheme.secondary,
           ),
           padding: const EdgeInsets.all(5),
           child: Icon(

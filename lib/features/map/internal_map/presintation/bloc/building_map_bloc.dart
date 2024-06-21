@@ -19,19 +19,23 @@ class BuildingMapBloc extends Bloc<BuildingMapEvent, BuildingMapState> {
   Floor? _currentFloor;
   InternalRoute? _route;
   Uint8List? _currentFloorImage;
-  String? enterId;
+  String? _startId;
+  String? _endId;
 
   BuildingMapBloc(this.createRoute, this.loadFloor)
       : super(const BuildingMapState.initial()) {
     on<BuildingMapEvent>((event, emit) async {
+      if (event is RouteCleared) {
+        _startId = null;
+        _endId = null;
+        _route = null;
+        emit(
+          _getState(BuildingMapStatus.success),
+        );
+      }
       if (event is FloorOpened) {
         emit(
-          BuildingMapState(
-            BuildingMapStatus.loading,
-            _currentFloor,
-            _currentFloorImage,
-            _route,
-          ),
+          _getState(BuildingMapStatus.loading),
         );
         var newFloor = await loadFloor(
           FloorLoadParams(
@@ -44,6 +48,12 @@ class BuildingMapBloc extends Bloc<BuildingMapEvent, BuildingMapState> {
           (l) => _emitError(l, emit),
           (r) {
             _currentFloorImage = r.$2;
+            for (var waypoint in r.$1.objects) {
+              if (waypoint.type == 7) {
+                _startId = waypoint.id;
+                break;
+              }
+            }
             emit(
               BuildingMapState(
                 _currentFloor == null
@@ -52,49 +62,56 @@ class BuildingMapBloc extends Bloc<BuildingMapEvent, BuildingMapState> {
                 r.$1,
                 _currentFloorImage,
                 _route,
+                _startId,
+                _endId,
               ),
             );
             _currentFloor = r.$1;
-            for (var waypoint in r.$1.objects) {
-              if (waypoint.type == 7) {
-                enterId = waypoint.id;
-                break;
-              }
-            }
           },
         );
       }
       if (event is InternalRouteCreated) {
         emit(
-          BuildingMapState(
-            BuildingMapStatus.loading,
-            _currentFloor,
-            _currentFloorImage,
-            _route,
-          ),
+          _getState(BuildingMapStatus.loading),
         );
-
+        if (event.fromId != null) {
+          _startId = event.fromId;
+        }
+        if (event.toId != null) {
+          _endId = event.toId;
+        }
+        if (_startId == null || _endId == null) {
+          emit(
+            _getState(BuildingMapStatus.success),
+          );
+          return;
+        }
         var route = await createRoute(CreateRouteParams(
-          fromId: enterId!,
-          toId: event.fromId ?? event.toId,
+          fromId: _startId!,
+          toId: _endId!,
         ));
+
         route.fold(
           (l) => _emitError(l, emit),
           (r) {
             _route = r;
             emit(
-              BuildingMapState(
-                BuildingMapStatus.success,
-                _currentFloor,
-                _currentFloorImage,
-                _route,
-              ),
+              _getState(BuildingMapStatus.success),
             );
           },
         );
       }
     });
   }
+
+  BuildingMapState _getState(BuildingMapStatus status) => BuildingMapState(
+        status,
+        _currentFloor,
+        _currentFloorImage,
+        _route,
+        _startId,
+        _endId,
+      );
 
   void _emitError(Failure l, Emitter<BuildingMapState> emit) {
     if (l is UnknownFailure) {
@@ -104,6 +121,15 @@ class BuildingMapBloc extends Bloc<BuildingMapEvent, BuildingMapState> {
     if (l is ServerFailure) {
       log(l.message);
     }
-    emit(BuildingMapState(BuildingMapStatus.success, _currentFloor, _currentFloorImage, _route));
+    emit(
+      BuildingMapState(
+        BuildingMapStatus.success,
+        _currentFloor,
+        _currentFloorImage,
+        _route,
+        _startId,
+        _endId,
+      ),
+    );
   }
 }

@@ -18,14 +18,13 @@ class OnClickBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return MapBottomSheet(
       title: building.title,
-      content: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            BlocBuilder<UserBloc, UserState>(
-              builder: (context, state) {
-                return MapBottomSheetButton(
+      content: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: MapBottomSheetButton(
                   color: AppTheme.of(context).colorScheme.primary,
                   text: "Описание",
                   icon: const Icon(Icons.chat),
@@ -40,19 +39,44 @@ class OnClickBottomSheet extends StatelessWidget {
                             );
                             Navigator.pop(context);
                           },
-                          showCommentsField: state.maybeMap(
-                            success: (value) => value.user.role == 2,
-                            orElse: () => false,
+                          showCommentsField:
+                              BlocProvider.of<UserBloc>(context).state.maybeMap(
+                                    success: (value) => value.user.role == 2,
+                                    orElse: () => false,
+                                  ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const Gap(10),
+              Expanded(
+                child: MapBottomSheetButton(
+                  color: AppTheme.of(context).colorScheme.primary,
+                  text: "Карта",
+                  icon: const Icon(Icons.map),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => BlocProvider.value(
+                          value: BlocProvider.of<MapBloc>(context),
+                          child: BlocProvider.value(
+                            value: BlocProvider.of<UserBloc>(context),
+                            child: BuildingMap(building: building),
                           ),
                         ),
                       ),
                     );
                   },
-                );
-              },
-            ),
-            const Gap(10),
-            MapBottomSheetButton(
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            width: double.infinity,
+            child: MapBottomSheetButton(
               color: AppTheme.of(context).colorScheme.secondary,
               text: "Маршрут",
               icon: const Icon(Icons.route),
@@ -63,28 +87,8 @@ class OnClickBottomSheet extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
-            const Gap(10),
-            MapBottomSheetButton(
-              color: AppTheme.of(context).colorScheme.primary,
-              text: "Карта",
-              icon: const Icon(Icons.map),
-              onPressed: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => BlocProvider.value(
-                      value: BlocProvider.of<MapBloc>(context),
-                      child: BlocProvider.value(
-                        value: BlocProvider.of<UserBloc>(context),
-                        child: BuildingMap(building: building),
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

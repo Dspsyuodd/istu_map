@@ -17,31 +17,26 @@ class CloseToBuildingBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return MapBottomSheet(
       title: building.title,
-      content: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            MapBottomSheetButton(
-              color: AppTheme.of(context).colorScheme.primary,
-              text: "Карта",
-              icon: const Icon(Icons.map),
-              onPressed: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => BlocProvider.value(
-                      value: BlocProvider.of<MapBloc>(context),
-                      child: BlocProvider.value(
-                        value: BlocProvider.of<UserBloc>(context),
-                        child: BuildingMap(building: building),
-                      ),
-                    ),
+      content: SizedBox(
+        width: double.infinity,
+        child: MapBottomSheetButton(
+          color: AppTheme.of(context).colorScheme.primary,
+          text: "Карта",
+          icon: const Icon(Icons.map),
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => BlocProvider.value(
+                  value: BlocProvider.of<MapBloc>(context),
+                  child: BlocProvider.value(
+                    value: BlocProvider.of<UserBloc>(context),
+                    child: BuildingMap(building: building),
                   ),
-                );
-              },
-            ),
-          ],
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

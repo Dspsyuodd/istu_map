@@ -43,36 +43,55 @@ class _BuildingMapState extends State<BuildingMap> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 10,
-        shadowColor: Colors.black,
-        backgroundColor: AppTheme.of(context).colorScheme.surface,
-        title: Text(
-          widget.building.title,
-          style: AppTheme.of(context).textTheme.displayLarge,
-        ),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
-            size: 15,
-          ),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
-      body: BlocProvider<BuildingMapBloc>(
-        create: (context2) {
-          var bloc = sl<BuildingMapBloc>();
-          bloc.add(FloorOpened(
-            widget.building.id,
-            widget.building.floors.first.floorNumber,
-            widget.building.floors.first.floorId,
-          ));
+    return BlocProvider<BuildingMapBloc>(
+      create: (context2) {
+        var bloc = sl<BuildingMapBloc>();
+        bloc.add(FloorOpened(
+          widget.building.id,
+          widget.building.floors.first.floorNumber,
+          widget.building.floors.first.floorId,
+        ));
 
-          return bloc;
-        },
-        child: MultiBlocListener(
+        return bloc;
+      },
+      child: Scaffold(
+        floatingActionButton: BlocBuilder<BuildingMapBloc, BuildingMapState>(
+          builder: (context, state) {
+            return Visibility(
+              visible: state.route != null,
+              child: FloatingActionButton(
+                backgroundColor: AppTheme.of(context).colorScheme.surface,
+                child: Icon(
+                  Icons.close,
+                  color: AppTheme.of(context).iconTheme.color,
+                ),
+                onPressed: () {
+                  BlocProvider.of<BuildingMapBloc>(context).add(
+                    const RouteCleared(),
+                  );
+                },
+              ),
+            );
+          },
+        ),
+        appBar: AppBar(
+          elevation: 10,
+          shadowColor: Colors.black,
+          backgroundColor: AppTheme.of(context).colorScheme.surface,
+          title: Text(
+            widget.building.title,
+            style: AppTheme.of(context).textTheme.displayLarge,
+          ),
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: AppTheme.of(context).iconTheme.color,
+              size: 15,
+            ),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ),
+        body: MultiBlocListener(
           listeners: [
             BlocListener<BuildingMapBloc, BuildingMapState>(
               listener: (context, state) {
@@ -138,6 +157,8 @@ class _BuildingMapState extends State<BuildingMap> {
                           );
                         },
                         child: ObjectMarker(
+                          isSelected:
+                              e.id == state.endId || e.id == state.startId,
                           icon: ObjectType.values[e.type].iconData,
                           title: switch (ObjectType.values[e.type]) {
                             ObjectType.auditorium ||
