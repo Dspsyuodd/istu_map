@@ -84,7 +84,10 @@ class _ImagesPageViewState extends State<ImagesPageView> {
                 color: Colors.white,
               ),
               const Gap(5),
-              Text(widget.images.length.toString())
+              Text(
+                widget.images.length.toString(),
+                style: const TextStyle(color: Colors.white),
+              )
             ],
           ),
         ),

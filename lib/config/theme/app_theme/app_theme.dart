@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'color_themes.dart';
 
 import 'dart:async';
+
 enum AppColorThemes {
   light,
   dark,
 }
+
 class AppTheme extends StatefulWidget {
   const AppTheme({
     super.key,
@@ -35,17 +38,30 @@ class AppTheme extends StatefulWidget {
 
 class _AppThemeState extends State<AppTheme> {
   late ThemeData _appTheme;
+  late SharedPreferences prefs;
+
+  void initTheme() async {
+    prefs = await SharedPreferences.getInstance();
+    var colorTheme = prefs.getInt('theme') ?? 0;
+    setState(() {
+      _appTheme = AppColorTheme.getTheme(AppColorThemes.values[colorTheme]);
+    });
+  }
 
   @override
   void initState() {
-    super.initState();
     _appTheme = AppColorTheme.getTheme(AppColorThemes.dark);
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      initTheme();
+    });
   }
 
   Future<void> _changeTheme(AppColorThemes newTheme) async {
     setState(() {
       _appTheme = AppColorTheme.getTheme(newTheme);
     });
+    prefs.setInt('theme', newTheme.index);
   }
 
   @override

@@ -3,7 +3,7 @@ import 'package:istu_map/features/map/external_map/domain/usecases/get_route_to_
 import 'package:istu_map/features/map/external_map/domain/usecases/get_route_to_object.dart';
 import 'package:istu_map/features/map/internal_map/data/datasources/floor_api.dart';
 import 'package:istu_map/features/shared/data/datasources/image_api.dart';
-import 'package:istu_map/features/map/internal_map/data/datasources/image_local_data_source.dart';
+import 'package:istu_map/features/shared/data/datasources/image_local_data_source.dart';
 import 'package:istu_map/features/map/internal_map/data/repositories/floor_repository_impl.dart';
 import 'package:istu_map/features/shared/data/repositories/image_repository_impl.dart';
 import 'package:istu_map/features/map/internal_map/domain/repositories/floor_repository.dart';

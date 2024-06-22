@@ -35,8 +35,9 @@ class AuthenticationTextField extends StatelessWidget {
             autofillHints: const [AutofillHints.email],
             decoration: InputDecoration(
               errorText: errorText,
-              enabledBorder: const UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white),
+              enabledBorder: UnderlineInputBorder(
+                borderSide:
+                    BorderSide(color: AppTheme.of(context).iconTheme.color!),
               ),
             ),
           ),

@@ -55,15 +55,10 @@ class BuildingMapBloc extends Bloc<BuildingMapEvent, BuildingMapState> {
               }
             }
             emit(
-              BuildingMapState(
+              _getState(
                 _currentFloor == null
                     ? BuildingMapStatus.initial
                     : BuildingMapStatus.success,
-                r.$1,
-                _currentFloorImage,
-                _route,
-                _startId,
-                _endId,
               ),
             );
             _currentFloor = r.$1;
