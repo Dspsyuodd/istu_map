@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -20,6 +22,7 @@ class Authentication extends StatelessWidget {
       create: (_) => sl<AuthenticationBloc>()..add(const InitEvent()),
       child: BlocListener<AuthenticationBloc, AuthenticationState>(
         listener: (context, state) async {
+          log(state.runtimeType.toString());
           if (state is LoginSuccess) {
             await initGeolocation();
             if (!context.mounted) return;

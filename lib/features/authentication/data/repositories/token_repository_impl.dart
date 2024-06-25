@@ -19,7 +19,9 @@ class TokenRepositoryImpl extends ExceptionsHandler implements TokenRepository {
   @override
   Future<void> clearStorage() async {
     _tokens.clear();
-    return await _storage.deleteAll();
+    await _storage.delete(key: 'AccessToken');
+    await _storage.delete(key: 'RefreshToken');
+    return;
   }
 
   @override

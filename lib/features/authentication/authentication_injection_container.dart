@@ -33,5 +33,9 @@ void initAuthenticationDependencies() {
 
   sl.registerLazySingleton(() => AuthenticationApi(sl()));
 
-  sl.registerLazySingleton(() => const FlutterSecureStorage());
+  sl.registerLazySingleton(() => const FlutterSecureStorage(
+        aOptions: AndroidOptions(
+          encryptedSharedPreferences: true,
+        ),
+      ));
 }

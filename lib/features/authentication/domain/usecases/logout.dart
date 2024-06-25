@@ -10,6 +10,7 @@ class Logout extends Usecase<Future<void>, NoParams> {
 
   @override
   Future<Either<Failure, Future<void>>> call(NoParams params) async {
-    return right(repository.clearStorage());
+    await repository.clearStorage();
+    return right(Future.value());
   }
 }
