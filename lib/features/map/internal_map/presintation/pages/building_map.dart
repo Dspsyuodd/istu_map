@@ -75,7 +75,6 @@ class _BuildingMapState extends State<BuildingMap> {
           widget.building.floors.first.floorNumber,
           widget.building.floors.first.floorId,
         ));
-
         return bloc;
       },
       child: Scaffold(

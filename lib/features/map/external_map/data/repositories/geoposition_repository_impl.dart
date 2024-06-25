@@ -1,15 +1,15 @@
 import 'dart:async';
 
 import 'package:fpdart/fpdart.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:location/location.dart';
 
 import '../../../../../core/errors/failure.dart';
 import '../../domain/repositories/geoposition_repository.dart';
 
 class GeopositionRepositoryImpl implements GeopositionRepository {
   GeopositionRepositoryImpl();
-  final List<StreamSubscription<Position>> _subscribtions = [];
+  final List<StreamSubscription<LocationData>> _subscribtions = [];
 
   @override
   void dispose() {
@@ -20,8 +20,8 @@ class GeopositionRepositoryImpl implements GeopositionRepository {
 
   @override
   void addListener(void Function(Either<Failure, LatLng>) listener) {
-    var subscription = Geolocator.getPositionStream().listen((position) {
-      var latlng = LatLng(position.latitude, position.longitude);
+    var subscription = Location().onLocationChanged.listen((position) {
+      var latlng = LatLng(position.latitude ?? 0, position.longitude ?? 0);
       listener(Right(latlng));
     });
 
@@ -30,7 +30,7 @@ class GeopositionRepositoryImpl implements GeopositionRepository {
 
   @override
   Future<Either<Failure, LatLng>> getCurrentPosition() async {
-    var position = await Geolocator.getCurrentPosition();
-    return Right(LatLng(position.latitude, position.longitude));
+    var position = await Location().getLocation();
+    return Right(LatLng(position.latitude ?? 0, position.longitude ?? 0));
   }
 }
