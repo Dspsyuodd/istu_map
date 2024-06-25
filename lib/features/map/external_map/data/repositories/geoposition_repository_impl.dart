@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:fpdart/fpdart.dart';
 import 'package:geolocator/geolocator.dart';
@@ -22,6 +23,7 @@ class GeopositionRepositoryImpl implements GeopositionRepository {
   void addListener(void Function(Either<Failure, LatLng>) listener) {
     var subscription = Geolocator.getPositionStream().listen((position) {
       var latlng = LatLng(position.latitude, position.longitude);
+      print(latlng.toString());
       listener(Right(latlng));
     });
 
@@ -31,6 +33,7 @@ class GeopositionRepositoryImpl implements GeopositionRepository {
   @override
   Future<Either<Failure, LatLng>> getCurrentPosition() async {
     var position = await Geolocator.getCurrentPosition();
+    print(position.toString());
     return Right(LatLng(position.latitude, position.longitude));
   }
 }

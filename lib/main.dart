@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'features/app/ui/app.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   final uncaughtExceptionsController = StreamController<void>.broadcast();
 
   PlatformDispatcher.instance.onError = (error, stackTrace) {
