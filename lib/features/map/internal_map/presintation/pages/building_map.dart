@@ -43,6 +43,30 @@ class _BuildingMapState extends State<BuildingMap> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.building.floors.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(
+          elevation: 10,
+          shadowColor: Colors.black,
+          backgroundColor: AppTheme.of(context).colorScheme.surface,
+          title: Text(
+            widget.building.title,
+            style: AppTheme.of(context).textTheme.displayLarge,
+          ),
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: AppTheme.of(context).iconTheme.color,
+              size: 15,
+            ),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ),
+        body: Center(
+          child: Text('Нет данных', style: AppTheme.of(context).textTheme.displayLarge,),
+        ),
+      );
+    }
     return BlocProvider<BuildingMapBloc>(
       create: (context2) {
         var bloc = sl<BuildingMapBloc>();
@@ -182,6 +206,7 @@ class _BuildingMapState extends State<BuildingMap> {
                       .toList(),
                 );
               }
+
               return Stack(
                 children: [
                   ImageMap(

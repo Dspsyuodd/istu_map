@@ -28,8 +28,6 @@ class _IstuMapWidgetState extends State<IstuMapWidget>
   final mapController = MapController();
   bool isZoomIn = false;
 
-  
-
   @override
   void initState() {
     animationController = AnimationController(
@@ -121,32 +119,49 @@ class _IstuMapWidgetState extends State<IstuMapWidget>
               BlocBuilder<MapBloc, MapState>(
                 builder: (context, state) {
                   return MarkerLayer(
-                    markers: state.buildings
-                        .map(
-                          (e) => Marker(
-                            rotate: true,
-                            point: e.externalPosition,
-                            child: InkWell(
-                              child: const ObjectMarker(
-                                icon: Icons.home,
-                              ),
-                              onTap: () {
-                                showBottomSheet(
-                                  elevation: 100,
-                                  context: context,
-                                  builder: (sheetContext) {
-                                    return BlocProvider.value(
-                                      value: BlocProvider.of<UserBloc>(
-                                          sheetContext),
-                                      child: OnClickBottomSheet(building: e),
-                                    );
-                                  },
+                    markers: state.buildings.map((e) {
+                      var text = titleToMarkerText(e.title);
+                      return Marker(
+                        rotate: true,
+                        point: e.externalPosition,
+                        child: InkWell(
+                          child: text != null
+                              ? Container(
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: AppTheme.of(context)
+                                          .colorScheme
+                                          .secondary),
+                                  padding: const EdgeInsets.all(5),
+                                  child: Center(
+                                    child: Text(
+                                      text,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : const ObjectMarker(
+                                  icon: Icons.home,
+                                ),
+                          onTap: () {
+                            showBottomSheet(
+                              elevation: 100,
+                              context: context,
+                              builder: (sheetContext) {
+                                return BlocProvider.value(
+                                  value:
+                                      BlocProvider.of<UserBloc>(sheetContext),
+                                  child: OnClickBottomSheet(building: e),
                                 );
                               },
-                            ),
-                          ),
-                        )
-                        .toList(),
+                            );
+                          },
+                        ),
+                      );
+                    }).toList(),
                   );
                 },
               ),
@@ -232,5 +247,20 @@ class _IstuMapWidgetState extends State<IstuMapWidget>
         ),
       ],
     );
+  }
+
+  String? titleToMarkerText(String title) {
+    return switch (title) {
+      "Первый корпус" => '1',
+      "Второй корпус" => '2',
+      "Третий корпус" => '3',
+      "Четвертый корпус" => '4',
+      "Пятый корпус" => '5',
+      "Шестой корпус" => '6',
+      "Седьмой корпус" => '7',
+      "Восьмой корпус" => '8',
+      "Девятой корпус" => '9',
+      _ => null,
+    };
   }
 }
