@@ -25,6 +25,7 @@ class BuildingMapBloc extends Bloc<BuildingMapEvent, BuildingMapState> {
   BuildingMapBloc(this.createRoute, this.loadFloor)
       : super(const BuildingMapState.initial()) {
     on<BuildingMapEvent>((event, emit) async {
+      log(event.runtimeType.toString());
       if (event is RouteCleared) {
         _startId = null;
         _endId = null;
@@ -54,14 +55,13 @@ class BuildingMapBloc extends Bloc<BuildingMapEvent, BuildingMapState> {
                 break;
               }
             }
-            emit(
-              _getState(
-                _currentFloor == null
-                    ? BuildingMapStatus.initial
-                    : BuildingMapStatus.success,
-              ),
-            );
+            var stateToEmit = _currentFloor == null
+                ? BuildingMapStatus.initial
+                : BuildingMapStatus.success;
             _currentFloor = r.$1;
+            emit(
+              _getState(stateToEmit),
+            );
           },
         );
       }
