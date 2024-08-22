@@ -9,14 +9,14 @@ import '../widgets/auth_elevated_button.dart';
 import '../widgets/auth_screen_template.dart';
 import '../widgets/authentication_text_field.dart';
 
-class RegistrationScreen extends StatefulWidget {
-  const RegistrationScreen({Key? key}) : super(key: key);
+class RegistrationPage extends StatefulWidget {
+  const RegistrationPage({Key? key}) : super(key: key);
 
   @override
-  State<RegistrationScreen> createState() => _RegistrationScreenState();
+  State<RegistrationPage> createState() => _RegistrationPageState();
 }
 
-class _RegistrationScreenState extends State<RegistrationScreen> {
+class _RegistrationPageState extends State<RegistrationPage> {
   var email = '';
   String? emailErrorMessage;
 

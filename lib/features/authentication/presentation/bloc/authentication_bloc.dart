@@ -22,7 +22,7 @@ class AuthenticationBloc
   final Logout logout;
   final Register register;
   final LoginViaIstuAcc loginViaIstuAcc;
-  final Initialize initialize;
+  final InitializeTokens initialize;
 
   AuthenticationBloc(this.login, this.register, this.loginViaIstuAcc,
       this.initialize, this.logout)
@@ -63,9 +63,7 @@ class AuthenticationBloc
         );
         result.fold(
           (l) => _emitError(l, emit),
-          (r) {
-            emit(RegistrationSuccess(r));
-          },
+          (r) => emit(RegistrationSuccess(r)),
         );
       }
 

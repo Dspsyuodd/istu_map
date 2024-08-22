@@ -12,11 +12,11 @@ class Register extends Usecase<UserDto, RegisterParams> {
   Future<Either<Failure, UserDto>> call(RegisterParams params) {
     return authenticationRepository.registration(
       UserDto(
-      email: params.email,
-      password: params.password,
-      firstName: params.firstName,
-      lastName: params.lastName,
-    )
+        email: params.email,
+        password: params.password,
+        firstName: params.firstName,
+        lastName: params.lastName,
+      ),
     );
   }
 }

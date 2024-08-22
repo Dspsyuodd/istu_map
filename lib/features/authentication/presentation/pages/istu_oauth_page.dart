@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:istu_map/config/constants/api_constants.dart';
 
-class IstuOauth extends StatelessWidget {
-  const IstuOauth({super.key});
+class IstuOauthPage extends StatelessWidget {
+  const IstuOauthPage({super.key});
   
   @override
   Widget build(BuildContext context) {

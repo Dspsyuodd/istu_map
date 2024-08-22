@@ -18,7 +18,7 @@ final sl = GetIt.instance;
 void initAuthenticationDependencies() {
   sl.registerFactory(() => AuthenticationBloc(sl(), sl(), sl(), sl(), sl()));
 
-  sl.registerLazySingleton(() => Initialize(sl(), sl()));
+  sl.registerLazySingleton(() => InitializeTokens(sl(), sl()));
   sl.registerLazySingleton(() => Login(sl(), sl()));
   sl.registerLazySingleton(() => Register(sl()));
   sl.registerLazySingleton(() => LoginViaIstuAcc(sl(), sl()));

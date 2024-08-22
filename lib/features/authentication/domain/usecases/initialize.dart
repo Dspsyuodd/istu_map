@@ -5,11 +5,12 @@ import '../../core/failures.dart';
 import '../repositories/authentication_repository.dart';
 import '../repositories/token_repository.dart';
 
-class Initialize extends Usecase<void, NoParams> {
+class InitializeTokens extends Usecase<void, NoParams> {
   final TokenRepository tokenRepository;
   final AuthenticationRepository authenticationRepository;
 
-  Initialize(this.tokenRepository, this.authenticationRepository);
+  InitializeTokens(this.tokenRepository, this.authenticationRepository);
+  @override
   Future<Either<Failure, void>> call(NoParams params) async {
     var token = await tokenRepository.getAuthToken();
     return token.fold(

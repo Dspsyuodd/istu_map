@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:istu_map/features/authentication/presentation/pages/authentication.dart';
+import 'package:istu_map/features/authentication/presentation/pages/authentication_page.dart';
 import '../../features/map/external_map/presentation/pages/map.dart';
 import '../../features/map/external_map/presentation/bloc/map_bloc.dart';
 import '../../features/map/map_injection_container.dart';
@@ -22,5 +22,5 @@ class AppRouter {
 final _routes = {
   '/': const SplashScreen(),
   '/map': BlocProvider<MapBloc>(create: (_) => sl(), child: const IstuMap()),
-  '/auth': const Authentication(),
+  '/auth': const AuthenticationPage(),
 };

@@ -3,24 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:gap/gap.dart';
-import 'package:istu_map/features/authentication/presentation/pages/istu_oauth.dart';
+import 'package:istu_map/features/authentication/presentation/pages/istu_oauth_page.dart';
 import '../../domain/entities/user_data.dart';
 import '../../domain/entities/user_dto.dart';
 import '../bloc/authentication_bloc.dart';
-import 'registration_screen.dart';
+import 'registration_page.dart';
 import '../widgets/auth_elevated_button.dart';
 import '../widgets/auth_screen_template.dart';
 import '../widgets/authentication_text_field.dart';
 import '../widgets/login_via_lk_button.dart';
 
-class AuthorizaitonScreen extends StatefulWidget {
-  const AuthorizaitonScreen({Key? key}) : super(key: key);
+class AuthorizaitonPage extends StatefulWidget {
+  const AuthorizaitonPage({Key? key}) : super(key: key);
 
   @override
-  State<AuthorizaitonScreen> createState() => _AuthorizaitonScreenState();
+  State<AuthorizaitonPage> createState() => _AuthorizaitonPageState();
 }
 
-class _AuthorizaitonScreenState extends State<AuthorizaitonScreen> {
+class _AuthorizaitonPageState extends State<AuthorizaitonPage> {
   var _email = '';
   String? _emailErrorMessage;
 
@@ -133,7 +133,7 @@ class _AuthorizaitonScreenState extends State<AuthorizaitonScreen> {
                             builder: (_) => BlocProvider.value(
                               value:
                                   BlocProvider.of<AuthenticationBloc>(context),
-                              child: const RegistrationScreen(),
+                              child: const RegistrationPage(),
                             ),
                           ),
                         );
@@ -160,7 +160,7 @@ class _AuthorizaitonScreenState extends State<AuthorizaitonScreen> {
                       onPressed: () async {
                         WebUri? callbackUrl = await Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (_) => const IstuOauth(),
+                            builder: (_) => const IstuOauthPage(),
                           ),
                         );
                         if (callbackUrl != null && context.mounted) {

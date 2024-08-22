@@ -8,7 +8,7 @@ class AuthenticationInterceptor extends Interceptor {
 
   AuthenticationInterceptor(this.tokenRepository);
   @override
-  void onRequest(
+  Future<void> onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {

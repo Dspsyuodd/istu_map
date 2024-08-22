@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../bloc/authentication_bloc.dart';
-import 'authorizaiton_screen.dart';
 
 import '../../authentication_injection_container.dart';
+import 'authorizaiton_page.dart';
 
-class Authentication extends StatelessWidget {
-  const Authentication({Key? key}) : super(key: key);
+class AuthenticationPage extends StatelessWidget {
+  const AuthenticationPage({Key? key}) : super(key: key);
   Future<void> initGeolocation() async {
     var status = await Permission.location.status;
     if (status.isGranted) return;
@@ -29,7 +29,7 @@ class Authentication extends StatelessWidget {
             Navigator.of(context).pushReplacementNamed('/map');
           }
         },
-        child: const AuthorizaitonScreen(),
+        child: const AuthorizaitonPage(),
       ),
     );
   }
